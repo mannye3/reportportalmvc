@@ -7,13 +7,26 @@
 		}
 
 
-		public function getStateLga(){
-			$this->db->query('SELECT DISTINCT * FROM states');
+		public function getUsers(){
+			$this->db->query('SELECT  * FROM clients_accounts');
 
 			$results = $this->db->resultSet();
 
 			return $results;
 		}
+
+
+		public function getUsers2($symbol){
+			$this->db->query('SELECT  * FROM clients_accounts WHERE symbol = :symbol');
+
+			// Bind Values
+			$this->db->bind(':symbol', $symbol);
+
+			$results = $this->db->resultSet();
+
+			return $results;
+		}
+
 
 		public function getLga($state){
 			$this->db->query('SELECT lga FROM locals WHERE state = :state ORDER BY lga');
