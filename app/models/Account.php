@@ -49,7 +49,7 @@
 
 
 public function getMsgById($id){
-      $this->db->query('SELECT * FROM messages WHERE id = :id');
+      $this->db->query('SELECT * FROM inbox_messages WHERE id = :id');
       $this->db->bind(':id', $id);
 
       $row = $this->db->single();
@@ -74,6 +74,19 @@ public function getMsgById($id){
       } else {
         return 0;
       }
+    }
+
+
+
+
+    public function Totalinbox($username){
+      $this->db->query('SELECT SUM(num) AS totalmsginbox FROM inbox_messages WHERE receiver_username = :username AND read_status = 1 ');
+
+      $this->db->bind(':username', $username);
+
+     $results = $this->db->resultSet();
+
+      return $results;
     }
 
       

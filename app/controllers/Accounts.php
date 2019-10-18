@@ -168,13 +168,15 @@
 
       public function inbox(){
             $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
-             $inbox = $this->accountModel->InboxMsg($_SESSION['username']);
+            $inbox = $this->accountModel->InboxMsg($_SESSION['username']);
+            $total_inbox = $this->accountModel->Totalinbox($_SESSION['username']);
 
                   
 
              $data = [
               'inbox' => $inbox,
-              'total_sent' => $total_sent
+              'total_sent' => $total_sent,
+              'total_inbox' => $total_inbox
                   
               
             ];
@@ -210,6 +212,8 @@
          $open_msg = $this->accountModel->getMsgById($id);
 
       $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+
+
 
      
       
