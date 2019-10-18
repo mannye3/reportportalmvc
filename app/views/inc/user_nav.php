@@ -34,11 +34,11 @@
                             <a href="javaScript:void();">
                                 <i class="fa fa-envelope"></i><span>Email</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
-                            <ul class="vertical-submenu">
+                           <!--  <ul class="vertical-submenu">
                                 <li><a href="sell.php">Sell</a></li>
                                 <li><a href="buy.php">Buy</a></li>
                                 
-                            </ul>
+                            </ul> -->
                         </li>
 
                         <li>
@@ -49,7 +49,7 @@
                         </li>
 
                         <li>
-                            <a href="news.php">
+                            <a href="<?php echo URLROOT; ?>/users/logout">
                              <i class="fa fa-sign-out"></i><span>Logout</span>
                             </a>
                             

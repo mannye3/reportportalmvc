@@ -1,4 +1,4 @@
- <?php include'inc/header.php';  ?>
+
             <!-- Start Breadcrumbbar -->                    
             <div class="breadcrumbbar">
                 <div class="row align-items-center">
@@ -515,4 +515,3 @@
                 <!-- End row -->
             </div>
 
- <?php include'inc/footer.php';  ?>

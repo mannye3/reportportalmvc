@@ -3,7 +3,7 @@
   define('DB_HOST', 'localhost');
   define('DB_USER', 'root');
   define('DB_PASS', '');
-  define('DB_NAME', 'vetrotrade');
+  define('DB_NAME', 'reportportal');
 
   // App Root
   define('APPROOT', dirname(dirname(__FILE__)));

@@ -16,7 +16,7 @@
 
 
       public function updatePassword($data){
-      $this->db->query('UPDATE users SET password = :password  WHERE id = :id');
+      $this->db->query('UPDATE clients_accounts SET password = :password  WHERE id = :id');
       // Bind values
       $this->db->bind(':password',  $data['password']);
       $this->db->bind(':id',  $data['id']);
@@ -33,11 +33,14 @@
 
 
      public function updateUser($data){
-      $this->db->query('UPDATE users SET name = :name, phone = :phone  WHERE id = :id');
+      $this->db->query('UPDATE clients_accounts SET email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
       // Bind values
       $this->db->bind(':id',  $data['id']);
-      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
+      $this->db->bind(':company', $data['company']);
+      $this->db->bind(':website', $data['website']);
+      $this->db->bind(':address', $data['address']);
       
 
       // Execute
@@ -243,11 +246,32 @@
 
 
 
-      public function getMyFunds($email){
-      $this->db->query('SELECT * FROM fund WHERE email = :email  ORDER BY id DESC');
+      public function getReport($symbol){ 
+      $this->db->query('SELECT data.`TO ACCOUNT` AS BUYER_ACCOUNT , data.`TO MEMBER` AS TO_MEMBER , data.`FROM MEMBER` AS FROM_MEMBER , data.`VOLUME` AS VOLUME, data.`TRADE DATE` AS TRADE_DATE , data.`PRICE` AS PRICE    , smsNewAccount.SHAREHOLDERSNAME AS BUYER_NAME  ,
+      data.`FROM ACCOUNT`  AS SELLER_ACCOUNT , smsNewAccount2.SHAREHOLDERSNAME AS SELLER_NAME
+      FROM data
+        INNER JOIN smsNewAccount ON data.`TO ACCOUNT` = smsNewAccount.ACCOUNTNUMBER
+           INNER JOIN smsNewAccount2 ON data.`FROM ACCOUNT` = smsNewAccount2.ACCOUNTNUMBER
+         WHERE data.SYMBOL=:symbol ORDER BY id DESC');
+
+      
+
+           // SELECT data.`TO ACCOUNT` AS BUYER_ACCOUNT    , new_account.NAME AS BUYER_NAME  ,
+           // data.`FROM ACCOUNT`  AS SELLER_ACCOUNT , new_account2.NAME AS SELLER_NAME
+           // FROM data
+           // INNER JOIN new_account ON data.`TO ACCOUNT` = new_account.ACCOUNT
+           // INNER JOIN new_account2 ON data.`FROM ACCOUNT` = new_account2.ACCOUNT
+           // WHERE data.SYMBOL='SDCSCSPLC'
+
+           //  SELECT data.`TO ACCOUNT` AS BUYER_ACCOUNT    , new_account.NAME AS BUYER_NAME  ,
+           //  data.`FROM ACCOUNT`  AS SELLER_ACCOUNT , new_account2.NAME AS SELLER_NAME
+           //  FROM data
+           //  INNER JOIN new_account ON data.`TO ACCOUNT` = new_account.ACCOUNT
+           // INNER JOIN new_account2 ON data.`FROM ACCOUNT` = new_account2.ACCOUNT
+           // WHERE data.SYMBOL='SDCSCSPLC'
 
       // Bind Values
-      $this->db->bind(':email', $email);
+      $this->db->bind(':symbol', $symbol);
 
       $results = $this->db->resultSet();
 
@@ -255,54 +279,85 @@
     }
 
 
+// public function getReport($symbol){ 
+//       $this->db->query('SELECT `TO MEMBER` AS TO_MEMBER, `TO ACCOUNT` AS TO_ACCOUNT, `FROM MEMBER` AS FROM_MEMBER, `FROM ACCOUNT` AS FROM_ACCOUNT  FROM `data` WHERE `SYMBOL` = :symbol  ORDER BY id DESC');
 
+//       // Bind Values
+//       $this->db->bind(':symbol', $symbol);
 
-public function getMyWithdrawa($email){
-      $this->db->query('SELECT * FROM withdraw WHERE email = :email  ORDER BY id DESC');
+//       $results = $this->db->resultSet();
 
-      // Bind Values
-      $this->db->bind(':email', $email);
-
-      $results = $this->db->resultSet();
-
-      return $results;
-    }
-
-
-public function getMyTrade($email){
-      $this->db->query('SELECT * FROM trade WHERE email = :email  ORDER BY id DESC');
-
-      // Bind Values
-      $this->db->bind(':email', $email);
-
-      $results = $this->db->resultSet();
-
-      return $results;
-    }
+//       return $results;
+//     }
 
 
 
-      public function Totalfunds($email){
-      $this->db->query('SELECT SUM(amount) AS totalamount FROM fund WHERE email = :email');
 
-      // Bind Values
-      $this->db->bind(':email', $email);
+    //   public function getAccount($symbol){ 
+    //   $this->db->query('SELECT data.`TO ACCOUNT` AS A1   ,data.`FROM ACCOUNT` AS A2   , new_account.NAME AS SHM ,data.`TO MEMBER` AS DM , dealing_member.member_name AS DMN FROM data
+    //     INNER JOIN new_account ON data.`TO ACCOUNT` = new_account.ACCOUNT
+    //      INNER JOIN dealing_member ON data.`TO MEMBER` = dealing_member.member_code
+    //      WHERE data.SYMBOL=:symbol  ');
 
-      $results = $this->db->resultSet();
+    //   // Bind Values
+    //   $this->db->bind(':symbol', $symbol);
 
-      return $results;
-    }
+    //   $results = $this->db->resultSet();
+
+    //   return $results;
+    // }
 
 
 
-    public function getMyPropertyByRef($ref_id){
-      $this->db->query('SELECT * FROM property WHERE ref_id = :ref_id');
-      $this->db->bind(':ref_id', $ref_id);
 
-      $row = $this->db->single();
 
-      return $row;
-    }
+
+
+  //   public function getBroker(){
+  //     $this->db->query('SELECT *  FROM clients_accounts2');
+  //     //$this->db->bind(':ref_id', $ref_id);
+
+      
+
+  //   $results = $this->db->resultSet();
+
+  //   return $results;
+
+ 
+  // }
+
+
+  // public function getAccount(){
+  //     $this->db->query('SELECT *  FROM new_account');
+  //     //$this->db->bind(':ref_id', $ref_id);
+
+      
+
+  //   $results = $this->db->resultSet();
+
+  //   return $results;
+
+ 
+  // }
+
+
+   public function getAccount2(){
+      $this->db->query('SELECT *  FROM new_account');
+      //$this->db->bind(':ref_id', $ref_id);
+
+      
+
+    $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
+
+
+
+
+
 
 
 

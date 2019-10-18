@@ -218,7 +218,7 @@
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profilelink">
                                                 <div class="dropdown-item">
                                                     <div class="profilename">
-                                                      <h5>John Doe</h5>
+                                                      <h5><?php echo $_SESSION['username']; ?></h5>
                                                     </div>
                                                 </div>
                                                 <div class="userbox">
@@ -230,7 +230,7 @@
                                                             <a href="#" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/email.svg" class="img-fluid" alt="email">Email</a>
                                                         </li>                                                        
                                                         <li class="media dropdown-item">
-                                                            <a href="#" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/logout.svg" class="img-fluid" alt="logout">Logout</a>
+                                                            <a href="<?php echo URLROOT; ?>/users/logout" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/logout.svg" class="img-fluid" alt="logout">Logout</a>
                                                         </li>
                                                     </ul>
                                                 </div>

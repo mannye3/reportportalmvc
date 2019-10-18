@@ -34,6 +34,7 @@
     <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-email.js"></script>
     <!-- Core js -->
     <script src="<?php echo URLROOT; ?>/assets/js/core.js"></script>
+      <script src="<?php echo URLROOT; ?>/assets/js/pass.js"></script>
     <!-- End js -->
 
     <script src="<?php echo URLROOT; ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>

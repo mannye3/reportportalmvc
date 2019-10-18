@@ -1,4 +1,4 @@
- <?php include'inc/header.php';  ?>
+
 
     <div class="breadcrumbbar">
                 <div class="row align-items-center">
@@ -70,4 +70,4 @@
         </div>
         <!-- End Rightbar -->
     </div>
-     <?php include'inc/footer.php';  ?>
+     

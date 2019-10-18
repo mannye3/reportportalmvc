@@ -47,7 +47,7 @@
 
 
                                                 <td>
-                                                    <?php   
+                                                    <?php    
                                         if ($my_funds->status  == 1){
                                             echo '<span class="badge badge-success badge-pill">Approved</span></span>';
                                                         }

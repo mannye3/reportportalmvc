@@ -1,6 +1,6 @@
 
-<?php foreach($data['total_funds'] as $total_funds) : ?>
-         <?php endforeach; ?>
+<!-- <?php foreach($data['total_funds'] as $total_funds) : ?>
+         <?php endforeach; ?> -->
        
 
  <!-- Start Breadcrumbbar -->                    

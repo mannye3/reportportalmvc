@@ -265,18 +265,17 @@
     public function createUserSession($user){
       $_SESSION['user_id'] = $user->id;
       $_SESSION['user_email'] = $user->email;
-      $_SESSION['lname'] = $user->lname;
-       $_SESSION['fname'] = $user->fname;
        $_SESSION['username'] = $user->username;
       $_SESSION['user_phone'] = $user->phone;
-      $_SESSION['user_image'] = $user->image;
-       $_SESSION['user_type'] = $user->type;
-       $_SESSION['account_type'] = $user->account_type;
-       $_SESSION['status'] = $user->status;
-        $_SESSION['status'] = $user->status;
-        $_SESSION['currency_type'] = $user->currency_type;
+      $_SESSION['user_role'] = $user->role;
+      $_SESSION['user_company'] = $user->company;
+      $_SESSION['user_symbol'] = $user->symbol;
+       $_SESSION['user_address'] = $user->address;
+       $_SESSION['user_website'] = $user->website;
         $_SESSION['reg_date'] = $user->reg_date;
         $_SESSION['status '] = $user->status;
+
+        
 
 
          
@@ -293,7 +292,7 @@
        unset($_SESSION['username']);
       unset($_SESSION['user_phone']);
       session_destroy();
-      redirect('users/login');
+      redirect('users');
     }
 
 public function email($email){

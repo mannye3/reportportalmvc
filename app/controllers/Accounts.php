@@ -2,7 +2,7 @@
   class Accounts extends Controller {
     public function __construct(){
       if(!isLoggedIn()){
-        redirect('users/login');
+        redirect('users');
       }
 
       $this->accountModel = $this->model('Account');
@@ -12,13 +12,13 @@
 
       public function index(){
       // Get User Properties
-      $total_funds = $this->accountModel->Totalfunds($_SESSION['user_email']);
+      // $total_funds = $this->accountModel->Totalfunds($_SESSION['user_email']);
 
             
 
-      $data = [
-            'total_funds' => $total_funds
-              ];
+      // $data = [
+      //       'total_funds' => $total_funds
+      //         ];
 
               
 
@@ -29,18 +29,159 @@
 
 
      public function profile(){
-      $total_funds = $this->accountModel->Totalfunds($_SESSION['user_email']);
+      // $total_funds = $this->accountModel->Totalfunds($_SESSION['user_email']);
 
             
 
-      $data = [
-            'total_funds' => $total_funds
-              ];
+      // $data = [
+      //       'total_funds' => $total_funds
+      //         ];
 
           $this->view('inc/user_header');
            $this->view('accounts/profile', $data);
           $this->view('inc/user_footer');
     }
+
+
+    public function edit_profile(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        // Init data
+            $data =[
+              'id' => $_SESSION['user_id'],
+              'email' => trim($_POST['email']),
+              'phone' => trim($_POST['phone']),
+              'company' => trim($_POST['company']),
+              'website' => trim($_POST['website']),
+              'address' => trim($_POST['address']),
+              'email_err' => '',
+              'phone_err' => '',
+            ];
+
+            
+
+            // Validate Email
+            if(empty($data['email'])){
+              $data['email_err'] = 'Pleae enter name';
+            } else {
+    
+            }
+
+            // Validate Phone
+            if(empty($data['phone'])){
+              $data['phone_err'] = 'Pleae enter phone';
+            } else {
+            }
+
+        
+
+            // Make sure errors are empty
+            if(empty($data['email_err']) && empty($data['phone_err'])){
+              // Validated
+              
+          // Validated
+          if($this->accountModel->updateUser($data)){
+
+            $_SESSION['user_email'] = $data['email'];
+            $_SESSION['user_phone'] = $data['phone'];
+            $_SESSION['user_company'] = $data['company'];
+            $_SESSION['user_website'] = $data['website'];
+             $_SESSION['user_address'] = $data['address'];
+            
+            flash('post_message', 'Profile Updated');
+            redirect('accounts/profile');
+          } else {
+            die('Something went wrong');
+          }
+        } else {
+          // Load view with errors
+          $this->view('accounts/profile', $data);
+        }
+
+      } else {
+      
+
+        $data =[
+              'email' => '',
+              'phone' => '',
+              'company' => '',
+              'website' => '',
+              'address' => '',
+              'email_err' => '',
+              'phone_err' => ''
+            ];
+  
+        $this->view('accounts/profile', $data);
+      }
+    }
+
+
+
+     public function edit_password(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        // Init data
+            $data =[
+              'id' => $_SESSION['user_id'],
+              'password' => trim($_POST['password']),
+              'password_err' => ''
+            ];
+
+            
+
+            // Validate Email
+            if(empty($data['password'])){
+              $data['password_err'] = 'Pleae enter password';
+            } else {
+    
+            }
+
+           
+        
+
+            // Make sure errors are empty
+            if(empty($data['password_err'])){
+              // Validated
+
+             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+              
+          // Validated
+          if($this->accountModel->updatePassword($data)){
+
+           
+            flash('alert_message', 'Password Updated');
+           
+            redirect('accounts/profile');
+          } else {
+            die('Something went wrong');
+          }
+        } else {
+          // Load view with errors
+          $this->view('accounts/profile', $data);
+        }
+
+      } else {
+      
+
+        $data =[
+              'password' => '',
+              'password_err' => ''
+            ];
+  
+        $this->view('accounts/profile', $data);
+      }
+    }
+
+
+
+
+
 
     public function buy(){
       // Get User Properties
@@ -53,17 +194,40 @@
           $this->view('inc/user_footer');
     }
 
+    
 
-    public function sell(){
-      // Get User Properties
-     $data = [
+     public function sell(){
+               $get_report = $this->accountModel->getReport($_SESSION['user_symbol']);
+               // $get_brokerinfo = $this->accountModel->getBroker();
+               // $get_accountinfo = $this->accountModel->getAccount();
+               
+                
+
+            
+             
+              $data = [
+            'get_report' => $get_report
+            // 'get_brokerinfo' => $get_brokerinfo
+             // 'get_accountinfo' => $get_accountinfo
+             
+              ];
+
+              $this->view('inc/user_header');
+               $this->view('accounts/sell', $data);
+              $this->view('inc/user_footer');
+              }
+
+
+    // public function sell(){
+    //   // Get User Properties
+    //  $data = [
         
-      ];
+    //   ];
 
-          $this->view('inc/user_header');
-           $this->view('accounts/sell', $data);
-          $this->view('inc/user_footer');
-    }
+    //       $this->view('inc/user_header');
+    //        $this->view('accounts/sell', $data);
+    //       $this->view('inc/user_footer');
+    // }
 
 
 
@@ -98,134 +262,8 @@ public function landing(){
     
 
 
-        public function edit_password(){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        // Init data
-            $data =[
-              'id' => trim($_POST['id']),
-              'password' => trim($_POST['password']),
-              'password_err' => ''
-            ];
-
-            
-
-            // Validate Email
-            if(empty($data['password'])){
-              $data['password_err'] = 'Pleae enter password';
-            } else {
-    
-            }
-
-           
-        
-
-            // Make sure errors are empty
-            if(empty($data['password_err'])){
-              // Validated
-
-             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-              
-          // Validated
-          if($this->accountModel->updatePassword($data)){
-
-           
-            flash('alert_message', '<div class="alert alert-success alert-dismissible fade show" role="alert"><button class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Password Updated</div>');
-           
-            redirect('accounts/profile');
-          } else {
-            die('Something went wrong');
-          }
-        } else {
-          // Load view with errors
-          $this->view('accounts/profile', $data);
-        }
-
-      } else {
-      
-
-        $data =[
-              'password' => '',
-              'password_err' => ''
-            ];
-  
-        $this->view('accounts/profile', $data);
-      }
-    }
-
-
-
-      public function edit_profile(){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        // Init data
-            $data =[
-              'id' => trim($_POST['id']),
-              'name' => trim($_POST['name']),
-              'phone' => trim($_POST['phone']),
-              'name_err' => '',
-              'phone_err' => '',
-            ];
-
-            
-
-            // Validate Email
-            if(empty($data['name'])){
-              $data['name_err'] = 'Pleae enter name';
-            } else {
-    
-            }
-
-            // Validate Phone
-            if(empty($data['phone'])){
-              $data['phone_err'] = 'Pleae enter phone';
-            } else {
-            }
-
-        
-
-            // Make sure errors are empty
-            if(empty($data['name_err']) && empty($data['phone_err'])){
-              // Validated
-              
-          // Validated
-          if($this->accountModel->updateUser($data)){
-
-            $_SESSION['user_name'] = $data['name'];
-            $_SESSION['user_phone'] = $data['phone'];
-            
-            flash('post_message', 'Post Updated');
-            redirect('accounts');
-          } else {
-            die('Something went wrong');
-          }
-        } else {
-          // Load view with errors
-          $this->view('accounts/edit_profile', $data);
-        }
-
-      } else {
-      
-
-        $data =[
-              'name' => '',
-              'email' => '',
-              'phone' => '',
-              'name_err' => '',
-              'phone_err' => ''
-            ];
-  
-        $this->view('accounts/edit_profile', $data);
-      }
-    }
-
-
+       
+     
 
 
     public function profile_pic(){
@@ -833,17 +871,7 @@ public function placeTrade2(){
 
 
 
-          public function fundHistory(){
-               $my_funds = $this->accountModel->getMyFunds($_SESSION['user_email']);
-
-              $data = [
-            'my_funds' => $my_funds
-              ];
-
-                $this->view('inc/user_header');
-               $this->view('accounts/fundHistory', $data);
-              $this->view('inc/user_footer');
-              }
+         
 
 
 
