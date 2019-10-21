@@ -1,6 +1,9 @@
 <?php foreach($data['total_inbox'] as $total_inbox) : ?>
          <?php endforeach; ?>
 
+<?php foreach($data['total_sent'] as $total_sent) : ?>
+         <?php endforeach; ?>
+
 <div class="col-lg-3">
                         <div class="email-leftbar">
                             <div class="card m-b-30">
@@ -19,7 +22,10 @@
                                 
                                       <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="<?php echo URLROOT; ?>/accounts/sent"><i class="feather icon-send mr-2"></i>Sent</a>
-                                        <span class="badge badge-secondary-inverse"><?php echo $data['total_sent']->totalmsgsent; ?></span>
+                                        <span class="badge badge-secondary-inverse">
+                                          <?php echo number_format($total_sent->totalmsgsent);  ?>
+
+                                         </span>
 
 
 

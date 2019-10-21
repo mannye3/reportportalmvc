@@ -38,34 +38,54 @@
                                 </div>
                                 <div class="card-body">
                                 <?php flash('alert_message'); ?>                                  
-                                    <form action="<?php echo URLROOT; ?>/accounts/admin_compose" method="post">
-                                        <div class="form-group row">
+                                    <form action="<?php echo URLROOT; ?>/accounts/reply/<?php echo $data['reply_msg']->msg_code; ?>" method="post">
+                                       <!--  <div class="form-group row">
                                             <label for="emailTo" class="col-sm-2 col-form-label">To</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control"  name="receiver_symbol" >
-                                            <?php foreach($data['load_users'] as $load_users) : ?>
-                                                <option value="<?php echo $load_users->symbol; ?>"><?php echo $load_users->symbol; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                              
-                                                
+                                                <input type="email" class="form-control" id="emailTo" placeholder="Email">
                                             </div>
                                         </div>
-                                        
-                                        
+                                        <div class="form-group row">
+                                            <label for="emailCc" class="col-sm-2 col-form-label">CC</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="emailCc" placeholder="CC">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="emailBcc" class="col-sm-2 col-form-label">BCC</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="emailBcc" placeholder="BCC">
+                                            </div>
+                                        </div> -->
                                         
 
                                         <div class="form-group row">
                                             <label for="emailSubject" class="col-sm-2 col-form-label">Subject</label>
                                             <div class="col-sm-10">
-                                                <input name="subject" required="" type="text" class="form-control <?php echo (!empty($data['subject_err'])) ? 'is-invalid' : ''; ?>" id="emailSubject" placeholder="Subject">
-                                                <span class="invalid-feedback"><?php echo $data['subject_err']; ?></span>
+                                                <input name="subject" value="Reply: <?php echo $data['reply_msg']->subject; ?>" required="" type="text" class="form-control" id="emailSubject" placeholder="Subject">
+
+                                                <input type="" value="<?php echo $data['reply_msg']->sender_username; ?>"  name="receiver_username">
+
+                                                 <input type="" value="<?php echo $data['reply_msg']->sender_symbol; ?>"  name="receiver_symbol">
+
+                                                 <input type="" value="<?php echo $data['reply_msg']->sender_email; ?>"  name="receiver_email">
+
+                                                  <input type="" value="<?php echo $data['reply_msg']->msg_code; ?>"  name="msg_code">
+
+
+                                               
                                             </div>
                                         </div>                                      
                                         <div class="form-group row">
                                             <label for="emailSubject" class="col-sm-2 col-form-label">Message</label>
                                             <div class="col-sm-10">
-                                                <textarea name="message"  class="summernote"></textarea>
+                                                <textarea name="editor1"><br> <br>--------- original Message---------<br> <br> <?php echo $data['reply_msg']->message; ?> </textarea>
+                                        <script>
+                                                CKEDITOR.replace( 'editor1' );
+                                        </script>
+
+
+                                               
                                                 
                                             </div>
                                         </div>

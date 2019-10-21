@@ -48,33 +48,20 @@
                                 </div> -->
                                 <div class="card-body">                                     
                                     <div class="table-responsive">
+                                        <?php flash('alert_message'); ?>
                                         <table class="table table-hover table-borderless">                                            
                                             <tbody>
-                                                 <?php  foreach($data['sent'] as $sent_msg) :   ?>
-                                                <tr class="email-unread">                                                    
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="emailCheck1">
-                                                            <label class="custom-control-label psn-abs" for="emailCheck1"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="feather icon-star font-18"></i></td>
-                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message/<?php echo $sent_msg->id; ?>"><?php echo $sent_msg->subject; ?></a></td>                             
-                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message/<?php echo $sent_msg->id; ?>">
+                                                 <?php $count = 0; foreach($data['sent'] as $sent_msg) : $count++;  ?>
+                                                <tr class="">                                                    
+                                                   <td>(<?php echo $count; ?>)</td>
+                                                    
+                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message_sent/<?php echo $sent_msg->msg_code; ?>"><?php echo $sent_msg->subject; ?></a></td>                             
+                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message_sent/<?php echo $sent_msg->msg_code; ?>">
                                                         
 
-                                                        <?php   
-                                                    if ($sent_msg->read_status  == 1){
-                                                        echo '<span class="badge badge-success-inverse mr-2">New</span>';
-                                                                    }
-                                                        ?>
-
-                                                        <?php   
-                                                    if ($sent_msg->msg_status  == 1){
-                                                        echo '<span class="badge badge-danger-inverse mr-2">Urgent</span>';
-                                                                    }
-                                                        ?>
+                                                       
                                                         
+                                            
 
                                                         
                                                         <p class="mt-1 mb-0 font-14"><?php 
@@ -121,4 +108,131 @@
                 </div>
                 <!-- Start row -->
             </div>
+
+             <div class="col-lg-6 col-xl-3">
+                        <div class="card m-b-30">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Close Icon</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="jquery-confirm">
+                                    <button type="button" class="btn btn-primary" id="close-icon-dialog">Show Demo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
           
+          <script type="text/javascript">
+              jconfirm.instances = [];
+    jconfirm.lastFocused = false;
+    jconfirm.pluginDefaults = {
+        template: '' +
+        '<div class="jconfirm">' +
+        '<div class="jconfirm-bg jconfirm-bg-h"></div>' +
+        '<div class="jconfirm-scrollpane">' +
+        '<div class="jconfirm-row">' +
+        '<div class="jconfirm-cell">' +
+        '<div class="jconfirm-holder">' +
+        '<div class="jc-bs3-container">' +
+        '<div class="jc-bs3-row">' +
+        '<div class="jconfirm-box-container jconfirm-animated">' +
+        '<div class="jconfirm-box" role="dialog" aria-labelledby="labelled" tabindex="-1">' +
+        '<div class="jconfirm-closeIcon">&times;</div>' +
+        '<div class="jconfirm-title-c">' +
+        '<span class="jconfirm-icon-c"></span>' +
+        '<span class="jconfirm-title"></span>' +
+        '</div>' +
+        '<div class="jconfirm-content-pane">' +
+        '<div class="jconfirm-content"></div>' +
+        '</div>' +
+        '<div class="jconfirm-buttons">' +
+        '</div>' +
+        '<div class="jconfirm-clear">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div></div>',
+        title: 'Hello',
+        titleClass: '',
+        type: 'default',
+        typeAnimated: true,
+        draggable: true,
+        dragWindowGap: 15,
+        dragWindowBorder: true,
+        animateFromElement: true,
+        /**
+         * @deprecated
+         */
+        alignMiddle: true,
+        smoothContent: true,
+        content: 'Are you sure to continue?',
+        buttons: {},
+        defaultButtons: {
+            ok: {
+                action: function($goojdfkvvj){
+                }
+            },
+            close: {
+                action: function(){
+                }
+            }
+        },
+        contentLoaded: function(){
+        },
+        icon: '',
+        lazyOpen: false,
+        bgOpacity: null,
+        theme: 'light',
+        animation: 'scale',
+        closeAnimation: 'scale',
+        animationSpeed: 400,
+        animationBounce: 1,
+        escapeKey: true,
+        rtl: false,
+        container: 'body',
+        containerFluid: false,
+        backgroundDismiss: false,
+        backgroundDismissAnimation: 'shake',
+        autoClose: false,
+        closeIcon: null,
+        closeIconClass: false,
+        watchInterval: 100,
+        columnClass: 'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1',
+        boxWidth: '50%',
+        scrollToPreviousElement: true,
+        scrollToPreviousElementAnimate: true,
+        useBootstrap: true,
+        offsetTop: 40,
+        offsetBottom: 40,
+        bootstrapClasses: {
+            container: 'container',
+            containerFluid: 'container-fluid',
+            row: 'row'
+        },
+        onContentReady: function(){
+
+        },
+        onOpenBefore: function(){
+
+        },
+        onOpen: function(){
+
+        },
+        onClose: function(){
+
+        },
+        onDestroy: function(){
+
+        },
+        onAction: function(){
+
+        }
+    };
+
+    /**
+          </script>

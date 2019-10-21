@@ -14,8 +14,9 @@
                                 <div class="card-body">
                                    <form id="login-form" action="<?php echo URLROOT; ?>/users" method="post">
                                         <div class="form-head">
-                                            <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="img-fluid" alt="logo"></a>
-                                        </div>                                        
+                                            <a href="index.html" class="logo"><img src="assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
+                                        </div> 
+                                        <h4>Welcome to NASD Issuers Portal</h4>                                   
                                         <h4 class="text-primary my-4">Log in !</h4>
 
                                         <div class="form-group">

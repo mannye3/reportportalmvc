@@ -48,9 +48,20 @@
 
 
 
-public function getMsgById($id){
-      $this->db->query('SELECT * FROM inbox_messages WHERE id = :id');
-      $this->db->bind(':id', $id);
+// public function getMsgById($id){
+//       $this->db->query('SELECT * FROM inbox_messages WHERE id = :id');
+//       $this->db->bind(':id', $id);
+
+//       $row = $this->db->single();
+
+//       return $row;
+//     }
+
+
+
+    public function getMsgByCode($msg_code){
+      $this->db->query('SELECT * FROM inbox_messages WHERE msg_code = :msg_code');
+      $this->db->bind(':msg_code', $msg_code);
 
       $row = $this->db->single();
 
@@ -60,29 +71,55 @@ public function getMsgById($id){
 
 
 
-
-      public function Totalsent($sysmbol){
-      $this->db->query('SELECT COUNT(id) AS totalmsgsent FROM messages ');
-
-      // Bind Values
-     
+    public function getMsgByCodeSent($msg_code){
+      $this->db->query('SELECT * FROM messages WHERE msg_code = :msg_code');
+      $this->db->bind(':msg_code', $msg_code);
 
       $row = $this->db->single();
-      
-      if($this->db->rowCount() > 0){
-        return $row;
+
+      return $row;
+    }
+
+
+    public function updateMsgStatus($msg_code, $read){
+       $this->db->query('UPDATE inbox_messages SET read_status = :read WHERE msg_code = :msg_code');
+      // Bind values
+      $this->db->bind(':msg_code', $msg_code);
+      $this->db->bind(':read', $read);
+     
+     
+
+   // Execute
+      if($this->db->execute()){
+        return true;
       } else {
-        return 0;
+        return false;
       }
     }
 
 
 
 
-    public function Totalinbox($username){
-      $this->db->query('SELECT SUM(num) AS totalmsginbox FROM inbox_messages WHERE receiver_username = :username AND read_status = 1 ');
+ public function Totalsent($symbol){
+      $this->db->query('SELECT SUM(num) AS totalmsgsent FROM messages WHERE sender_symbol = :symbol  ');
 
-      $this->db->bind(':username', $username);
+      $this->db->bind(':symbol', $symbol);
+
+     $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
+
+
+      
+
+
+    public function Totalinbox($symbol){
+      $this->db->query('SELECT SUM(num) AS totalmsginbox FROM inbox_messages WHERE receiver_symbol = :symbol AND read_status = 1 ');
+
+      $this->db->bind(':symbol', $symbol);
 
      $results = $this->db->resultSet();
 
@@ -98,7 +135,7 @@ public function getMsgById($id){
     //Add New Properties
       public function SendMessage($data){
       
-      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, msg_date) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :msg_date)');
+      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :msg_date, :msg_code)');
     
       // Bind Values      
       $this->db->bind(':subject', $data['subject']);
@@ -107,6 +144,7 @@ public function getMsgById($id){
       $this->db->bind(':sender_email', $data['sender_email']);
       $this->db->bind(':sender_symbol', $data['sender_symbol']);
       $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['msg_code']);
       
 
 
@@ -123,22 +161,55 @@ public function getMsgById($id){
             
     }
 
+
+    //Add New Properties
+      public function ReplyMessage($data){
+      
+      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, receiver_username, receiver_symbol , receiver_email ,  msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_username, :receiver_symbol , :receiver_email ,  :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_username', $data['receiver_username']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':receiver_email', $data['receiver_email']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['reply_msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
 
 
 
     //Add New Properties
       public function SendMessageInbox($data){
       
-      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_username, msg_date) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_username, :msg_date)');
+      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_symbol,  :msg_date, :msg_code)');
     
       // Bind Values      
       $this->db->bind(':subject', $data['subject']);
       $this->db->bind(':message', $data['message']);
       $this->db->bind(':sender_username', $data['sender_username']);
-       $this->db->bind(':receiver_username', $data['receiver_username']);
       $this->db->bind(':sender_email', $data['sender_email']);
       $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
       $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['msg_code']);
       
 
 
@@ -157,6 +228,99 @@ public function getMsgById($id){
 
 
 
+    //Add New Properties
+      public function AdminSendMessageInbox($data){
+      
+      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_symbol,  :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
+
+
+
+    //Add New Properties
+      public function ReplyMessageInbox($data){
+      
+      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_username, receiver_symbol , receiver_email ,  msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_username, :receiver_symbol , :receiver_email , :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_username', $data['receiver_username']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':receiver_email', $data['receiver_email']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['reply_msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
+
+
+
+
+ public function deleteMessageinbox($msg_code){
+      $this->db->query('DELETE FROM inbox_messages WHERE msg_code = :msg_code');
+      // Bind values
+      $this->db->bind(':msg_code', $msg_code);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+    public function deleteMessagesent($msg_code){
+      $this->db->query('DELETE FROM messages WHERE msg_code = :msg_code');
+      // Bind values
+      $this->db->bind(':msg_code', $msg_code);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
 
 
 
@@ -200,11 +364,11 @@ public function getMsgById($id){
 
 
 
- public function InboxMsg($username){
-      $this->db->query('SELECT *  FROM inbox_messages WHERE receiver_username = :username ORDER BY id DESC');
+ public function InboxMsg($symbol){
+      $this->db->query('SELECT *  FROM inbox_messages WHERE receiver_symbol = :symbol ORDER BY id DESC');
 
       // Bind Values
-      $this->db->bind(':username', $username);
+      $this->db->bind(':symbol', $symbol);
 
       $results = $this->db->resultSet();
 

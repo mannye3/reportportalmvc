@@ -40,7 +40,7 @@
 
     public function compose(){
       
-    
+            $msg_code= rand(100000,999999);
 
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
@@ -53,7 +53,8 @@
               'sender_username' => $_SESSION['username'],
               'sender_symbol' => $_SESSION['user_symbol'],
               'subject' => trim($_POST['subject']),
-              'message' => trim($_POST['message']),
+              'message' => trim($_POST['editor1']),
+              'msg_code' => $msg_code,
               'msg_date' => date('jS \ F Y h:i:s A'),
               'subject_err' => '',
               'message_err' => ''
@@ -70,9 +71,14 @@
             if(empty($data['message_err'])){
               // Validated
               if($this->accountModel->SendMessage($data)){
-                flash('alert_message', 'Message Sent');
-                redirect('accounts/compose');
-              } else {
+
+                    if($this->accountModel->SendMessageInbox($data)){
+                    flash('alert_message', 'Message Sent');
+                    redirect('accounts/compose');
+                  } 
+              } 
+
+              else {
                 die('Something went wrong');
               }
             } else {
@@ -84,10 +90,12 @@
 
           } else {
              $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+             $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
            
             $data = [
               'message' => '',
-              'total_sent' => $total_sent
+              'total_sent' => $total_sent,
+               'total_inbox' => $total_inbox
             ];
       
             $this->view('inc/user_header');
@@ -97,26 +105,33 @@
         }
 
 
-        public function admin_compose(){
+
+
+
+
+public function reply($msg_code){
       
-    
+             $reply_msg_code= rand(100000,999999);
 
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
            
+           
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-             
+
 
           
             $data = [
-              'receiver_username' => trim($_POST['receiver_username']),
-              
               'sender_email' => $_SESSION['user_email'],
               'sender_username' => $_SESSION['username'],
               'sender_symbol' => $_SESSION['user_symbol'],
               'subject' => trim($_POST['subject']),
-              'message' => trim($_POST['message']),
+              'message' => trim($_POST['editor1']),
+              'receiver_username' => trim($_POST['receiver_username']),
+              'receiver_symbol' => trim($_POST['receiver_symbol']),
+              'receiver_email' => trim($_POST['receiver_email']),
+              'reply_msg_code' => $reply_msg_code,
               'msg_date' => date('jS \ F Y h:i:s A'),
               'subject_err' => '',
               'message_err' => ''
@@ -132,7 +147,85 @@
             // Make sure no errors
             if(empty($data['message_err'])){
               // Validated
-              if($this->accountModel->SendMessageInbox($data)){
+              if($this->accountModel->ReplyMessage($data)){
+
+                    if($this->accountModel->ReplyMessageInbox($data)){
+                    flash('alert_message', 'Message Sent');
+                    redirect('accounts/inbox');
+                  } 
+              } 
+
+              else {
+                die('Something went wrong');
+              }
+            } else {
+              // Load view with errors
+             $this->view('inc/user_header');
+           $this->view('accounts/reply', $data);
+          $this->view('inc/user_footer');
+            }
+
+          } else {
+             $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+             $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
+             $reply_msg = $this->accountModel->getMsgByCode($msg_code);
+
+             
+           
+            $data = [
+              'message' => '',
+              'total_sent' => $total_sent,
+               'total_inbox' => $total_inbox,
+               'reply_msg' => $reply_msg
+            ];
+      
+            $this->view('inc/user_header');
+            $this->view('accounts/reply', $data);
+            $this->view('inc/user_footer');
+          }
+        }
+
+
+
+
+
+        public function admin_compose(){
+      
+           $msg_code= rand(100000,999999);
+
+           if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+             
+
+          
+            $data = [
+              
+              'sender_email' => $_SESSION['user_email'],
+              'sender_username' => $_SESSION['username'],
+              'sender_symbol' => $_SESSION['user_symbol'],
+              'receiver_symbol' => trim($_POST['receiver_symbol']),
+              'subject' => trim($_POST['subject']),
+              'message' => trim($_POST['message']),
+              'msg_code' => $msg_code,
+              'msg_date' => date('jS \ F Y h:i:s A'),
+              'subject_err' => '',
+              'message_err' => ''
+             
+            ];
+
+            // Validate data
+            if(empty($data['message'])){
+              $data['message_err'] = 'Message Field is Empty';
+            }
+            
+
+            // Make sure no errors
+            if(empty($data['message_err'])){
+              // Validated
+              if($this->accountModel->AdminSendMessageInbox($data)){
                 flash('alert_message', 'Message Sent');
                 redirect('accounts/admin_compose');
               } else {
@@ -168,8 +261,8 @@
 
       public function inbox(){
             $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
-            $inbox = $this->accountModel->InboxMsg($_SESSION['username']);
-            $total_inbox = $this->accountModel->Totalinbox($_SESSION['username']);
+            $inbox = $this->accountModel->InboxMsg($_SESSION['user_symbol']);
+            $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
 
                   
 
@@ -191,12 +284,14 @@
     public function sent(){
       $sent = $this->accountModel->SentMsg($_SESSION['user_symbol']);
        $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+        $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
 
             
 
       $data = [
             'sent' => $sent,
-             'total_sent' => $total_sent
+             'total_sent' => $total_sent,
+              'total_inbox' => $total_inbox
               ];
 
           $this->view('inc/user_header');
@@ -208,26 +303,49 @@
 
 
 
-      public function open_message($id){
-         $open_msg = $this->accountModel->getMsgById($id);
-
+      public function open_message($msg_code){
+          $read = 0;
+         $open_msg = $this->accountModel->getMsgByCode($msg_code);
+      $view_pro = $this->accountModel->updateMsgStatus($msg_code,$read);
       $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+      $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
 
 
-
-     
-      
-      
 
       $data = [
         'open_msg' => $open_msg,
-        'total_sent' => $total_sent
+        'total_sent' => $total_sent,
+        'total_inbox' => $total_inbox
             
         
       ];
 
       $this->view('inc/user_header');
       $this->view('accounts/open_message', $data);
+      $this->view('inc/user_footer');
+    }
+
+
+
+public function open_message_sent($msg_code){
+          
+         $open_msg = $this->accountModel->getMsgByCodeSent($msg_code);
+
+      $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+      $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
+
+
+
+      $data = [
+        'open_msg' => $open_msg,
+        'total_sent' => $total_sent,
+        'total_inbox' => $total_inbox
+            
+        
+      ];
+
+      $this->view('inc/user_header');
+      $this->view('accounts/open_message_sent', $data);
       $this->view('inc/user_footer');
     }
 
@@ -391,21 +509,9 @@
 
 
 
-
-    public function buy(){
-      // Get User Properties
-     $data = [
-        
-      ];
-
-          $this->view('inc/user_header');
-           $this->view('accounts/buy', $data);
-          $this->view('inc/user_footer');
-    }
-
     
 
-     public function sell(){
+     public function tradeHistory(){
                $get_report = $this->accountModel->getReport($_SESSION['user_symbol']);
                // $get_brokerinfo = $this->accountModel->getBroker();
                // $get_accountinfo = $this->accountModel->getAccount();
@@ -422,7 +528,7 @@
               ];
 
               $this->view('inc/user_header');
-               $this->view('accounts/sell', $data);
+               $this->view('accounts/tradeHistory', $data);
               $this->view('inc/user_footer');
               }
 
@@ -455,18 +561,6 @@
 
     
 
-
-
-public function landing(){
-      // Get User Properties
-     $data = [
-        
-      ];
-
-          
-           $this->view('accounts/landing', $data);
-         
-    }
 
     
 
@@ -514,19 +608,39 @@ public function landing(){
 
 
 
-          public function delete_property($ref_id){
+          public function delete_msg_inbox($msg_code){
             
               // Get existing post from model
-             $pro_info = $this->listingModel->getPropertyByRef($ref_id);
+             $msg_info = $this->accountModel->getMsgByCode($msg_code);
             
               // Check for owner
               if($post->user_id != $_SESSION['user_id']){
                 redirect('accounts');
               }
 
-              if($this->listingModel->deleteProperty($ref_id)){
-                flash('post_message', 'Post Removed');
-                redirect('accounts/my_properties');
+              if($this->accountModel->deleteMessageinbox($msg_code)){
+                flash('alert_message', 'Message Removed');
+                redirect('accounts/inbox');
+              } else {
+                die('Something went wrong');
+              }
+              }
+
+
+
+               public function delete_msg_sent($msg_code){
+            
+              // Get existing post from model
+             $msg_info = $this->accountModel->getMsgByCodeSent($msg_code);
+            
+              // Check for owner
+              if($post->user_id != $_SESSION['user_id']){
+                redirect('accounts');
+              }
+
+              if($this->accountModel->deleteMessagesent($msg_code)){
+                flash('alert_message', 'Message Removed');
+                redirect('accounts/sent');
               } else {
                 die('Something went wrong');
               }

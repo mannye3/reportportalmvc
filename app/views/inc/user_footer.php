@@ -50,6 +50,9 @@
     <script src="<?php echo URLROOT; ?>/assets/plugins/datatables/dataTables.responsive.min.js"></script>
     <script src="<?php echo URLROOT; ?>/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
     <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-table-datatable.js"></script>
+
+     <script src="<?php echo URLROOT; ?>/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+    <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-jquery-confirm.js"></script>
 </body>
 
 <!-- Mirrored from xpanthersolutions.com/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Oct 2019 17:22:11 GMT -->

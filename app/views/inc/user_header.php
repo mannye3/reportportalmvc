@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>Orbiter - Bootstrap Minimal & Clean Admin Template</title>
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="<?php echo URLROOT; ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo URLROOT; ?>/assets/images/newNasdIcon.jpg">
     <!-- Start css -->
     <!-- Switchery css -->
     <link href="<?php echo URLROOT; ?>/assets/plugins/switchery/switchery.min.css" rel="stylesheet">
@@ -28,56 +28,19 @@
     <link href="<?php echo URLROOT; ?>/assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="<?php echo URLROOT; ?>/assets/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
 
+    <link href="<?php echo URLROOT; ?>/assets/plugins/jquery-confirm/css/jquery-confirm.css" rel="stylesheet" type="text/css">
+
     <!-- DataTables css -->
     <link href="<?php echo URLROOT; ?>/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo URLROOT; ?>/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive Datatable css -->
     <link href="<?php echo URLROOT; ?>/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <!-- End css -->
 </head>
 <body class="vertical-layout">    
     <!-- Start Infobar Setting Sidebar -->
-    <div id="infobar-settings-sidebar" class="infobar-settings-sidebar">
-        <div class="infobar-settings-sidebar-head d-flex w-100 justify-content-between">
-            <h4>Settings</h4><a href="javascript:void(0)" id="infobar-settings-close" class="infobar-settings-close"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/close.svg" class="img-fluid menu-hamburger-close" alt="close"></a>
-        </div>
-        <div class="infobar-settings-sidebar-body">
-            <div class="custom-mode-setting">
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">Payment Reminders</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-first" checked /></div>
-                </div>
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">Stock Updates</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-second" checked /></div>
-                </div>
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">Open for New Products</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-third" /></div>
-                </div>
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">Enable SMS</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-fourth" checked /></div>
-                </div>
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">Newsletter Subscription</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-fifth" checked /></div>
-                </div>
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">Show Map</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-sixth" /></div>
-                </div>
-                <div class="row align-items-center pb-3">
-                    <div class="col-8"><h6 class="mb-0">e-Statement</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-seventh" checked /></div>
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-8"><h6 class="mb-0">Monthly Report</h6></div>
-                    <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-eightth" checked /></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="infobar-settings-sidebar-overlay"></div>
     <!-- End Infobar Setting Sidebar -->
     <!-- Start Containerbar -->
@@ -91,7 +54,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="mobile-logobar">
-                            <a href="index.html" class="mobile-logo"><img src="<?php echo URLROOT; ?>/assets/images/logo.svg" class="img-fluid" alt="logo"></a>
+                            <a href="index.html" class="mobile-logo"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
                         </div>
                         <div class="mobile-togglebar">
                             <ul class="list-inline mb-0">
@@ -134,27 +97,20 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <div class="searchbar">
-                                        <form>
-                                            <div class="input-group">
-                                              <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                                              <div class="input-group-append">
-                                                <button class="btn" type="submit" id="button-addon2"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/search.svg" class="img-fluid" alt="search"></button>
-                                              </div>
-                                            </div>
-                                        </form>
+                                        
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="infobar">
                             <ul class="list-inline mb-0">
-                                <li class="list-inline-item">
+                               <!--  <li class="list-inline-item">
                                     <div class="settingbar">
                                         <a href="javascript:void(0)" id="infobar-settings-open" class="infobar-icon">
                                             <img src="<?php echo URLROOT; ?>/assets/images/svg-icon/settings.svg" class="img-fluid" alt="settings">
                                         </a>
                                     </div>
-                                </li>
+                                </li> -->
                                 <li class="list-inline-item">
                                     <div class="notifybar">
                                         <div class="dropdown">
@@ -198,19 +154,7 @@
                                         </div>
                                     </div>
                                 </li>                                
-                                <li class="list-inline-item">
-                                    <div class="languagebar">
-                                        <div class="dropdown">
-                                            <a class="dropdown-toggle" href="#" role="button" id="languagelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag flag-icon-us flag-icon-squared"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languagelink">
-                                                <a class="dropdown-item" href="#"><i class="flag flag-icon-us flag-icon-squared"></i>English</a>
-                                                <a class="dropdown-item" href="#"><i class="flag flag-icon-de flag-icon-squared"></i>German</a>
-                                                <a class="dropdown-item" href="#"><i class="flag flag-icon-bl flag-icon-squared"></i>France</a>
-                                                <a class="dropdown-item" href="#"><i class="flag flag-icon-ru flag-icon-squared"></i>Russian</a>                                                
-                                            </div>
-                                        </div>
-                                    </div>                                   
-                                </li>
+                               
                                 <li class="list-inline-item">
                                     <div class="profilebar">
                                         <div class="dropdown">

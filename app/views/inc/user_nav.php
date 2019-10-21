@@ -3,8 +3,8 @@
             <div class="sidebar">
                 <!-- Start Logobar -->
                 <div class="logobar">
-                    <a href="index.html" class="logo logo-large"><img src="<?php echo URLROOT; ?>/assets/images/logo.svg" class="img-fluid" alt="logo"></a>
-                    <a href="index.html" class="logo logo-small"><img src="<?php echo URLROOT; ?>/assets/images/small_logo.svg" class="img-fluid" alt="logo"></a>
+                    <a href="index.html" class="logo logo-large"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
+                    <a href="index.html" class="logo logo-small"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
                 </div>
                 <!-- End Logobar -->
                 <!-- Start Navigationbar -->
@@ -20,25 +20,21 @@
 
 
                          <li>
-                            <a href="javaScript:void();">
-                                <img src="<?php echo URLROOT; ?>/assets/images/svg-icon/tables.svg" class="img-fluid" alt="tables"><span>Trade Report</span><i class="feather icon-chevron-right pull-right"></i>
+                            <a href="<?php echo URLROOT; ?>/accounts/tradeHistory">
+                                <img src="<?php echo URLROOT; ?>/assets/images/svg-icon/tables.svg" class="img-fluid" alt="tables"><span>Trade Report</span>
                             </a>
-                            <ul class="vertical-submenu">
-                                <li><a href="<?php echo URLROOT; ?>/accounts/sell">Sell</a></li>
-                                <li><a href="<?php echo URLROOT; ?>/accounts/buy">Buy</a></li>
-                                
-                            </ul>
+                            
                         </li>
 
                          <li>
                             <a href="javaScript:void();">
                                 <i class="fa fa-envelope"></i><span>Email</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
-                           <!--  <ul class="vertical-submenu">
-                                <li><a href="sell.php">Sell</a></li>
-                                <li><a href="buy.php">Buy</a></li>
+                             <ul class="vertical-submenu">
+                                <li><a href="<?php echo URLROOT; ?>/accounts/inbox">Inbox</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts/sent">Sent</a></li>
                                 
-                            </ul> -->
+                            </ul>
                         </li>
 
                         <li>

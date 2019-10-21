@@ -69,7 +69,12 @@
                                         <div class="form-group row">
                                             <label for="emailSubject" class="col-sm-2 col-form-label">Message</label>
                                             <div class="col-sm-10">
-                                                <textarea name="message"  class="summernote"></textarea>
+                                                <!-- <textarea name="message"  class="summernote"></textarea> -->
+
+                                                <textarea name="editor1"></textarea>
+                                        <script>
+                                                CKEDITOR.replace( 'editor1' );
+                                        </script>
                                                 
                                             </div>
                                         </div>
@@ -90,3 +95,6 @@
                 <!-- End row -->
             </div>
             <!-- End Contentbar -->
+
+               
+       

@@ -48,14 +48,15 @@
                                 </div> -->
                                <div class="card-body">                                    
                                     <div class="table-responsive">
+                                          <?php flash('alert_message'); ?>  
                                         <table class="table table-hover table-borderless">                                            
                                             <tbody>
                                                  <?php $count = 0; foreach($data['inbox'] as $inbox_msg) : $count++;  ?>
                                                 <tr class="email-unread">                                                    
                                                     <td>(<?php echo $count; ?>)</td>
                                                    
-                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message/<?php echo $inbox_msg->id; ?>"><?php echo substr($inbox_msg->subject,0,35); ?></a></td>                             
-                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message/<?php echo $inbox_msg->id; ?>">
+                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message/<?php echo $inbox_msg->msg_code; ?>"><?php echo substr($inbox_msg->subject,0,35); ?></a></td>                             
+                                                    <td><a href="<?php echo URLROOT; ?>/accounts/open_message/<?php echo $inbox_msg->msg_code; ?>">
                                                         
 
                                                         <?php   
