@@ -135,7 +135,7 @@
     //Add New Properties
       public function SendMessage($data){
       
-      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :msg_date, :msg_code)');
+      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, receiver_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_symbol, :msg_date, :msg_code)');
     
       // Bind Values      
       $this->db->bind(':subject', $data['subject']);
@@ -143,6 +143,7 @@
       $this->db->bind(':sender_username', $data['sender_username']);
       $this->db->bind(':sender_email', $data['sender_email']);
       $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
       $this->db->bind(':msg_date', $data['msg_date']);
       $this->db->bind(':msg_code', $data['msg_code']);
       
@@ -376,8 +377,8 @@
     }
 
 
-   public function getAccount2(){
-      $this->db->query('SELECT *  FROM new_account');
+   public function GetallNews(){
+      $this->db->query('SELECT *  FROM blog ORDER BY id DESC');
       //$this->db->bind(':ref_id', $ref_id);
 
       
@@ -391,9 +392,42 @@
 
 
 
+  public function getNewsById($id){
+      $this->db->query('SELECT * FROM blog WHERE id = :id');
+      $this->db->bind(':id', $id);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
 
 
 
+
+
+    public function CloseDeal($symbol){
+      $this->db->query('SELECT * FROM market_activity_sheet WHERE symbol = :symbol');
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
+
+
+
+public function Deals($symbol){
+      $this->db->query('SELECT * FROM market_activity_sheet WHERE symbol = :symbol');
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
 
 
 
@@ -402,70 +436,7 @@
 
 
 
-    //Add New Properties
-      public function addProperty($data){
-      
-      $this->db->query('INSERT INTO property (title, type, purpose, price, rooms, bathrooms, details, address, latitude, longitude, state, lga, fullname, email, phone, ref_id, upload_date, user_id) VALUES(:title, :type, :purpose, :price, :rooms, :bathrooms, :details, :address, :latitude, :longitude, :state, :lga, :fullname, :email, :phone, :ref_id, :upload_date, :user_id)');
     
-      // Bind Values      
-      $this->db->bind(':title', $data['title']);
-      $this->db->bind(':type', $data['type']);
-      $this->db->bind(':purpose', $data['purpose']);
-      $this->db->bind(':price', $data['price']);
-      $this->db->bind(':rooms', $data['rooms']);
-      $this->db->bind(':bathrooms', $data['bathrooms']);
-      $this->db->bind(':details', $data['details']);
-      $this->db->bind(':address', $data['address']);
-      $this->db->bind(':latitude', $data['latitude']);
-      $this->db->bind(':longitude', $data['longitude']);
-      $this->db->bind(':state', $data['state']);
-      $this->db->bind(':lga', $data['lga']);
-      $this->db->bind(':fullname', $data['fullname']);
-      $this->db->bind(':email', $_SESSION['user_email']);
-      $this->db->bind(':phone', $_SESSION['user_phone']);
-      $this->db->bind(':ref_id', $data['ref_id']);
-      $this->db->bind(':upload_date', $data['upload_date']); 
-      $this->db->bind(':user_id', $_SESSION['user_id']);
-    
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }           
-            
-    }
-
-
-
-
-
-
-
-
-       // Update 
-    public function addDocument($data){
-      
-      $this->db->query('UPDATE users SET fp_doc = :fp_doc, bp_doc= :bp_doc, doc_name = :doc_name WHERE id = :id');
-      // Bind Values      
-     
-      $this->db->bind(':fp_doc', $data['fp_doc']);
-      $this->db->bind(':bp_doc', $data['bp_doc']);
-       $this->db->bind(':doc_name', $data['doc_name']);
-       $this->db->bind(':id', $data['id']);
-           
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }     
-            
-    }
 
 
   

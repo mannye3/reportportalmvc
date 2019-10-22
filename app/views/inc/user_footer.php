@@ -9,6 +9,10 @@
         </div>
         <!-- End Rightbar -->
     </div>
+
+   
+
+    <
     <!-- End Containerbar -->
     <!-- Start js -->        
     <script src="<?php echo URLROOT; ?>/assets/js/jquery.min.js"></script>

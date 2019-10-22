@@ -36,6 +36,11 @@
     <!-- Responsive Datatable css -->
     <link href="<?php echo URLROOT; ?>/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
      <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+
+     <script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
     <!-- End css -->
 </head>
 <body class="vertical-layout">    
@@ -171,7 +176,7 @@
                                                             <a href="<?php echo URLROOT; ?>/accounts/profile" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/user.svg" class="img-fluid" alt="user">My Profile</a>
                                                         </li>
                                                         <li class="media dropdown-item">
-                                                            <a href="#" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/email.svg" class="img-fluid" alt="email">Email</a>
+                                                            <a href="<?php echo URLROOT; ?>/accounts/inbox" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/email.svg" class="img-fluid" alt="email">Email</a>
                                                         </li>                                                        
                                                         <li class="media dropdown-item">
                                                             <a href="<?php echo URLROOT; ?>/users/logout" class="profile-icon"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/logout.svg" class="img-fluid" alt="logout">Logout</a>

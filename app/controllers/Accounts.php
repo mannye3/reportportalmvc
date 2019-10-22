@@ -11,14 +11,20 @@
     }
 
       public function index(){
-      // Get User Properties
-      // $total_funds = $this->accountModel->Totalfunds($_SESSION['user_email']);
+      
+      $Close_Deal = $this->accountModel->CloseDeal($_SESSION['user_symbol']);
+
+       $Deals = $this->accountModel->CloseDeal($_SESSION['user_symbol']);
 
             
 
-      // $data = [
-      //       'total_funds' => $total_funds
-      //         ];
+      $data = [
+            'Close_Deal' => $Close_Deal,
+             'Deals' => $Deals
+              ];
+
+
+
 
               
 
@@ -42,8 +48,12 @@
       
             $msg_code= rand(100000,999999);
 
+          $receiver_symbol = 'ADMINCODE';
+
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
+
+            
            
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -52,6 +62,7 @@
               'sender_email' => $_SESSION['user_email'],
               'sender_username' => $_SESSION['username'],
               'sender_symbol' => $_SESSION['user_symbol'],
+              'receiver_symbol' => $receiver_symbol,
               'subject' => trim($_POST['subject']),
               'message' => trim($_POST['editor1']),
               'msg_code' => $msg_code,
@@ -279,6 +290,13 @@ public function reply($msg_code){
            $this->view('accounts/inbox', $data);
           $this->view('inc/user_footer');
     }
+
+
+
+
+
+
+
 
 
     public function sent(){
@@ -547,8 +565,12 @@ public function open_message_sent($msg_code){
 
 
     public function news(){
-      // Get User Properties
+
+     $get_news = $this->accountModel->GetallNews();
+
      $data = [
+
+       'get_news' => $get_news
         
       ];
 
@@ -556,6 +578,31 @@ public function open_message_sent($msg_code){
            $this->view('accounts/news', $data);
           $this->view('inc/user_footer');
     }
+
+
+
+    public function open_news($id){
+        
+      $open_new = $this->accountModel->getNewsById($id);
+      
+
+
+      $data = [
+        'open_new' => $open_new
+       
+            
+        
+      ];
+
+      $this->view('inc/user_header');
+      $this->view('accounts/open_news', $data);
+      $this->view('inc/user_footer');
+    }
+
+
+
+
+    
 
 
 
