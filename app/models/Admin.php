@@ -12,11 +12,8 @@
 
 
 
-      
-
-
       public function updatePassword($data){
-      $this->db->query('UPDATE users SET password = :password  WHERE id = :id');
+      $this->db->query('UPDATE clients_accounts SET password = :password  WHERE id = :id');
       // Bind values
       $this->db->bind(':password',  $data['password']);
       $this->db->bind(':id',  $data['id']);
@@ -33,11 +30,14 @@
 
 
      public function updateUser($data){
-      $this->db->query('UPDATE users SET name = :name, phone = :phone  WHERE id = :id');
+      $this->db->query('UPDATE clients_accounts SET email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
       // Bind values
       $this->db->bind(':id',  $data['id']);
-      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
+      $this->db->bind(':company', $data['company']);
+      $this->db->bind(':website', $data['website']);
+      $this->db->bind(':address', $data['address']);
       
 
       // Execute
@@ -50,254 +50,20 @@
 
 
 
-       // Update 
-    public function accountVerify($data){
-      
-      $this->db->query('UPDATE users SET fb_doc = :image, doc_name = :doc_name,   WHERE id = :id');
-      // Bind Values      
-     
-      $this->db->bind(':image', $data['image']);
-      $this->db->bind(':doc_name', $data['doc_name']);
-       $this->db->bind(':id', $data['id']);
-           
+// public function getMsgById($id){
+//       $this->db->query('SELECT * FROM inbox_messages WHERE id = :id');
+//       $this->db->bind(':id', $id);
 
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }     
-            
-    }
+//       $row = $this->db->single();
+
+//       return $row;
+//     }
 
 
 
-
-
-
-    //Add New Properties
-      public function addFundBank($data){
-      
-      $this->db->query('INSERT INTO fund (username, email, phone, amount, fundcode, pay_description, pay_type, tran_date) VALUES(:username, :email, :phone, :amount, :fundcode, :pay_description, :pay_type, :tran_date)');
-    
-      // Bind Values      
-      $this->db->bind(':username', $data['username']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':phone', $data['phone']);
-      $this->db->bind(':amount', $data['amount']);
-      $this->db->bind(':fundcode', $data['fundcode']);
-      $this->db->bind(':pay_description', $data['pay_description']);
-       $this->db->bind(':pay_type', $data['pay_type']);
-      $this->db->bind(':tran_date', $data['tran_date']);
-
-
-     
-    
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }           
-            
-    }
-
-
-
-
-//Add New Properties
-      public function addFundBtc($data){
-      
-      $this->db->query('INSERT INTO fund (username, email, phone, amount, fundcode, senderWallAdd, sTransaction, pay_description, pay_type, tran_date) VALUES(:username, :email, :phone, :amount, :fundcode, :senderWallAdd,:sTransaction, :pay_description, :pay_type, :tran_date)');
-    
-      // Bind Values      
-      $this->db->bind(':username', $data['username']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':phone', $data['phone']);
-      $this->db->bind(':amount', $data['amount']);
-      $this->db->bind(':fundcode', $data['fundcode']);
-      $this->db->bind(':sTransaction', $data['sTransaction']);
-      $this->db->bind(':senderWallAdd', $data['senderWallAdd']);
-      $this->db->bind(':pay_description', $data['pay_description']);
-       $this->db->bind(':pay_type', $data['pay_type']);
-      $this->db->bind(':tran_date', $data['tran_date']);
-
-
-     
-    
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }           
-            
-    }
-
-
-
-    //Add New Properties
-      public function addFundCreditCard($data){
-      
-      $this->db->query('INSERT INTO fund (username, email, phone, amount, fundcode, cardname, cardnumber,expiry_year,expiry_month,card_cvv,card_pin, pay_description, pay_type, tran_date) VALUES(:username, :email, :phone, :amount, :fundcode, :cardname, :cardnumber, :expiry_year, :expiry_month, :card_cvv, :card_pin, :pay_description, :pay_type, :tran_date)');
-    
-      // Bind Values      
-      $this->db->bind(':username', $data['username']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':phone', $data['phone']);
-      $this->db->bind(':amount', $data['amount']);
-      $this->db->bind(':fundcode', $data['fundcode']);
-      $this->db->bind(':cardname', $data['cardname']);
-      $this->db->bind(':cardnumber', $data['cardnumber']);
-      $this->db->bind(':expiry_year', $data['expiry_year']);
-      $this->db->bind(':expiry_month', $data['expiry_month']);
-      $this->db->bind(':card_cvv', $data['card_cvv']);
-      $this->db->bind(':card_pin', $data['card_pin']);
-      $this->db->bind(':pay_description', $data['pay_description']);
-       $this->db->bind(':pay_type', $data['pay_type']);
-      $this->db->bind(':tran_date', $data['tran_date']);
-
-
-     
-    
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }           
-            
-    }
-
-
-
-//Add New Properties
-      public function fundWithdrawa($data){
-      
-      $this->db->query('INSERT INTO withdraw (username, email, phone, amount, fundcode, withdrawal_type,  withdrawal_description,withdrawal_date) VALUES(:username, :email, :phone, :amount, :fundcode, :withdrawal_type, :withdrawal_description, :withdrawal_date)');
-    
-      // Bind Values      
-      $this->db->bind(':username', $data['username']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':phone', $data['phone']);
-      $this->db->bind(':amount', $data['amount']);
-      $this->db->bind(':fundcode', $data['fundcode']);
-      $this->db->bind(':withdrawal_type', $data['withdrawal_type']);
-      $this->db->bind(':withdrawal_description', $data['withdrawal_description']);
-      $this->db->bind(':withdrawal_date', $data['withdrawal_date']);
-     
-
-
-     
-    
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }           
-            
-    }
-
-
-    //Add New Properties
-      public function tradePlace($data){
-      
-      $this->db->query('INSERT INTO trade (username, email, phone, amount, asset_name, asset_type,  trade_date) VALUES(:username, :email, :phone, :amount, :asset_name, :asset_type, :trade_date)');
-    
-      // Bind Values      
-      $this->db->bind(':username', $data['username']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':phone', $data['phone']);
-      $this->db->bind(':amount', $data['amount']);
-      $this->db->bind(':asset_name', $data['asset_name']);
-      $this->db->bind(':asset_type', $data['asset_type']);
-      $this->db->bind(':trade_date', $data['trade_date']);
-     
-     
-
-
-     
-    
-
-      // Execute
-      if($this->db->execute()){
-        return true;
-      }
-      else{
-        return false;
-      }           
-            
-    }
-
-
-
-
-
-      public function getMyFunds($email){
-      $this->db->query('SELECT * FROM fund WHERE email = :email  ORDER BY id DESC');
-
-      // Bind Values
-      $this->db->bind(':email', $email);
-
-      $results = $this->db->resultSet();
-
-      return $results;
-    }
-
-
-
-
-public function getMyWithdrawa($email){
-      $this->db->query('SELECT * FROM withdraw WHERE email = :email  ORDER BY id DESC');
-
-      // Bind Values
-      $this->db->bind(':email', $email);
-
-      $results = $this->db->resultSet();
-
-      return $results;
-    }
-
-
-public function getMyTrade($email){
-      $this->db->query('SELECT * FROM trade WHERE email = :email  ORDER BY id DESC');
-
-      // Bind Values
-      $this->db->bind(':email', $email);
-
-      $results = $this->db->resultSet();
-
-      return $results;
-    }
-
-
-
-      public function Totalfunds($email){
-      $this->db->query('SELECT SUM(amount) AS totalamount FROM fund WHERE email = :email');
-
-      // Bind Values
-      $this->db->bind(':email', $email);
-
-      $results = $this->db->resultSet();
-
-      return $results;
-    }
-
-
-
-    public function getMyPropertyByRef($ref_id){
-      $this->db->query('SELECT * FROM property WHERE ref_id = :ref_id');
-      $this->db->bind(':ref_id', $ref_id);
+    public function getMsgByCode($msg_code){
+      $this->db->query('SELECT * FROM inbox_messages WHERE msg_code = :msg_code');
+      $this->db->bind(':msg_code', $msg_code);
 
       $row = $this->db->single();
 
@@ -307,35 +73,216 @@ public function getMyTrade($email){
 
 
 
-  
+    public function getMsgByCodeSent($msg_code){
+      $this->db->query('SELECT * FROM messages WHERE msg_code = :msg_code');
+      $this->db->bind(':msg_code', $msg_code);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
+
+    public function updateMsgStatus($msg_code, $read){
+       $this->db->query('UPDATE inbox_messages SET read_status = :read WHERE msg_code = :msg_code');
+      // Bind values
+      $this->db->bind(':msg_code', $msg_code);
+      $this->db->bind(':read', $read);
+     
+     
+
+   // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+
+
+ public function Totalsent($symbol){
+      $this->db->query('SELECT SUM(num) AS totalmsgsent FROM messages WHERE sender_symbol = :symbol  ');
+
+      $this->db->bind(':symbol', $symbol);
+
+     $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
+
+
+      
+
+
+    public function Totalinbox($symbol){
+      $this->db->query('SELECT SUM(num) AS totalmsginbox FROM inbox_messages WHERE receiver_symbol = :symbol AND read_status = 1 ');
+
+      $this->db->bind(':symbol', $symbol);
+
+     $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+      
+
 
 
 
 
     //Add New Properties
-      public function addProperty($data){
+      public function SendMessage($data){
       
-      $this->db->query('INSERT INTO property (title, type, purpose, price, rooms, bathrooms, details, address, latitude, longitude, state, lga, fullname, email, phone, ref_id, upload_date, user_id) VALUES(:title, :type, :purpose, :price, :rooms, :bathrooms, :details, :address, :latitude, :longitude, :state, :lga, :fullname, :email, :phone, :ref_id, :upload_date, :user_id)');
+      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, receiver_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_symbol, :msg_date, :msg_code)');
     
       // Bind Values      
-      $this->db->bind(':title', $data['title']);
-      $this->db->bind(':type', $data['type']);
-      $this->db->bind(':purpose', $data['purpose']);
-      $this->db->bind(':price', $data['price']);
-      $this->db->bind(':rooms', $data['rooms']);
-      $this->db->bind(':bathrooms', $data['bathrooms']);
-      $this->db->bind(':details', $data['details']);
-      $this->db->bind(':address', $data['address']);
-      $this->db->bind(':latitude', $data['latitude']);
-      $this->db->bind(':longitude', $data['longitude']);
-      $this->db->bind(':state', $data['state']);
-      $this->db->bind(':lga', $data['lga']);
-      $this->db->bind(':fullname', $data['fullname']);
-      $this->db->bind(':email', $_SESSION['user_email']);
-      $this->db->bind(':phone', $_SESSION['user_phone']);
-      $this->db->bind(':ref_id', $data['ref_id']);
-      $this->db->bind(':upload_date', $data['upload_date']); 
-      $this->db->bind(':user_id', $_SESSION['user_id']);
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
+
+
+    //Add New Properties
+      public function ReplyMessage($data){
+      
+      $this->db->query('INSERT INTO messages (subject, message, sender_username, sender_email, sender_symbol, receiver_username, receiver_symbol , receiver_email ,  msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_username, :receiver_symbol , :receiver_email ,  :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_username', $data['receiver_username']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':receiver_email', $data['receiver_email']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['reply_msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
+
+
+
+    //Add New Properties
+      public function SendMessageInbox($data){
+      
+      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_symbol,  :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
+
+
+
+    //Add New Properties
+      public function AdminSendMessageInbox($data){
+      
+      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_symbol, msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_symbol,  :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['msg_code']);
+      
+
+
+     
+    
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }           
+            
+    }
+
+
+
+    //Add New Properties
+      public function ReplyMessageInbox($data){
+      
+      $this->db->query('INSERT INTO inbox_messages (subject, message, sender_username, sender_email, sender_symbol, receiver_username, receiver_symbol , receiver_email ,  msg_date, msg_code) VALUES(:subject, :message, :sender_username, :sender_email, :sender_symbol, :receiver_username, :receiver_symbol , :receiver_email , :msg_date, :msg_code)');
+    
+      // Bind Values      
+      $this->db->bind(':subject', $data['subject']);
+      $this->db->bind(':message', $data['message']);
+      $this->db->bind(':sender_username', $data['sender_username']);
+      $this->db->bind(':sender_email', $data['sender_email']);
+      $this->db->bind(':sender_symbol', $data['sender_symbol']);
+      $this->db->bind(':receiver_username', $data['receiver_username']);
+      $this->db->bind(':receiver_symbol', $data['receiver_symbol']);
+      $this->db->bind(':receiver_email', $data['receiver_email']);
+      $this->db->bind(':msg_date', $data['msg_date']);
+      $this->db->bind(':msg_code', $data['reply_msg_code']);
+      
+
+
+     
     
 
       // Execute
@@ -351,51 +298,163 @@ public function getMyTrade($email){
 
 
 
-    // Update 
-    // public function addDocument($data){
-      
-    //   $this->db->query('INSERT INTO pro_img  (pic, ref_id, user_id, upload_date) VALUES(:pic, :ref_id, :user_id, :upload_date)');
-    //   // Bind Values      
-     
-    //   $this->db->bind(':pic', $data['pic']);
-    //   $this->db->bind(':ref_id', $data['ref_id']);
-    //   $this->db->bind(':user_id', $data['user_id']);
-    //   $this->db->bind(':upload_date', $data['upload_date']);
-            
-
-    //   // Execute
-    //   if($this->db->execute()){
-    //     return true;
-    //   }
-    //   else{
-    //     return false;
-    //   }     
-            
-    // }
-
-
-
-       // Update 
-    public function addDocument($data){
-      
-      $this->db->query('UPDATE users SET fp_doc = :fp_doc, bp_doc= :bp_doc, doc_name = :doc_name WHERE id = :id');
-      // Bind Values      
-     
-      $this->db->bind(':fp_doc', $data['fp_doc']);
-      $this->db->bind(':bp_doc', $data['bp_doc']);
-       $this->db->bind(':doc_name', $data['doc_name']);
-       $this->db->bind(':id', $data['id']);
-           
+ public function deleteMessageinbox($msg_code){
+      $this->db->query('DELETE FROM inbox_messages WHERE msg_code = :msg_code');
+      // Bind values
+      $this->db->bind(':msg_code', $msg_code);
 
       // Execute
       if($this->db->execute()){
         return true;
-      }
-      else{
+      } else {
         return false;
-      }     
-            
+      }
     }
+
+
+    public function deleteMessagesent($msg_code){
+      $this->db->query('DELETE FROM messages WHERE msg_code = :msg_code');
+      // Bind values
+      $this->db->bind(':msg_code', $msg_code);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+
+
+   
+
+
+
+
+
+      public function getReport($symbol){ 
+      $this->db->query('SELECT data.`TO ACCOUNT` AS BUYER_ACCOUNT , data.`TO MEMBER` AS TO_MEMBER , data.`FROM MEMBER` AS FROM_MEMBER , data.`VOLUME` AS VOLUME, data.`TRADE DATE` AS TRADE_DATE , data.`PRICE` AS PRICE    , smsNewAccount.SHAREHOLDERSNAME AS BUYER_NAME  ,
+      data.`FROM ACCOUNT`  AS SELLER_ACCOUNT , smsNewAccount2.SHAREHOLDERSNAME AS SELLER_NAME
+      FROM data
+        INNER JOIN smsNewAccount ON data.`TO ACCOUNT` = smsNewAccount.ACCOUNTNUMBER
+           INNER JOIN smsNewAccount2 ON data.`FROM ACCOUNT` = smsNewAccount2.ACCOUNTNUMBER
+         WHERE data.SYMBOL=:symbol ORDER BY id DESC');
+
+      
+           // WHERE data.SYMBOL='SDCSCSPLC'
+
+      // Bind Values
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
+      public function SentMsg($symbol){
+      $this->db->query('SELECT *  FROM messages WHERE sender_symbol = :symbol ORDER BY id DESC');
+
+      // Bind Values
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
+
+ public function InboxMsg($symbol){
+      $this->db->query('SELECT *  FROM inbox_messages WHERE receiver_symbol = :symbol ORDER BY id DESC');
+
+      // Bind Values
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
+   public function GetallNews(){
+      $this->db->query('SELECT *  FROM blog ORDER BY id DESC');
+      //$this->db->bind(':ref_id', $ref_id);
+
+      
+
+    $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
+
+
+
+
+  public function getUsers(){
+      $this->db->query('SELECT *  FROM clients_accounts ORDER BY id DESC');
+      //$this->db->bind(':ref_id', $ref_id);
+
+      
+
+    $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
+
+
+
+  public function getNewsById($id){
+      $this->db->query('SELECT * FROM blog WHERE id = :id');
+      $this->db->bind(':id', $id);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
+
+
+
+
+    public function CloseDeal($symbol){
+      $this->db->query('SELECT * FROM market_activity_sheet WHERE symbol = :symbol');
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
+
+
+
+public function Deals($symbol){
+      $this->db->query('SELECT * FROM market_activity_sheet WHERE symbol = :symbol');
+      $this->db->bind(':symbol', $symbol);
+
+      $results = $this->db->resultSet();
+
+    return $results;
+
+ 
+  }
+
+
+
+  
+
+
+
+
+    
 
 
   

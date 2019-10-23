@@ -168,14 +168,14 @@
     series: [{
       type: '',
       name: 'DEAL',
-      data: <?php echo $date ?>,
+      data: Volume,
       dataGrouping: {
         units: groupingUnits
       }
     }, {
       type: 'column',
       name: 'PRICE',
-      data: <?php echo $usi ?>,
+      data: Volume,
       yAxis: 1,
       dataGrouping: {
         units: groupingUnits

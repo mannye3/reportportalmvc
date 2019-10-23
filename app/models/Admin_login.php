@@ -8,12 +8,12 @@
 
     // Regsiter user
     public function register($data){
-      $this->db->query('INSERT INTO users (fname, lname, username, email, phone, password, country, zipcode, account_type, currency_type, reg_date) VALUES(:fname, :lname, :username, :email, :phone, :password, :country, :zipcode, :account_type, :currency_type, :reg_date)');
+      $this->db->query('INSERT INTO users (fname, lname, username, username, phone, password, country, zipcode, account_type, currency_type, reg_date) VALUES(:fname, :lname, :username, :username, :phone, :password, :country, :zipcode, :account_type, :currency_type, :reg_date)');
       // Bind values
       $this->db->bind(':fname', $data['fname']);
        $this->db->bind(':lname', $data['lname']);
        $this->db->bind(':username', $data['username']);
-      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':username', $data['username']);
       $this->db->bind(':phone', $data['phone']);
       $this->db->bind(':password', $data['password']);
       $this->db->bind(':country', $data['country']);
@@ -31,9 +31,9 @@
     }
 
     // Login User
-    public function login($email, $password){
-      $this->db->query('SELECT * FROM admin WHERE email = :email');
-      $this->db->bind(':email', $email);
+    public function login($username, $password){
+      $this->db->query('SELECT * FROM admin WHERE username = :username');
+      $this->db->bind(':username', $username);
 
       $row = $this->db->single();
 
@@ -49,9 +49,9 @@
 
 
       // Forget Password
-    public function forgetPassword($email){
-      $this->db->query('SELECT * FROM users WHERE email = :email');
-      $this->db->bind(':email', $email);
+    public function forgetPassword($username){
+      $this->db->query('SELECT * FROM users WHERE username = :username');
+      $this->db->bind(':username', $username);
 
       $row = $this->db->single();
 
@@ -62,11 +62,11 @@
 
 
 
-    // Find user by email
-    public function findUserByEmail($email){
-      $this->db->query('SELECT * FROM admin WHERE email = :email');
+    // Find user by username
+    public function findUserByusername($username){
+      $this->db->query('SELECT * FROM admin WHERE username = :username');
       // Bind value
-      $this->db->bind(':email', $email);
+      $this->db->bind(':username', $username);
 
       $row = $this->db->single();
 
@@ -97,9 +97,9 @@
 
 
 
-     public function getUserDetail($email){
-      $this->db->query('SELECT * FROM users WHERE email = :email');
-      $this->db->bind(':email', $email);
+     public function getUserDetail($username){
+      $this->db->query('SELECT * FROM users WHERE username = :username');
+      $this->db->bind(':username', $username);
 
       $row = $this->db->single();
 
@@ -109,9 +109,9 @@
 
 
     public function updateUserPassword($data){
-      $this->db->query('UPDATE users SET password = :password  WHERE email = :email');
+      $this->db->query('UPDATE users SET password = :password  WHERE username = :username');
       // Bind values
-      $this->db->bind(':email',  $data['email']);
+      $this->db->bind(':username',  $data['username']);
       $this->db->bind(':password', $data['password']);
     
       

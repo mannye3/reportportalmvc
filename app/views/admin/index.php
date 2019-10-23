@@ -1,76 +1,161 @@
 
-<?php foreach($data['total_funds'] as $total_funds) : ?>
-         <?php endforeach; ?>
-       
-
-
-                <div class="page-content fade-in-up">
-                    <!-- BEGIN: Page heading-->
-                    <div class="page-heading">
-                        <div class="page-breadcrumb">
-                            <h1 class="page-title page-title-sep">Dashboard</h1>
-                            
+ <!-- Start Breadcrumbbar -->                    
+            <div class="breadcrumbbar">
+                <div class="row align-items-center">
+                    <div class="col-md-8 col-lg-8">
+                        <h4 class="page-title">CRM</h4>
+                        <div class="breadcrumb-list">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">CRM</li>
+                            </ol>
                         </div>
-                    </div><!-- BEGIN: Page content-->
-                    <div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="widgetbar">
+                            <button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Actions</button>
+                        </div>                        
+                    </div>
+                </div>          
+            </div>
 
-                        
-
-                           
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="mb-2"><i class="fa fa-users font-40 text-warning"></i></div>
-                                        <div class="mb-3 text-muted font-16">Total Users</div>
-                                        <div class="h5 font-20"><span>2 </span><span class="font-weight-normal"></span></div>
-                                       <!--  <div class="font-16">$18.054</div> -->
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="mb-2"><i class="fa fa-users font-40 text-primary"></i></div>
-                                        <div class="mb-3 text-muted font-16">Active Users</div>
-                                        <div class="h5 font-20"><span>2</span><span class="font-weight-normal"></span></div>
-                                       <!--  <div class="font-16">$18.054</div> -->
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="mb-2"><i class="fa fa-users font-40 text-secondary"></i></div>
-                                        <div class="mb-3 text-muted font-16">Pending Users</div>
-                                        <div class="h5 font-20"><span>2</span><span class="font-weight-normal"></span></div>
-                                       <!--  <div class="font-16">$18.054</div> -->
+            <ul>
+            <li><?php echo $usi ?></li>
+            <li><?php echo $date; ?></li>
+        </ul>
+            <!-- End Breadcrumbbar -->
+            <!-- Start Contentbar -->    
+            <div class="contentbar">                
+                <!-- Start row -->
+                <div class="row">
+                    <!-- Start col -->
+                    
+                    <!-- End col -->                    
+                    <!-- Start col -->
+                    <div class="col-lg-12 col-xl-12">
+                        <div class="card m-b-30 dash-widget">
+                            <div class="card-header">                                
+                                <div class="row align-items-center">
                                     
-                                        
+                                    <div class="col-7">
+                                     
                                     </div>
                                 </div>
                             </div>
-                            
-                        </div>
-                        <!-- <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between mb-4">
-                                    <div>
-                                        <h5 class="box-title mb-2">Bitcoin Prices</h5>
-                                        <div class="text-muted font-13">Simple Chart Data</div>
-                                    </div><a class="text-muted" href="#"><i class="ti-more-alt"></i></a>
-                                </div>
-                                <div id="crypto_axes" style="height:300px;"></div>
+                            <div class="card-body py-0 pl-0 pr-2">
+                               <div id="container" style="height: 500px; min-width: 300px"></div>
                             </div>
-                        </div> -->
-                       
+                        </div>
+                    </div>
+                    <!-- End col -->
+                </div>
+                <!-- End row -->
+                <!-- Start row -->
+               
+                <!-- End row -->
+            </div>
 
 
-                        
-                      
-                    </div><!-- END: Page content-->
-                </div><!-- BEGIN: Footer-->
-              
+
+
+
+
+
+    <script type="text/javascript">
+        
+        Highcharts.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/aapl-ohlcv.json', function (data) {
+
+  // split the data set into ohlc and volume
+  var ohlc = [],
+    volume = [],
+    dataLength = data.length,
+    // set the allowed units for data grouping
+    groupingUnits = [[
+      'week',             // unit name
+      [1]               // allowed multiples
+    ], [
+      'month',
+      [1, 2, 3, 4, 6]
+    ]],
+
+    i = 0;
+
+  for (i; i < dataLength; i += 1) {
+    ohlc.push([
+      data[i][0], // the date
+      data[i][1], // open
+      data[i][2], // high
+      data[i][3], // low
+      data[i][4] // close
+    ]);
+
+    volume.push([
+      data[i][0], // the date
+      data[i][5] // the volume
+    ]);
+  }
+
+
+  // create the chart
+  Highcharts.stockChart('container', {
+
+    rangeSelector: {
+      selected: 1
+    },
+
+    title: {
+      text: 'AAPL Historical'
+    },
+
+    yAxis: [{
+      labels: {
+        align: 'right',
+        x: -3
+      },
+      title: {
+        text: 'OHLC'
+      },
+      height: '60%',
+      lineWidth: 2,
+      resize: {
+        enabled: true
+      }
+    }, {
+      labels: {
+        align: 'right',
+        x: -3
+      },
+      title: {
+        text: 'Volume'
+      },
+      top: '65%',
+      height: '35%',
+      offset: 0,
+      lineWidth: 2
+    }],
+
+    tooltip: {
+      split: true
+    },
+
+    series: [{
+      type: '',
+      name: 'DEAL',
+      data: Volume,
+      dataGrouping: {
+        units: groupingUnits
+      }
+    }, {
+      type: 'column',
+      name: 'PRICE',
+      data: Volume,
+      yAxis: 1,
+      dataGrouping: {
+        units: groupingUnits
+      }
+    }]
+  });
+});
+    </script>
  
