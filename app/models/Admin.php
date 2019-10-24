@@ -30,9 +30,10 @@
 
 
      public function updateUser($data){
-      $this->db->query('UPDATE clients_accounts SET email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
+      $this->db->query('UPDATE clients_accounts SET username = :username,  email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
       // Bind values
       $this->db->bind(':id',  $data['id']);
+       $this->db->bind(':username',  $data['username']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
       $this->db->bind(':company', $data['company']);
@@ -46,6 +47,55 @@
       } else {
         return false;
       }
+    }
+
+
+
+    // Regsiter user
+    public function AddUser($data){
+      $this->db->query('INSERT INTO clients_accounts (username, password, symbol, email, phone, company, address, website,  reg_date) VALUES(:username, :password, :symbol, :email, :phone, :company, :address, :website,  :reg_date)');
+      // Bind values
+      $this->db->bind(':username', $data['username']);
+       $this->db->bind(':password', $data['password']);
+      $this->db->bind(':symbol', $data['symbol']);
+      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':phone', $data['phone']);
+      $this->db->bind(':company', $data['company']);
+      $this->db->bind(':address', $data['address']);
+      $this->db->bind(':website', $data['website']);
+       $this->db->bind(':reg_date', $data['reg_date']);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+    public function deleteUser($id){
+      $this->db->query('DELETE FROM clients_accounts WHERE id = :id');
+      // Bind values
+      $this->db->bind(':id', $id);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+
+    public function getUserById($id){
+      $this->db->query('SELECT * FROM clients_accounts WHERE id = :id');
+      $this->db->bind(':id', $id);
+
+      $row = $this->db->single();
+
+      return $row;
     }
 
 
@@ -379,7 +429,7 @@
     }
 
 
-   public function GetallNews(){
+   public function getNews(){
       $this->db->query('SELECT *  FROM blog ORDER BY id DESC');
       //$this->db->bind(':ref_id', $ref_id);
 

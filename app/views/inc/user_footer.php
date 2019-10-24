@@ -57,6 +57,12 @@
 
      <script src="<?php echo URLROOT; ?>/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
     <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-jquery-confirm.js"></script>
+
+    <script src="<?php echo URLROOT; ?>/assets/plugins/jquery-step/jquery.steps.min.js"></script>
+    <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-form-wizard.js"></script>
+
+    <script src="<?php echo URLROOT; ?>/assets/plugins/footable/js/footable.min.js"></script>     
+    <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-table-footable.js"></script>  
 </body>
 
 <!-- Mirrored from xpanthersolutions.com/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Oct 2019 17:22:11 GMT -->

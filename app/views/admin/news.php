@@ -38,34 +38,31 @@
                             <div class="card-body">
                                 <h6 class="card-subtitle">Export data to Copy, CSV, Excel & Note.</h6>
                                 <div class="table-responsive">
-                                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                                    <table class="table foo-filtering-table" data-filtering="true">
                                         <thead>
-                                         <tr>
-                                            <th>SN</th>
-                                            <th>Username</th>
-                                            <th>Symbol</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Reg Date</th>
+                                        <tr>
+                                            <th data-breakpoints="xs">SN</th>
+                                            <th>Title</th>
+                                            <th>Blog Content</th>
+                                            <th data-breakpoints="xs sm md">Published Birth</th>
                                             <th>Action</th>
-                                            
+                                           
                                         </tr>
-
                                         </thead>
                                         <tbody>
-                                         <?php  $count = 0; foreach($data['allusers'] as $allusers) :  $count++; ?>
-                                       <tr>
-                                            <td><?php echo $count; ?></td>
-                                            <td> <?php echo $allusers->username; ?> </td>
-                                            <td><?php echo $allusers->symbol; ?></td>
-                                            <td><?php echo $allusers->email; ?></td>  
-                                            <td><?php echo $allusers->phone; ?></td>
-                                            <td><?php echo $allusers->reg_date; ?></td>
-                                             <td><a href="<?php echo URLROOT; ?>/admins/edit_user/<?php echo $allusers->id; ?>"><span class="badge badge-primary">Edit</span></a><a href="<?php echo URLROOT; ?>/admins/delete_user/<?php echo $allusers->id; ?>" onclick="return confirm('Are you sure you want to DELETE USER ?')"><span class="badge badge-danger">Delete</span></a></td>
-                                            
+                                             <?php  $count = 0; foreach($data['allnews'] as $allnews) :  $count++; ?>
+                                        <tr>
+                                            <td><?php echo $count;  ?></td>
+                                            <td><?php echo substr($allnews->page_title,0,20); ?></td>
+                                            <td><?php echo substr($allnews->page_content,0,50); ?></td>
+                                            <td><?php echo $allnews->date_published;  ?></td>
+                                            <td><a href="<?php echo URLROOT; ?>/admins/edit_user/<?php echo $allusers->id; ?>"><span class="badge badge-primary">Edit</span></a><a href="<?php echo URLROOT; ?>/admins/delete_user/<?php echo $allusers->id; ?>" onclick="return confirm('Are you sure you want to DELETE USER ?')"><span class="badge badge-danger">Delete</span></a></td>
                                             
                                         </tr>
+                                        
+                                         
                                         <?php endforeach; ?>
+                                        
                                         </tbody>
                                     </table>
                                 </div>

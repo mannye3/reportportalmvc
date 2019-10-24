@@ -11,15 +11,7 @@
     }
 
       public function index(){
-      // Get User Properties
-      // $total_funds = $this->adminModel->Totalfunds($_SESSION['user_symbol']);
-
-            
-
-      // $data = [
-      //       'total_funds' => $total_funds
-      //         ];
-
+    
               
 
           $this->view('inc/user_header');
@@ -56,6 +48,173 @@
            $this->view('admin/users', $data);
           $this->view('inc/user_footer');
     }
+
+
+          public function edit_user($id){
+
+
+      
+            $num = rand(1000, 9999);
+            $username = 'SD-' . $num; 
+
+           if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+           
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+
+          
+            $data = [
+             'username' => trim($_POST['username']),
+              'id' => $id,
+              'email' => trim($_POST['email']),
+              'phone' => trim($_POST['phone']),
+              'company' => trim($_POST['company']),
+              'website' => trim($_POST['website']),
+              'address' => trim($_POST['address']),
+              'username_err' => ''
+             
+             
+            ];
+
+            // Validate data
+            if(empty($data['username'])){
+              $data['username_err'] = 'username Field is Empty';
+            }
+            
+
+            // Make sure no errors
+            if(empty($data['username_err'])){
+              // Validated
+              if($this->adminModel->updateUser($data)){
+                  flash('alert_message', 'Account Updated');
+                  redirect('admins/users');
+                
+              } 
+
+              else {
+                die('Something went wrong');
+              }
+            } else {
+              // Load view with errors
+               $this->view('inc/user_header');
+              $this->view('admin/edit_user', $data);
+              $this->view('inc/user_footer');
+            }
+
+          } else {
+              $user_info = $this->adminModel->getUserById($id);
+
+            $data = [
+            'user_info' => $user_info
+
+            ];
+
+            
+      
+           $this->view('inc/user_header');
+          $this->view('admin/edit_user', $data);
+          $this->view('inc/user_footer');
+          }
+        }
+
+
+
+
+ public function add_user(){
+
+
+            $password = 'password123';
+            $num = rand(1000, 9999);
+            $username = 'SD-' . $num; 
+
+           if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+           
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+
+          
+            $data = [
+             // 'username' => trim($_POST['username']),
+              'username' => $username,
+              'email' => trim($_POST['email']),
+              'password' => $password,
+              'phone' => trim($_POST['phone']),
+              'symbol' => trim($_POST['symbol']),
+              'company' => trim($_POST['company']),
+              'website' => trim($_POST['website']),
+              'address' => trim($_POST['address']),
+              'reg_date' => date('jS \ F Y h:i:s A'),
+              'username_err' => ''
+             
+             
+            ];
+
+            // Validate data
+            if(empty($data['username'])){
+              $data['username_err'] = 'username Field is Empty';
+            }
+
+             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            
+
+            // Make sure no errors
+            if(empty($data['username_err'])){
+              // Validated
+              if($this->adminModel->AddUser($data)){
+                  flash('alert_message', 'User Added');
+                  redirect('admins/users');
+                
+              } 
+
+              else {
+                die('Something went wrong');
+              }
+            } else {
+              // Load view with errors
+               $this->view('inc/user_header');
+              $this->view('admin/users', $data);
+              $this->view('inc/user_footer');
+            }
+
+          } else {
+            //   $user_info = $this->adminModel->getUserById();
+
+            // $data = [
+            // 'user_info' => $user_info
+
+            // ];
+
+            
+      
+           $this->view('inc/user_header');
+          $this->view('admin/add_user', $data);
+          $this->view('inc/user_footer');
+          }
+        }
+
+         public function delete_user($id){
+            
+
+              if($this->adminModel->deleteUser($id)){
+                flash('alert_message', 'Account Removed');
+                redirect('admins/users');
+              } 
+                  else {
+                    die('Something went wrong');
+                  }
+
+              }
+
+
+
+         
+
 
 
 
@@ -139,7 +298,7 @@
 
 
 
-public function reply($msg_code){
+        public function reply($msg_code){
       
              $reply_msg_code= rand(100000,999999);
 
@@ -215,6 +374,21 @@ public function reply($msg_code){
           }
         }
 
+
+
+            public function news(){
+      $allnews = $this->adminModel->getNews();
+
+            
+
+      $data = [
+            'allnews' => $allnews
+              ];
+
+          $this->view('inc/user_header');
+           $this->view('admin/news', $data);
+          $this->view('inc/user_footer');
+    }
 
 
 

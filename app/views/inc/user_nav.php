@@ -24,7 +24,7 @@
                             </a>
                             <ul class="vertical-submenu">
                                 <li><a href="<?php echo URLROOT; ?>/admins/users">Users</a></li>
-                                <li><a href="<?php echo URLROOT; ?>/admins/sent">Add New</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/admins/add_user">Add New</a></li>
                                 
                             </ul>
                         </li>
@@ -47,7 +47,7 @@
                                 <i class="fa fa-newspaper-o"></i><span>News</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
                              <ul class="vertical-submenu">
-                                <li><a href="<?php echo URLROOT; ?>/admins/inbox">News</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/admins/news">News</a></li>
                                 <li><a href="<?php echo URLROOT; ?>/admins/sent">Add News</a></li>
                                 
                             </ul>
