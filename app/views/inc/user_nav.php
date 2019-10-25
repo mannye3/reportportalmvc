@@ -48,7 +48,7 @@
                             </a>
                              <ul class="vertical-submenu">
                                 <li><a href="<?php echo URLROOT; ?>/admins/news">News</a></li>
-                                <li><a href="<?php echo URLROOT; ?>/admins/sent">Add News</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/admins/add_news">Add News</a></li>
                                 
                             </ul>
                         </li>

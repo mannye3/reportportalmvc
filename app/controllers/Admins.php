@@ -392,6 +392,62 @@
 
 
 
+    public function add_news(){
+      $allnews = $this->adminModel->getNews();
+
+            
+
+      $data = [
+            'allnews' => $allnews
+              ];
+
+          $this->view('inc/user_header');
+           $this->view('admin/add_news', $data);
+          $this->view('inc/user_footer');
+    }
+
+
+
+
+
+
+      function uploadnews(){
+              if(isset($_POST['submit']))
+              {
+
+                      $target_dir = NEWS_PIC_ROOT_PATH;
+                      $RandomNum = time();
+                      $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                      $filename = explode('.', $_FILES["file"]["name"]);
+                      $picname = end($filename);
+                      $new_name = rand(1000, 9999) . '.' . $picname;
+                      $ImageName = str_replace(' ','-',strtolower($new_name));
+                      $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
+                      $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+                      $ImageExt = str_replace('.','',$ImageExt);
+                      $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+                      $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+                      $ret[$NewImageName]= $target_dir.$NewImageName;
+                      move_uploaded_file($_FILES["file"]["tmp_name"],$target_dir."/".$NewImageName );
+
+                      $data = array(
+                      'page_title' => trim($_POST['title']),
+                      'page_content' => trim($_POST['editor1']),
+                      'picture' => $NewImageName,
+                      'date_published' => date('jS \ F Y h:i:s A')
+                      );
+
+                      
+                    $this->adminModel->AddNews($data);
+                    }
+                    flash('alert_message', 'News Uploaded');
+                    redirect('admins/news');
+                 
+                    }
+
+
+
+
 
         public function admin_compose(){
       

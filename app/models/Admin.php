@@ -461,12 +461,35 @@
 
 
   public function getNewsById($id){
-      $this->db->query('SELECT * FROM blog WHERE id = :id');
+      $this->db->query('SELECT * FROM blog WHERE id = :id ' );
       $this->db->bind(':id', $id);
 
       $row = $this->db->single();
 
       return $row;
+    }
+
+
+    public function AddNews($data){
+      
+      $this->db->query('INSERT INTO blog (page_title, page_content, picture, date_published) VALUES(:page_title, :page_content, :picture, :date_published)');
+      // Bind Values      
+     
+      $this->db->bind(':picture', $data['picture']);
+      $this->db->bind(':page_title', $data['page_title']);
+      $this->db->bind(':page_content', $data['page_content']);
+       $this->db->bind(':date_published', $data['date_published']);
+       
+           
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }     
+            
     }
 
 

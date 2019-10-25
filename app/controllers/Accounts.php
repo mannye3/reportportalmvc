@@ -628,7 +628,7 @@ public function open_message_sent($msg_code){
             $target_file = $target_dir . basename($_FILES["file"]["name"]);
             $filename = explode('.', $_FILES["file"]["name"]);
             $picname = end($filename);
-            $new_name = rand(100, 999) . '.' . $picname;
+            $new_name = rand(1000, 9999) . '.' . $picname;
             $ImageName = str_replace(' ','-',strtolower($new_name));
             $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
             $ImageExt = substr($ImageName, strrpos($ImageName, '.'));

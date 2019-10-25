@@ -62,7 +62,14 @@
     <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-form-wizard.js"></script>
 
     <script src="<?php echo URLROOT; ?>/assets/plugins/footable/js/footable.min.js"></script>     
-    <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-table-footable.js"></script>  
+    <script src="<?php echo URLROOT; ?>/assets/js/custom/custom-table-footable.js"></script> 
+
+    <!-- dropify js -->
+        <script src="<?php echo URLROOT; ?>/assets/dropify/dropify.min.js"></script>
+
+         <script src="<?php echo URLROOT; ?>/assets/dropify/form-fileupload.init.js"></script>
+
+        
 </body>
 
 <!-- Mirrored from xpanthersolutions.com/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Oct 2019 17:22:11 GMT -->

@@ -15,7 +15,7 @@
   define('APPVERSION', '1.0.0');
 
   // Picture Image Path
-  define('PROPERTY_PIC_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/pro_pics/');
+  define('NEWS_PIC_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/news_pics/');
 
   // Profile Picture Path
   define('PROFILE_PIC_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/profile_pic/');

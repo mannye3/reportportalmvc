@@ -41,7 +41,9 @@
 <script src="https://code.highcharts.com/stock/modules/data.js"></script>
 <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-    <!-- End css -->
+
+                <!-- dropify -->
+<link href="<?php echo URLROOT; ?>/assets/dropify/dropify.min.css" rel="stylesheet" type="text/css" />    <!-- End css -->
 </head>
 <body class="vertical-layout">    
     <!-- Start Infobar Setting Sidebar -->
