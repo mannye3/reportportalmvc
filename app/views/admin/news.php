@@ -33,10 +33,10 @@
                         <div class="card m-b-30">
                             <div class="card-header">
                                 <?php flash('alert_message'); ?>
-                                <h5 class="card-title">Data Export Table</h5>
+                       
                             </div>
                             <div class="card-body">
-                                <h6 class="card-subtitle">Export data to Copy, CSV, Excel & Note.</h6>
+                               
                                 <div class="table-responsive">
                                     <table class="table foo-filtering-table" data-filtering="true">
                                         <thead>
@@ -63,8 +63,8 @@
                                             <td><?php echo $allnews->date_published;  ?></td>
                                            <td>
                                                     <div class="button-list">
-                                                        <a href="page-product-detail.html" class="btn btn-success-rgba"><i class="feather icon-edit-2"></i></a>
-                                                        <a href="page-product-detail.html" class="btn btn-danger-rgba"><i class="feather icon-trash"></i></a>
+                                                        <a href="<?php echo URLROOT; ?>/admins/edit_news/<?php echo $allnews->id; ?>" class="btn btn-success-rgba"><i class="feather icon-edit-2"></i></a>
+                                                        <a href="<?php echo URLROOT; ?>/admins/delete_news/<?php echo $allnews->id; ?> " onclick="return confirm('Are you sure you want to DELETE NEWS ?')" class="btn btn-danger-rgba"><i class="feather icon-trash"></i></a>
                                                     </div>
                                                 </td>
                                             

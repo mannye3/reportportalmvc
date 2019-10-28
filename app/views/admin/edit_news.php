@@ -25,31 +25,31 @@
                         <div class="card m-b-30">
                             
                             <div class="card-body">
-                               <form id="login-form" action="<?php echo URLROOT; ?>/admins/uploadnews" enctype="multipart/form-data" method="post">
+                               <form id="login-form" action="<?php echo URLROOT; ?>/admins/edit_news/<?php echo $data['news_info']->id; ?>" enctype="multipart/form-data" method="post">
 
 
                                     <div class="form-group row">
                                         <label for="productTitle" class="col-sm-12 col-form-label">News Title</label>
                                         <div class="col-sm-12">
-                                            <input type="text" name="title" class="form-control font-20" id="productTitle" placeholder="Title">
+                                            <input type="text" value="<?php echo $data['news_info']->page_title; ?>" name="title" class="form-control font-20" id="productTitle" placeholder="Title">
                                         </div>
                                     </div>                                     
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-form-label">Description</label>
                                         <div class="col-sm-12">
-                                            <textarea name="editor1"></textarea>
+                                            <textarea name="editor1"><?php echo $data['news_info']->page_content; ?></textarea>
                                         <script>
                                                 CKEDITOR.replace( 'editor1' );
                                         </script>
                                         </div>
                                     </div>
 
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                         <label for="productTitle" class="col-sm-12 col-form-label">Feature Picture</label>
                                         <div class="col-sm-12">
                                              <input type="file" name="file" class="dropify" data-height="300"> 
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                 <button type="type" name="submit" class="btn btn-primary btn-lg">Submit</button>
                             </div>

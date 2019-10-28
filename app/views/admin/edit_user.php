@@ -129,11 +129,11 @@
                              <div class="card-body">
                                 <?php flash('alert_message'); ?>
                                
-                                 <form id="login-form" action="<?php echo URLROOT; ?>/accounts/edit_password" method="post">
+                                 <form id="login-form" action="<?php echo URLROOT; ?>/admins/edit_userpassword/<?php echo $data['user_info']->id; ?>" method="post">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">New Password</label>
-                                            <input name="password" type="password" class="form-control" id="password">
+                                            <input   name="password" type="password" class="form-control" id="password">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">Confirm Password</label>

@@ -12,7 +12,7 @@
 
 
 
-      public function updatePassword($data){
+      public function updateUserPassword($data){
       $this->db->query('UPDATE clients_accounts SET password = :password  WHERE id = :id');
       // Bind values
       $this->db->bind(':password',  $data['password']);
@@ -27,6 +27,9 @@
         return false;
       }
     }
+
+
+    
 
 
      public function updateUser($data){
@@ -444,6 +447,25 @@
 
 
 
+  public function updateNews($data){
+      $this->db->query('UPDATE blog SET page_title = :page_title,  page_content = :page_content WHERE id = :id');
+      // Bind values
+         $this->db->bind(':id',  $data['id']);
+         $this->db->bind(':page_title',  $data['page_title']);
+         $this->db->bind(':page_content', $data['page_content']);
+     
+      
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+
 
   public function getUsers(){
       $this->db->query('SELECT *  FROM clients_accounts ORDER BY id DESC');
@@ -468,6 +490,22 @@
 
       return $row;
     }
+
+
+    public function deleteNews($id){
+      $this->db->query('DELETE FROM blog WHERE id = :id');
+      // Bind values
+      $this->db->bind(':id', $id);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
 
 
     public function AddNews($data){

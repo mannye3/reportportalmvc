@@ -30784,6 +30784,7 @@ input:-internal-autofill-selected {
   color: #8A98AC;
   border: 1px solid rgba(0, 0, 0, 0.03);
   border-radius: 3px;
+  border:1px solid black;
 }
 .form-control:focus {
   border-color: #0080ff;

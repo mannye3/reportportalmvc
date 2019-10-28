@@ -121,6 +121,66 @@
         }
 
 
+        public function edit_userpassword($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        // Init data
+            $data =[
+              'id' => $id,
+              'password' => trim($_POST['password']),
+              'password_err' => ''
+            ];
+
+            
+
+            // Validate Email
+            if(empty($data['password'])){
+              $data['password_err'] = 'Pleae enter password';
+            } else {
+    
+            }
+
+           
+        
+
+            // Make sure errors are empty
+            if(empty($data['password_err'])){
+              // Validated
+
+             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+              
+          // Validated
+          if($this->adminModel->updateUserPassword($data)){
+
+           
+            flash('alert_message', 'Password Updated');
+           
+            redirect('admins/users');
+          } else {
+            die('Something went wrong');
+          }
+        } else {
+          // Load view with errors
+          $this->view('accounts/profile', $data);
+        }
+
+      } else {
+      
+
+        $data =[
+              'password' => '',
+              'password_err' => ''
+            ];
+  
+        $this->view('admins/users', $data);
+      }
+    }
+
+
+
 
 
  public function add_user(){
@@ -197,6 +257,9 @@
           $this->view('inc/user_footer');
           }
         }
+
+
+
 
          public function delete_user($id){
             
@@ -405,6 +468,88 @@
            $this->view('admin/add_news', $data);
           $this->view('inc/user_footer');
     }
+
+
+
+
+       public function edit_news($id){
+
+
+      
+            $num = rand(1000, 9999);
+            $username = 'SD-' . $num; 
+
+           if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+           
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+
+          
+            $data = [
+             
+              'id' => $id,
+              'page_title' => trim($_POST['title']),
+              'page_content' => trim($_POST['editor1']),
+              'page_content_err' => ''
+             
+             
+            ];
+
+            // Validate data
+            if(empty($data['page_content'])){
+              $data['page_content_err'] = 'Content Field is Empty';
+            }
+            
+
+            // Make sure no errors
+            if(empty($data['page_content_err'])){
+              // Validated
+              if($this->adminModel->updateNews($data)){
+                  flash('alert_message', 'News Updated');
+                  redirect('admins/news');
+                
+              } 
+
+              else {
+                die('Something went wrong');
+              }
+            } else {
+              // Load view with errors
+               $this->view('inc/user_header');
+              $this->view('admin/edit_news', $data);
+              $this->view('inc/user_footer');
+            }
+
+          } else {
+              $news_info = $this->adminModel->getNewsById($id);
+
+            $data = [
+            'news_info' => $news_info
+
+            ];
+
+            
+      
+           $this->view('inc/user_header');
+          $this->view('admin/edit_news', $data);
+          $this->view('inc/user_footer');
+          }
+        }
+
+
+             public function delete_news($id){
+              if($this->adminModel->deleteNews($id)){
+                flash('alert_message', 'News Removed');
+                redirect('admins/news');
+              } 
+                  else {
+                    die('Something went wrong');
+                  }
+
+              }
 
 
 
