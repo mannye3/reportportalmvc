@@ -210,21 +210,23 @@
               'website' => trim($_POST['website']),
               'address' => trim($_POST['address']),
               'reg_date' => date('jS \ F Y h:i:s A'),
-              'username_err' => ''
+              'symbol_err' => ''
              
              
             ];
 
             // Validate data
-            if(empty($data['username'])){
-              $data['username_err'] = 'username Field is Empty';
+            if(empty($data['symbol'])){
+              $data['symbol_err'] ='Symbol Field is Empty';
+
+
             }
 
              $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             
 
             // Make sure no errors
-            if(empty($data['username_err'])){
+            if(empty($data['symbol_err'])){
               // Validated
               if($this->adminModel->AddUser($data)){
                   flash('alert_message', 'User Added');
@@ -238,20 +240,12 @@
             } else {
               // Load view with errors
                $this->view('inc/user_header');
-              $this->view('admin/users', $data);
+              $this->view('admin/add_user', $data);
               $this->view('inc/user_footer');
             }
 
           } else {
-            //   $user_info = $this->adminModel->getUserById();
-
-            // $data = [
-            // 'user_info' => $user_info
-
-            // ];
-
-            
-      
+           
            $this->view('inc/user_header');
           $this->view('admin/add_user', $data);
           $this->view('inc/user_footer');
@@ -285,8 +279,7 @@
       
             $msg_code= rand(100000,999999);
 
-          $receiver_symbol = 'ADMINCODE';
-
+         
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
 
@@ -299,7 +292,7 @@
               'sender_email' => $_SESSION['user_email'],
               'sender_username' => $_SESSION['username'],
               'sender_symbol' => $_SESSION['user_symbol'],
-              'receiver_symbol' => $receiver_symbol,
+              'receiver_symbol' => trim($_POST['receiver_symbol']),
               'subject' => trim($_POST['subject']),
               'message' => trim($_POST['editor1']),
               'msg_code' => $msg_code,
@@ -322,7 +315,7 @@
 
                     if($this->adminModel->SendMessageInbox($data)){
                     flash('alert_message', 'Message Sent');
-                    redirect('admin/compose');
+                    redirect('admins/compose');
                   } 
               } 
 
@@ -332,7 +325,7 @@
             } else {
               // Load view with errors
              $this->view('inc/user_header');
-           $this->view('admin/compose', $data);
+           $this->view('admins/compose', $data);
           $this->view('inc/user_footer');
             }
 
@@ -370,9 +363,6 @@
            
            
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
-
           
             $data = [
               'sender_email' => $_SESSION['user_email'],
@@ -403,7 +393,7 @@
 
                     if($this->adminModel->ReplyMessageInbox($data)){
                     flash('alert_message', 'Message Sent');
-                    redirect('admin/inbox');
+                    redirect('admins/inbox');
                   } 
               } 
 
@@ -468,6 +458,26 @@
            $this->view('admin/add_news', $data);
           $this->view('inc/user_footer');
     }
+
+
+     public function open_news($id){
+                
+              $open_new = $this->adminModel->getNewsById($id);
+              
+
+
+              $data = [
+                'open_new' => $open_new
+               
+                    
+                
+              ];
+
+              $this->view('inc/user_header');
+              $this->view('accounts/open_news', $data);
+              $this->view('inc/user_footer');
+            }
+
 
 
 
@@ -586,6 +596,45 @@
                     $this->adminModel->AddNews($data);
                     }
                     flash('alert_message', 'News Uploaded');
+                    redirect('admins/news');
+                 
+                    }
+
+
+
+
+
+
+
+
+                     function edit_newspicture($id){
+                    if(isset($_POST['submit']))
+                    {
+
+                      $target_dir = NEWS_PIC_ROOT_PATH;
+                      $RandomNum = time();
+                      $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                      $filename = explode('.', $_FILES["file"]["name"]);
+                      $picname = end($filename);
+                      $new_name = rand(1000, 9999) . '.' . $picname;
+                      $ImageName = str_replace(' ','-',strtolower($new_name));
+                      $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
+                      $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+                      $ImageExt = str_replace('.','',$ImageExt);
+                      $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+                      $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+                      $ret[$NewImageName]= $target_dir.$NewImageName;
+                      move_uploaded_file($_FILES["file"]["tmp_name"],$target_dir."/".$NewImageName );
+
+                      $data = array(
+                      'id' => $id,
+                      'picture' => $NewImageName
+                      );
+
+                      
+                    $this->adminModel->UpdateNewsPic($data);
+                    }
+                    flash('alert_message', 'News Picture Updated');
                     redirect('admins/news');
                  
                     }

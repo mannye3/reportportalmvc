@@ -8,18 +8,13 @@
                         <h4 class="page-title">Open</h4>
                         <div class="breadcrumb-list">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Apps</a></li>
+                                <li class="breadcrumb-item"><a href="<?php echo URLROOT; ?>/admins">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Email</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Compose</li>
+                                
                             </ol>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4">
-                        <div class="widgetbar">
-                            <button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Actions</button>
-                        </div>                        
-                    </div>
+                    
                 </div>          
             </div>
             <!-- End Breadcrumbbar -->
@@ -97,7 +92,7 @@
                                         <div class="row text-right">
                                             <div class="col-md-12">
 
-                                               <a href="<?php echo URLROOT; ?>/accounts/reply/<?php echo $data['open_msg']->msg_code;?>">
+                                               <a href="<?php echo URLROOT; ?>/admins/reply/<?php echo $data['open_msg']->msg_code;?>">
                                                 <button type="button" class="btn btn-primary-rgba my-1"><i class="feather icon-corner-up-left mr-2"></i>Reply</button></a> 
                                               
 

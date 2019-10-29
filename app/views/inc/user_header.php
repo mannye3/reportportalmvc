@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from xpanthersolutions.com/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Oct 2019 17:22:11 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +8,7 @@
     <meta name="keywords" content="admin, admin panel, admin template, admin dashboard, responsive, bootstrap 4, ui kits, ecommerce, web app, crm, cms, html, sass support, scss">
     <meta name="author" content="Themesbox">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Orbiter - Bootstrap Minimal & Clean Admin Template</title>
+    <title>NASD Issuers Portal</title>
     <!-- Fevicon -->
     <link rel="shortcut icon" href="<?php echo URLROOT; ?>/assets/images/newNasdIcon.jpg">
     <!-- Start css -->
@@ -41,6 +40,13 @@
 <script src="https://code.highcharts.com/stock/modules/data.js"></script>
 <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 
                 <!-- dropify -->
 <link href="<?php echo URLROOT; ?>/assets/dropify/dropify.min.css" rel="stylesheet" type="text/css" />    <!-- End css -->

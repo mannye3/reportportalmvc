@@ -1,12 +1,27 @@
-
  <?php foreach($data['Close_Deal'] as $Close_Deal) :
-
-          $usi = $Close_Deal->CLOSE_PRICE;
-          $date = $Close_Deal->DATE;
+         
+          $usi = $Close_Deal->Close_Price;
+          $date = $Close_Deal->Close_Date;
            $date = strtotime($date);
-            $date *= 1000;
+            $date *= 1000;      
+             $data1[] = "[$date , $usi]";
+  ?>
+          
 
-             $data[] = "[$date , $usi]";
+
+         <?php endforeach; ?> 
+
+
+
+
+         <?php foreach($data['Deals'] as $Deals) :
+
+          $Vol = $Deals->Daily_Volume;
+          $datedeals = $Deals->Volume_Date;
+          $datedeals = strtotime($datedeals);
+            $datedeals *= 1000;
+
+             $datadeals[] = "[$datedeals , $Vol]";
 
         
 
@@ -29,12 +44,12 @@
             <div class="breadcrumbbar">
                 <div class="row align-items-center">
                     <div class="col-md-8 col-lg-8">
-                        <h4 class="page-title">CRM</h4>
+                        <h4 class="page-title">Home</h4>
                         <div class="breadcrumb-list">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">CRM</li>
+                               
                             </ol>
                         </div>
                     </div>
@@ -47,8 +62,7 @@
             </div>
 
             <ul>
-            <li><?php echo $usi ?></li>
-            <li><?php echo $date; ?></li>
+           
         </ul>
             <!-- End Breadcrumbbar -->
             <!-- Start Contentbar -->    
@@ -167,15 +181,18 @@
 
     series: [{
       type: '',
-      name: 'DEAL',
-      data: Volume,
+      name: 'PRICE',
+       data: [<?php echo join($data1, ',') ?>],
+      
+      
       dataGrouping: {
         units: groupingUnits
       }
     }, {
       type: 'column',
-      name: 'PRICE',
-      data: Volume,
+      name: 'Volume',
+       data: [<?php echo join($datadeals, ',') ?>],
+     
       yAxis: 1,
       dataGrouping: {
         units: groupingUnits

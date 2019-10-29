@@ -22,11 +22,11 @@
                      <?php foreach($data['get_news'] as $get_news) :   ?>
                     <div class="col-md-12 col-lg-6 col-xl-4">
                         <div class="card m-b-30">
-                            <img class="card-img-top" src="<?php echo URLROOT; ?>/assets/images/blog/blog-1.jpg" alt="blog">
+                            <img class="card-img-top" src="<?php echo URLROOT; ?>/news_pics/<?php echo $get_news->picture; ?>" alt="blog">
                             <div class="card-body">
                                 <!-- <p class="text-center mb-3"><span class="badge badge-success text-uppercase"><?php echo $get_news->page_keywords; ?></span></p> -->
                                 <a href="<?php echo URLROOT; ?>/accounts/open_news/<?php echo $get_news->id; ?>"><h5 class="card-title font-18"><?php echo $get_news->page_title; ?></h5>
-                                <p class="card-text mb-0"><?php echo $get_news->page_description; ?></p></a>                                
+                                <p class="card-text mb-0"><?php echo substr($get_news->page_content,0,200); ?></p></a>                                
                             </div>
                             <div class="card-footer">
                                 <div class="row align-items-center">
@@ -38,7 +38,7 @@
                                     <div class="col-md-8">
                                         <div class="blog-meta">
                                             <ul class="list-inline mb-0">
-                                                <li class="list-inline-item"><?php echo date("m-d-Y", $get_news->date_published);?></li>
+                                                <li class="list-inline-item"><?php echo  $get_news->date_published;?></li>
                                                 
                                                 <li class="list-inline-item">|</li>
                                                 <li class="list-inline-item">by <a href="#">Admin</a></li>

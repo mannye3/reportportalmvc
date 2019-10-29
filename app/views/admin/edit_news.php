@@ -8,7 +8,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                                
-                                <li class="breadcrumb-item active" aria-current="page">Add News</li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit News</li>
                             </ol>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                 <!-- Start row -->
                 <div class="row">
                     <!-- Start col -->
-                    <div class="col-lg-7 col-xl-8">
+                    <div class="col-lg-7 col-xl-6">
                         <div class="card m-b-30">
                             
                             <div class="card-body">
@@ -52,7 +52,32 @@
                                     </div> -->
 
                                 <button type="type" name="submit" class="btn btn-primary btn-lg">Submit</button>
+                                </form>
                             </div>
+                            
+
+                        </div>
+                                          
+                            </div>
+
+                        <div class="col-lg-7 col-xl-6">
+                        <div class="card m-b-30">
+                            
+                            <div class="card-body">
+                               <form id="login-form" action="<?php echo URLROOT; ?>/admins/edit_newspicture/<?php echo $data['news_info']->id; ?>" enctype="multipart/form-data" method="post">
+
+
+                                <div class="form-group row">
+                                        <label for="productTitle" class="col-sm-12 col-form-label">Update Feature Picture</label>
+                                        <div class="col-sm-12">
+                                             <input type="file" name="file" class="dropify" data-default-file="<?php echo URLROOT; ?>/news_pics/<?php echo $data['news_info']->picture; ?>" data-height="300"> 
+                                        </div>
+                                    </div>
+
+                                <button type="type" name="submit" class="btn btn-primary btn-lg">Submit</button>
+                                 </form>
+                            </div>
+
 
                         </div>
                                           
@@ -64,7 +89,7 @@
 
 
 
-                     </form>
+                     
                     <!-- End col -->
                 </div>
                 <!-- End row -->

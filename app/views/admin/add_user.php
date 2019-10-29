@@ -26,11 +26,12 @@
                                     <div class="col-lg-8 col-xl-6">
                                         <form id="basic-form-wizard" method="post" action="<?php echo URLROOT; ?>/admins/add_user" >
                                             <div>
-                                                <h3>Symbol & Password</h3>
+                                                <h3>Contact Details</h3>
                                                 <section>
                                                     <div class="form-group">
                                                         <label for="username">Symbol</label>
-                                                        <input name="symbol" required="" type="text" class="form-control" id="username">
+                                                        <p style=" color: red;"><?php echo $data['symbol_err']; ?></p>
+                                                        <input name="symbol"  type="text" class="form-control <?php echo (!empty($data['symbol_err'])) ? 'is-invalid' : ''; ?>" id="username" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="password">Email</label>

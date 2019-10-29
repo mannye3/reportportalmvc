@@ -531,6 +531,28 @@
     }
 
 
+     public function UpdateNewsPic($data){
+      
+      $this->db->query('UPDATE blog SET picture = :picture WHERE id = :id');
+      // Bind Values      
+     
+      $this->db->bind(':id', $data['id']);
+      $this->db->bind(':picture', $data['picture']);
+     
+       
+           
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }     
+            
+    }
+
+
 
 
 

@@ -27,7 +27,7 @@
                 <!-- Start row -->
                 <div class="row">
                     <!-- Start col -->
-                    <?php require APPROOT . '/views/inc/msg_nav.php'; ?>
+                    <?php require APPROOT . '/views/inc/adminmsg_nav.php'; ?>
                     <!-- End col -->
                     <!-- Start col -->
                     <div class="col-lg-9">
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="card-body">
                                 <?php flash('alert_message'); ?>                                  
-                                    <form action="<?php echo URLROOT; ?>/accounts/reply/<?php echo $data['reply_msg']->msg_code; ?>" method="post">
+                                    <form action="<?php echo URLROOT; ?>/admins/reply/<?php echo $data['reply_msg']->msg_code; ?>" method="post">
                                        <!--  <div class="form-group row">
                                             <label for="emailTo" class="col-sm-2 col-form-label">To</label>
                                             <div class="col-sm-10">
@@ -64,13 +64,13 @@
                                             <div class="col-sm-10">
                                                 <input name="subject" value="Reply: <?php echo $data['reply_msg']->subject; ?>" required="" type="text" class="form-control" id="emailSubject" placeholder="Subject">
 
-                                                <input type="" hidden="" value="<?php echo $data['reply_msg']->sender_username; ?>"  name="receiver_username">
+                                                <input type="" hidden=""  value="<?php echo $data['reply_msg']->sender_username; ?>"  name="receiver_username">
 
-                                                 <input type="" hidden="" value="<?php echo $data['reply_msg']->sender_symbol; ?>"  name="receiver_symbol">
+                                                 <input type="" hidden=""  value="<?php echo $data['reply_msg']->sender_symbol; ?>"  name="receiver_symbol">
 
-                                                 <input type="" hidden="" value="<?php echo $data['reply_msg']->sender_email; ?>"  name="receiver_email">
+                                                 <input type="" hidden=""  value="<?php echo $data['reply_msg']->sender_email; ?>"  name="receiver_email">
 
-                                                  <input type="" hidden="" value="<?php echo $data['reply_msg']->msg_code; ?>"  name="msg_code">
+                                                  <input type="" hidden=""  value="<?php echo $data['reply_msg']->msg_code; ?>"  name="msg_code">
 
 
                                                

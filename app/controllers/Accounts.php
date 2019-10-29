@@ -14,7 +14,7 @@
       
       $Close_Deal = $this->accountModel->CloseDeal($_SESSION['user_symbol']);
 
-       $Deals = $this->accountModel->CloseDeal($_SESSION['user_symbol']);
+       $Deals = $this->accountModel->Deals($_SESSION['user_symbol']);
 
             
 
@@ -345,354 +345,328 @@ public function reply($msg_code){
 
 
 
-public function open_message_sent($msg_code){
-          
-         $open_msg = $this->accountModel->getMsgByCodeSent($msg_code);
-
-      $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
-      $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
-
-
-
-      $data = [
-        'open_msg' => $open_msg,
-        'total_sent' => $total_sent,
-        'total_inbox' => $total_inbox
-            
-        
-      ];
-
-      $this->view('inc/user_header');
-      $this->view('accounts/open_message_sent', $data);
-      $this->view('inc/user_footer');
-    }
-
-
-
-
- // public function sent(){
- //      $sent = $this->accountModel->SentMsg($_SESSION['user_symbol']);
- //       $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
-
-            
-
- //      $data = [
- //            'sent' => $sent,
- //             'total_sent' => $total_sent
- //              ];
-
- //          $this->view('inc/user_header');
- //           $this->view('accounts/sent', $data);
- //          $this->view('inc/user_footer');
- //    }
-
-
-
-    public function edit_profile(){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        // Init data
-            $data =[
-              'id' => $_SESSION['user_id'],
-              'email' => trim($_POST['email']),
-              'phone' => trim($_POST['phone']),
-              'company' => trim($_POST['company']),
-              'website' => trim($_POST['website']),
-              'address' => trim($_POST['address']),
-              'email_err' => '',
-              'phone_err' => '',
-            ];
-
-            
-
-            // Validate Email
-            if(empty($data['email'])){
-              $data['email_err'] = 'Pleae enter name';
-            } else {
-    
-            }
-
-            // Validate Phone
-            if(empty($data['phone'])){
-              $data['phone_err'] = 'Pleae enter phone';
-            } else {
-            }
-
-        
-
-            // Make sure errors are empty
-            if(empty($data['email_err']) && empty($data['phone_err'])){
-              // Validated
-              
-          // Validated
-          if($this->accountModel->updateUser($data)){
-
-            $_SESSION['user_email'] = $data['email'];
-            $_SESSION['user_phone'] = $data['phone'];
-            $_SESSION['user_company'] = $data['company'];
-            $_SESSION['user_website'] = $data['website'];
-             $_SESSION['user_address'] = $data['address'];
-            
-            flash('post_message', 'Profile Updated');
-            redirect('accounts/profile');
-          } else {
-            die('Something went wrong');
-          }
-        } else {
-          // Load view with errors
-          $this->view('accounts/profile', $data);
-        }
-
-      } else {
-      
-
-        $data =[
-              'email' => '',
-              'phone' => '',
-              'company' => '',
-              'website' => '',
-              'address' => '',
-              'email_err' => '',
-              'phone_err' => ''
-            ];
-  
-        $this->view('accounts/profile', $data);
-      }
-    }
-
-
-
-     public function edit_password(){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        // Init data
-            $data =[
-              'id' => $_SESSION['user_id'],
-              'password' => trim($_POST['password']),
-              'password_err' => ''
-            ];
-
-            
-
-            // Validate Email
-            if(empty($data['password'])){
-              $data['password_err'] = 'Pleae enter password';
-            } else {
-    
-            }
-
-           
-        
-
-            // Make sure errors are empty
-            if(empty($data['password_err'])){
-              // Validated
-
-             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-              
-          // Validated
-          if($this->accountModel->updatePassword($data)){
-
-           
-            flash('alert_message', 'Password Updated');
-           
-            redirect('accounts/profile');
-          } else {
-            die('Something went wrong');
-          }
-        } else {
-          // Load view with errors
-          $this->view('accounts/profile', $data);
-        }
-
-      } else {
-      
-
-        $data =[
-              'password' => '',
-              'password_err' => ''
-            ];
-  
-        $this->view('accounts/profile', $data);
-      }
-    }
-
-
-
-
-
-    
-
-     public function tradeHistory(){
-               $get_report = $this->accountModel->getReport($_SESSION['user_symbol']);
-               // $get_brokerinfo = $this->accountModel->getBroker();
-               // $get_accountinfo = $this->accountModel->getAccount();
-               
+      public function open_message_sent($msg_code){
                 
+               $open_msg = $this->accountModel->getMsgByCodeSent($msg_code);
 
+            $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+            $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
+
+
+
+            $data = [
+              'open_msg' => $open_msg,
+              'total_sent' => $total_sent,
+              'total_inbox' => $total_inbox
+                  
+              
+            ];
+
+            $this->view('inc/user_header');
+            $this->view('accounts/open_message_sent', $data);
+            $this->view('inc/user_footer');
+          }
+
+
+
+
+ 
+
+
+          public function edit_profile(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+              // Sanitize POST array
+              $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+              // Init data
+                  $data =[
+                    'id' => $_SESSION['user_id'],
+                    'email' => trim($_POST['email']),
+                    'phone' => trim($_POST['phone']),
+                    'company' => trim($_POST['company']),
+                    'website' => trim($_POST['website']),
+                    'address' => trim($_POST['address']),
+                    'email_err' => '',
+                    'phone_err' => '',
+                  ];
+
+                  
+
+                  // Validate Email
+                  if(empty($data['email'])){
+                    $data['email_err'] = 'Pleae enter name';
+                  } else {
+          
+                  }
+
+                  // Validate Phone
+                  if(empty($data['phone'])){
+                    $data['phone_err'] = 'Pleae enter phone';
+                  } else {
+                  }
+
+              
+
+                  // Make sure errors are empty
+                  if(empty($data['email_err']) && empty($data['phone_err'])){
+                    // Validated
+                    
+                // Validated
+                if($this->accountModel->updateUser($data)){
+
+                  $_SESSION['user_email'] = $data['email'];
+                  $_SESSION['user_phone'] = $data['phone'];
+                  $_SESSION['user_company'] = $data['company'];
+                  $_SESSION['user_website'] = $data['website'];
+                   $_SESSION['user_address'] = $data['address'];
+                  
+                  flash('post_message', 'Profile Updated');
+                  redirect('accounts/profile');
+                } else {
+                  die('Something went wrong');
+                }
+              } else {
+                // Load view with errors
+                $this->view('accounts/profile', $data);
+              }
+
+            } else {
             
-             
+
+              $data =[
+                    'email' => '',
+                    'phone' => '',
+                    'company' => '',
+                    'website' => '',
+                    'address' => '',
+                    'email_err' => '',
+                    'phone_err' => ''
+                  ];
+        
+              $this->view('accounts/profile', $data);
+            }
+          }
+
+
+
+           public function edit_password(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+              // Sanitize POST array
+              $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+              // Init data
+                  $data =[
+                    'id' => $_SESSION['user_id'],
+                    'password' => trim($_POST['password']),
+                    'password_err' => ''
+                  ];
+
+                  
+
+                  // Validate Email
+                  if(empty($data['password'])){
+                    $data['password_err'] = 'Pleae enter password';
+                  } else {
+          
+                  }
+
+                 
+              
+
+                  // Make sure errors are empty
+                  if(empty($data['password_err'])){
+                    // Validated
+
+                   $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                    
+                // Validated
+                if($this->accountModel->updatePassword($data)){
+
+                 
+                  flash('alert_message', 'Password Updated');
+                 
+                  redirect('accounts/profile');
+                } else {
+                  die('Something went wrong');
+                }
+              } else {
+                // Load view with errors
+                $this->view('accounts/profile', $data);
+              }
+
+            } else {
+            
+
+              $data =[
+                    'password' => '',
+                    'password_err' => ''
+                  ];
+        
+              $this->view('accounts/profile', $data);
+            }
+          }
+
+
+
+
+
+    
+
+           public function tradeHistory(){
+                     $get_report = $this->accountModel->getReport($_SESSION['user_symbol']);
+                     // $get_brokerinfo = $this->accountModel->getBroker();
+                     // $get_accountinfo = $this->accountModel->getAccount();
+                     
+                      
+
+                  
+                   
+                    $data = [
+                  'get_report' => $get_report
+                  // 'get_brokerinfo' => $get_brokerinfo
+                   // 'get_accountinfo' => $get_accountinfo
+                   
+                    ];
+
+                    $this->view('inc/user_header');
+                     $this->view('accounts/tradeHistory', $data);
+                    $this->view('inc/user_footer');
+                    }
+
+
+          // public function sell(){
+          //   // Get User Properties
+          //  $data = [
+              
+          //   ];
+
+          //       $this->view('inc/user_header');
+          //        $this->view('accounts/sell', $data);
+          //       $this->view('inc/user_footer');
+          // }
+
+
+
+          public function news(){
+
+           $get_news = $this->accountModel->GetallNews();
+
+           $data = [
+
+             'get_news' => $get_news
+              
+            ];
+
+                $this->view('inc/user_header');
+                 $this->view('accounts/news', $data);
+                $this->view('inc/user_footer');
+          }
+
+
+
+            public function open_news($id){
+                
+              $open_new = $this->accountModel->getNewsById($id);
+              
+
+
               $data = [
-            'get_report' => $get_report
-            // 'get_brokerinfo' => $get_brokerinfo
-             // 'get_accountinfo' => $get_accountinfo
-             
+                'open_new' => $open_new
+               
+                    
+                
               ];
 
               $this->view('inc/user_header');
-               $this->view('accounts/tradeHistory', $data);
+              $this->view('accounts/open_news', $data);
               $this->view('inc/user_footer');
-              }
-
-
-    // public function sell(){
-    //   // Get User Properties
-    //  $data = [
-        
-    //   ];
-
-    //       $this->view('inc/user_header');
-    //        $this->view('accounts/sell', $data);
-    //       $this->view('inc/user_footer');
-    // }
-
-
-
-    public function news(){
-
-     $get_news = $this->accountModel->GetallNews();
-
-     $data = [
-
-       'get_news' => $get_news
-        
-      ];
-
-          $this->view('inc/user_header');
-           $this->view('accounts/news', $data);
-          $this->view('inc/user_footer');
-    }
-
-
-
-    public function open_news($id){
-        
-      $open_new = $this->accountModel->getNewsById($id);
-      
-
-
-      $data = [
-        'open_new' => $open_new
-       
-            
-        
-      ];
-
-      $this->view('inc/user_header');
-      $this->view('accounts/open_news', $data);
-      $this->view('inc/user_footer');
-    }
-
-
-
-
-    
-
-
-
-    
-
-
-    
-
-
-       
-     
-
-
-    public function profile_pic(){
-
-           // ini_set('display_errors', '0');         # don't show any errors...
-           //  error_reporting(E_ALL | E_STRICT);
-
-           if($_FILES["file"]["name"] != '')
-            {
-            $target_dir = PROFILE_PIC_ROOT_PATH;
-            $RandomNum = time();
-            $target_file = $target_dir . basename($_FILES["file"]["name"]);
-            $filename = explode('.', $_FILES["file"]["name"]);
-            $picname = end($filename);
-            $new_name = rand(1000, 9999) . '.' . $picname;
-            $ImageName = str_replace(' ','-',strtolower($new_name));
-            $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
-            $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
-            $ImageExt = str_replace('.','',$ImageExt);
-            $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
-            $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
-            $ret[$NewImageName]= $target_dir.$NewImageName;
-            move_uploaded_file($_FILES["file"]["tmp_name"],$target_dir."/".$NewImageName );
-            $data = array(
-            'image' => $NewImageName,
-            'id' => $_SESSION['user_id']
-            );
-            $this->accountModel->addProfilePicture($data);
-             // $_SESSION['user_image'] = $data['image'];
-             
-            // echo "file Uploaded Successfully";
-            
-           // $this->view('accounts/index', $data);
             }
-         redirect('accounts');
-            }
-        
 
 
 
 
-          public function delete_msg_inbox($msg_code){
-            
-              // Get existing post from model
-             $msg_info = $this->accountModel->getMsgByCode($msg_code);
-            
-              // Check for owner
-              if($post->user_id != $_SESSION['user_id']){
-                redirect('accounts');
-              }
-
-              if($this->accountModel->deleteMessageinbox($msg_code)){
-                flash('alert_message', 'Message Removed');
-                redirect('accounts/inbox');
-              } else {
-                die('Something went wrong');
-              }
-              }
+    
 
 
+            public function profile_pic(){
 
-               public function delete_msg_sent($msg_code){
-            
-              // Get existing post from model
-             $msg_info = $this->accountModel->getMsgByCodeSent($msg_code);
-            
-              // Check for owner
-              if($post->user_id != $_SESSION['user_id']){
-                redirect('accounts');
-              }
+                 // ini_set('display_errors', '0');         # don't show any errors...
+                 //  error_reporting(E_ALL | E_STRICT);
 
-              if($this->accountModel->deleteMessagesent($msg_code)){
-                flash('alert_message', 'Message Removed');
-                redirect('accounts/sent');
-              } else {
-                die('Something went wrong');
-              }
-              }
-      
+                 if($_FILES["file"]["name"] != '')
+                  {
+                  $target_dir = PROFILE_PIC_ROOT_PATH;
+                  $RandomNum = time();
+                  $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                  $filename = explode('.', $_FILES["file"]["name"]);
+                  $picname = end($filename);
+                  $new_name = rand(1000, 9999) . '.' . $picname;
+                  $ImageName = str_replace(' ','-',strtolower($new_name));
+                  $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
+                  $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+                  $ImageExt = str_replace('.','',$ImageExt);
+                  $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+                  $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+                  $ret[$NewImageName]= $target_dir.$NewImageName;
+                  move_uploaded_file($_FILES["file"]["tmp_name"],$target_dir."/".$NewImageName );
+                  $data = array(
+                  'image' => $NewImageName,
+                  'id' => $_SESSION['user_id']
+                  );
+                  $this->accountModel->addProfilePicture($data);
+                   // $_SESSION['user_image'] = $data['image'];
+                   
+                  // echo "file Uploaded Successfully";
+                  
+                 // $this->view('accounts/index', $data);
+                  }
+               redirect('accounts');
+                  }
+              
+
+
+
+
+              public function delete_msg_inbox($msg_code){
+                
+                  // Get existing post from model
+                 $msg_info = $this->accountModel->getMsgByCode($msg_code);
+                
+                  // Check for owner
+                  if($post->user_id != $_SESSION['user_id']){
+                    redirect('accounts');
+                  }
+
+                  if($this->accountModel->deleteMessageinbox($msg_code)){
+                    flash('alert_message', 'Message Removed');
+                    redirect('accounts/inbox');
+                  } else {
+                    die('Something went wrong');
+                  }
+                  }
+
+
+
+                   public function delete_msg_sent($msg_code){
+                
+                  // Get existing post from model
+                 $msg_info = $this->accountModel->getMsgByCodeSent($msg_code);
+                
+                  // Check for owner
+                  if($post->user_id != $_SESSION['user_id']){
+                    redirect('accounts');
+                  }
+
+                  if($this->accountModel->deleteMessagesent($msg_code)){
+                    flash('alert_message', 'Message Removed');
+                    redirect('accounts/sent');
+                  } else {
+                    die('Something went wrong');
+                  }
+                  }
+          
 
 
              

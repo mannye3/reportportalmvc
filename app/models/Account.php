@@ -341,7 +341,7 @@
          WHERE data.SYMBOL=:symbol ORDER BY id DESC');
 
       
-           // WHERE data.SYMBOL='SDCSCSPLC'
+          
 
       // Bind Values
       $this->db->bind(':symbol', $symbol);
@@ -406,7 +406,7 @@
 
 
     public function CloseDeal($symbol){
-      $this->db->query('SELECT * FROM market_activity_sheet WHERE symbol = :symbol');
+      $this->db->query('SELECT `Close Price` AS   Close_Price, `Date` AS Close_Date  FROM general_market_summary WHERE Security = :symbol');
       $this->db->bind(':symbol', $symbol);
 
       $results = $this->db->resultSet();
@@ -419,7 +419,7 @@
 
 
 public function Deals($symbol){
-      $this->db->query('SELECT * FROM market_activity_sheet WHERE symbol = :symbol');
+      $this->db->query('SELECT  `Daily Volume` AS Daily_Volume, `Date` AS Volume_Date  FROM general_market_summary WHERE Security = :symbol');
       $this->db->bind(':symbol', $symbol);
 
       $results = $this->db->resultSet();

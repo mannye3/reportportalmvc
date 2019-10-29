@@ -58,8 +58,8 @@
 
                                             <td><?php echo $count;  ?></td>
                                              <td><img src="<?php echo URLROOT; ?>/news_pics/<?php echo $allnews->picture; ?>" class="img-fluid" width="35" alt="product"></td>
-                                            <td><?php echo substr($allnews->page_title,0,20); ?></td>
-                                            <td><?php echo substr($allnews->page_content,0,50); ?></td>
+                                            <td><a href="<?php echo URLROOT; ?>/admins/open_news/<?php echo $allnews->id; ?>"><?php echo substr($allnews->page_title,0,20); ?></a></td>
+                                            <td><?php echo substr($allnews->page_content,0,100); ?></td>
                                             <td><?php echo $allnews->date_published;  ?></td>
                                            <td>
                                                     <div class="button-list">

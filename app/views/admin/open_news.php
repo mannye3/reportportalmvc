@@ -12,7 +12,7 @@
                         </div>
                     </div>
                     
-                </div>           
+                </div>          
             </div>
             <!-- Start Contentbar -->    
             <div class="contentbar">                
@@ -24,10 +24,10 @@
                             
                             <div class="card-body">
                                 
-                                <img src="<?php echo URLROOT; ?>/news_pics/<?php echo $data['open_new']->picture; ?>" class="img-fluid" alt="Responsive image">
+                                <img src="<?php echo URLROOT; ?>/assets/images/ui-images/image-responsive.jpg" class="img-fluid" alt="Responsive image">
 
                                <br><br><br><br>
-                                <h5 class="card-title font-18"><?php echo $data['open_new']->page_title; ?></h5><br>
+                                <h5 class="card-title font-18">Images in Bootstrap are made responsive with</h5><br>
                                 <p><?php echo $data['open_new']->page_content; ?></p>
                             </div>
                         </div>
@@ -39,19 +39,4 @@
 
 
                    
-                    <!-- End col -->
-                </div>
-                <!-- End row -->
-            </div>
-            <!-- End Contentbar -->
-            <!-- Start Footerbar -->
-            <div class="footerbar">
-                <footer class="footer">
-                    <p class="mb-0">© 2019 Orbiter - All Rights Reserved.</p>
-                </footer>
-            </div>
-            <!-- End Footerbar -->
-        </div>
-        <!-- End Rightbar -->
-    </div>
-     
+         

@@ -109,7 +109,7 @@
        unset($_SESSION['username']);
       unset($_SESSION['user_phone']);
       session_destroy();
-      redirect('admin_login');
+      redirect('admin_logins');
     }
 
 public function username($username){

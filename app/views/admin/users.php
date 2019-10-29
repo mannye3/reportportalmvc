@@ -6,9 +6,8 @@
                         <h4 class="page-title">Users</h4>
                         <div class="breadcrumb-list">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Datatable</li>
+                                <li class="breadcrumb-item"><a href="<?php echo URLROOT; ?>/admins">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Users</li>
                             </ol>
                         </div>
                     </div>
@@ -33,10 +32,10 @@
                         <div class="card m-b-30">
                             <div class="card-header">
                                 <?php flash('alert_message'); ?>
-                                <h5 class="card-title">Data Export Table</h5>
+                              
                             </div>
                             <div class="card-body">
-                                <h6 class="card-subtitle">Export data to Copy, CSV, Excel & Note.</h6>
+                                
                                 <div class="table-responsive">
                                     <table id="datatable-buttons" class="table table-striped table-bordered">
                                         <thead>

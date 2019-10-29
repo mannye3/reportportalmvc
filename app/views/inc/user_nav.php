@@ -56,7 +56,7 @@
                         
 
                         <li>
-                            <a href="<?php echo URLROOT; ?>/users/logout">
+                            <a href="<?php echo URLROOT; ?>/admin_logins/logout">
                              <i class="fa fa-sign-out"></i><span>Logout</span>
                             </a>
                             
