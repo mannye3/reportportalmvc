@@ -72,7 +72,7 @@
         
 </body>
 
-<!-- Mirrored from xpanthersolutions.com/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Oct 2019 17:22:11 GMT -->
+
 </html>
 
 

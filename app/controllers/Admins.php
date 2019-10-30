@@ -12,6 +12,16 @@
 
       public function index(){
     
+      $Close_Deal = $this->adminModel->CloseDeal();
+
+       // $Deals = $this->adminModel->Deals();
+
+            
+
+      $data = [
+            'Close_Deal' => $Close_Deal
+             // 'Deals' => $Deals
+              ];
               
 
           $this->view('inc/user_header');

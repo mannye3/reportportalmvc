@@ -1,4 +1,46 @@
+<?php foreach($data['Close_Deal'] as $Close_Deal) :
+         
+          $usi = $Close_Deal->Price;
+          $date = $Close_Deal->TRADE_DATE;
+           $date = strtotime($date);
+            $date *= 1000;      
+             $$data1[] = "[$date , $usi]";
+  ?>
+          
 
+
+         <?php endforeach; ?> 
+
+
+
+
+         <!-- <?php foreach($data['Deals'] as $Deals) :
+
+          $Vol = $Deals->Daily_Volume;
+          $datedeals = $Deals->Volume_Date;
+          $datedeals = strtotime($datedeals);
+            $datedeals *= 1000;
+
+             $datadeals[] = "[$datedeals , $Vol]";
+
+        
+
+
+  ?>
+          
+
+        
+
+
+         <?php endforeach; ?>  -->
+
+
+
+
+
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
  <!-- Start Breadcrumbbar -->                    
             <div class="breadcrumbbar">
                 <div class="row align-items-center">
@@ -21,8 +63,7 @@
             </div>
 
             <ul>
-            <li><?php echo $usi ?></li>
-            <li><?php echo $date; ?></li>
+           
         </ul>
             <!-- End Breadcrumbbar -->
             <!-- Start Contentbar -->    
@@ -62,100 +103,95 @@
 
 
 
-    <script type="text/javascript">
-        
-        Highcharts.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/aapl-ohlcv.json', function (data) {
-
-  // split the data set into ohlc and volume
-  var ohlc = [],
-    volume = [],
-    dataLength = data.length,
-    // set the allowed units for data grouping
-    groupingUnits = [[
-      'week',             // unit name
-      [1]               // allowed multiples
-    ], [
-      'month',
-      [1, 2, 3, 4, 6]
-    ]],
-
-    i = 0;
-
-  for (i; i < dataLength; i += 1) {
-    ohlc.push([
-      data[i][0], // the date
-      data[i][1], // open
-      data[i][2], // high
-      data[i][3], // low
-      data[i][4] // close
-    ]);
-
-    volume.push([
-      data[i][0], // the date
-      data[i][5] // the volume
-    ]);
-  }
+<!--     <script type="text/javascript">
 
 
-  // create the chart
-  Highcharts.stockChart('container', {
+$(function () { 
 
-    rangeSelector: {
-      selected: 1
-    },
 
-    title: {
-      text: 'AAPL Historical'
-    },
+    var data_click = <?php echo $click; ?>;
 
-    yAxis: [{
-      labels: {
-        align: 'right',
-        x: -3
-      },
-      title: {
-        text: 'OHLC'
-      },
-      height: '60%',
-      lineWidth: 2,
-      resize: {
-        enabled: true
-      }
-    }, {
-      labels: {
-        align: 'right',
-        x: -3
-      },
-      title: {
-        text: 'Volume'
-      },
-      top: '65%',
-      height: '35%',
-      offset: 0,
-      lineWidth: 2
-    }],
+    var data_viewer = <?php echo $viewer; ?>;
 
-    tooltip: {
-      split: true
-    },
 
-    series: [{
-      type: '',
-      name: 'DEAL',
-      data: Volume,
-      dataGrouping: {
-        units: groupingUnits
-      }
-    }, {
-      type: 'column',
-      name: 'PRICE',
-      data: Volume,
-      yAxis: 1,
-      dataGrouping: {
-        units: groupingUnits
-      }
-    }]
-  });
+    $('#container').highcharts({
+
+        chart: {
+
+            type: 'column'
+
+        },
+
+        title: {
+
+            text: 'Yearly Website Ratio'
+
+        },
+
+        xAxis: {
+
+            categories: ['2013','2014','2015', '2016']
+
+        },
+
+        yAxis: {
+
+            title: {
+
+                text: 'Rate'
+
+            }
+
+        },
+
+        series: [{
+
+            name: 'Click',
+
+            data: data_click
+
+        }, {
+
+            name: 'View',
+
+            data: data_viewer
+
+        }]
+
+    });
+
 });
-    </script>
- 
+
+
+</script> -->
+
+
+<script type="text/javascript">
+  
+  document.addEventListener('DOMContentLoaded', function () {
+        var myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Fruit Consumption'
+            },
+            xAxis: {
+               
+                 categories: [<?php echo join($data1, ',') ?>],
+            },
+            yAxis: {
+                title: {
+                    text: 'Fruit eaten'
+                }
+            },
+            series: [{
+                name: 'Jane',
+                data: [1, 0, 4]
+            }, {
+                name: 'John',
+                data: [5, 7, 3]
+            }]
+        });
+    });
+</script>
