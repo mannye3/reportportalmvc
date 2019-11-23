@@ -48,7 +48,8 @@
       
             $msg_code= rand(100000,999999);
 
-          $receiver_symbol = 'ADMINCODE';
+            $receiver_symbol = 'ADMINCODE';
+            $receiver_email = 'info@fleepng.com';
 
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
@@ -63,6 +64,7 @@
               'sender_username' => $_SESSION['username'],
               'sender_symbol' => $_SESSION['user_symbol'],
               'receiver_symbol' => $receiver_symbol,
+              'receiver_email' => $receiver_email,
               'subject' => trim($_POST['subject']),
               'message' => trim($_POST['editor1']),
               'msg_code' => $msg_code,
@@ -83,11 +85,19 @@
               // Validated
               if($this->accountModel->SendMessage($data)){
 
-                    if($this->accountModel->SendMessageInbox($data)){
-                    flash('alert_message', 'Message Sent');
+                  if($this->accountModel->SendMessageInbox($data)){
+                   
+
+                    if(sendMail_notification($data)){
+                      
+                   flash('alert_message', 'Message Sent');
                     redirect('accounts/compose');
+                 }
+
                   } 
               } 
+
+             
 
               else {
                 die('Something went wrong');

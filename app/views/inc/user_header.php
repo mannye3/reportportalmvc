@@ -124,7 +124,7 @@
                                         </a>
                                     </div>
                                 </li> -->
-                                <li class="list-inline-item">
+                               <!--  <li class="list-inline-item">
                                     <div class="notifybar">
                                         <div class="dropdown">
                                             <a class="dropdown-toggle infobar-icon" href="#" role="button" id="notoficationlink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo URLROOT; ?>/assets/images/svg-icon/notifications.svg" class="img-fluid" alt="notifications">
@@ -166,7 +166,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>                                
+                                </li>  -->                               
                                
                                 <li class="list-inline-item">
                                     <div class="profilebar">

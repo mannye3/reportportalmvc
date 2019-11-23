@@ -1,4 +1,4 @@
-<?php foreach($data['Close_Deal'] as $Close_Deal) :
+<!-- <?php foreach($data['Close_Deal'] as $Close_Deal) :
          
           $usi = $Close_Deal->Price;
           $date = $Close_Deal->TRADE_DATE;
@@ -9,7 +9,7 @@
           
 
 
-         <?php endforeach; ?> 
+         <?php endforeach; ?>  -->
 
 
 

@@ -19,3 +19,20 @@
 
   // Profile Picture Path
   define('PROFILE_PIC_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/profile_pic/');
+
+
+
+
+
+  // DB Params
+  define('DB_HOST2', 'nasdotcng.com');
+  define('DB_USER2', 'notcsadm_excalib');
+  define('DB_PASS2', 'DRp@r6iLa0_j');
+  define('DB_NAME2', 'notcsadm_nasdngx');
+
+
+
+
+
+ 
+  

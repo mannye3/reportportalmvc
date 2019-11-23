@@ -8,17 +8,12 @@
                         <div class="breadcrumb-list">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<?php echo URLROOT; ?>/accounts">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Apps</a></li>
-                                <li class="breadcrumb-item"><a href="#">Email</a></li>
+            
                                 <li class="breadcrumb-item active" aria-current="page">Sent</li>
                             </ol>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4">
-                        <div class="widgetbar">
-                            <button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Actions</button>
-                        </div>                        
-                    </div>
+                   
                 </div>          
             </div>
             <!-- End Breadcrumbbar -->

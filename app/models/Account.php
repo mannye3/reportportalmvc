@@ -431,6 +431,41 @@ public function Deals($symbol){
 
 
 
+
+
+  public function getbasic($Security){
+
+ 
+      $this->db->query('SELECT * FROM security_to_traded WHERE `COL 11`= :Security ');
+      $this->db->bind(':Security', $COL 11);
+
+      
+
+    $results = $this->db->resultSet();
+
+    return $results;
+
+  }
+
+
+
+  Public function eric($ID){
+
+ 
+      $this->db->query('SELECT * FROM prices WHERE security_code= :ID ');
+      $this->db->bind(':ID', $security_code);
+
+      
+
+    $results = $this->db->resultSet();
+
+    return $results;
+
+  }
+
+
+
+
   
 
 

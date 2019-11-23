@@ -4,21 +4,15 @@
             <div class="breadcrumbbar">
                 <div class="row align-items-center">
                     <div class="col-md-8 col-lg-8">
-                        <h4 class="page-title">Compose</h4>
+                        <h4 class="page-title">Reply</h4>
                         <div class="breadcrumb-list">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Apps</a></li>
-                                <li class="breadcrumb-item"><a href="#">Email</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Compose</li>
+                                <li class="breadcrumb-item"><a href="<?php echo URLROOT; ?>/accounts">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Reply</li>
                             </ol>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4">
-                        <div class="widgetbar">
-                            <button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Actions</button>
-                        </div>                        
-                    </div>
+                    
                 </div>          
             </div>
             <!-- End Breadcrumbbar -->
@@ -79,7 +73,8 @@
                                         <div class="form-group row">
                                             <label for="emailSubject" class="col-sm-2 col-form-label">Message</label>
                                             <div class="col-sm-10">
-                                                <textarea name="editor1"><br> <br>--------- original Message---------<br> <br> <?php echo $data['reply_msg']->message; ?> </textarea>
+                                                <textarea name="editor1"><br> <br><br> <br>
+                                                    <hr><b>On  <?php echo $data['reply_msg']->msg_date; ?> :</b><br> <br> <?php echo $data['reply_msg']->message; ?> </textarea>
                                         <script>
                                                 CKEDITOR.replace( 'editor1' );
                                         </script>

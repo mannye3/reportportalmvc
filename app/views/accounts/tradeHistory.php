@@ -53,13 +53,13 @@
                                          <?php  $count = 0; foreach($data['get_report'] as $get_report) :  $count++; ?>
                                        <tr>
                                             <td><?php echo $count; ?></td>
-                                            <td> <?php echo $get_report->BUYER_NAME; ?> </td>
+                                            <td><?php echo $get_report->BUYER_NAME; ?> </td>
                                             <td><?php echo $get_report->TO_MEMBER; ?></td>
                                             <td><?php echo $get_report->SELLER_NAME; ?></td>  
                                             <td><?php echo $get_report->FROM_MEMBER; ?></td>
                                             <td><?php echo $get_report->VOLUME; ?></td>
-                                            <td><?php echo $get_report->PRICE; ?></td>
-                                            <td>  <?php echo date("m-d-Y", strtotime($get_report->TRADE_DATE));?>
+                                            <td><?php echo $get_report->PRICE/10000; ?></td>
+                                            <td><?php echo date("m-d-Y", strtotime($get_report->TRADE_DATE));?>
 
 
 

@@ -3,8 +3,8 @@
             <div class="sidebar">
                 <!-- Start Logobar -->
                 <div class="logobar">
-                    <a href="index.html" class="logo logo-large"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
-                    <a href="index.html" class="logo logo-small"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
+                    <a href="#" class="logo logo-large"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
+                    <a href="#" class="logo logo-small"><img src="<?php echo URLROOT; ?>/assets/images/nasdlogop.jpg" class="img-fluid" alt="logo"></a>
                 </div>
                 <!-- End Logobar -->
                 <!-- Start Navigationbar -->
