@@ -87,10 +87,10 @@
                                                             $obj_enc3 = json_encode($boyka);
                                                           $obj_dec3 = json_decode($obj_enc3);
 
-                                                       foreach($obj_dec3 as $obj3)
-                                                      $refprice = $obj3->refprice;
+                                                    foreach($obj_dec3 as $obj3)
+                                                    $refprice = $obj3->refprice;
                                                    $closeprice = $obj3->closeprice;
-                                                     $pecup = $refprice * 1.1;
+                                                 $pecup = $refprice * 1.1;
                                                    $pecdown = $refprice * (1-0.1);
 
 
@@ -98,40 +98,25 @@
 
                                                    if($totVol >= 5000 ){
 
+                                             $vwap = number_format($totVal/$totVol,2);
+                                                 if($vwap >= $pecdown || $vwap >= $pecup){
+                                                      $price = $vwap;
 
-                                                                        
-                                                                       $vwap = number_format($totVal/$totVol,2);
-                                                                      if($vwap >= $pecdown || $vwap >= $pecup){
-                                                                          $price = $vwap;
-
-                                                                          
-                                                                      }
-                                                                      else{
-                                                                          $price = $refprice;
-                                                                      }
-                                                                    }elseif($totVol < 5000){
-                                                                        
-                                                                       
-                                                                        $price = $refprice;
-                                                                    }
+                                                             }
+                                                              else{
+                                                           $price = $refprice;
+                                                               }
+                                                       }elseif($totVol < 5000){     
+                                                            $price = $refprice;
+                                                             }
                                                                   
+                                                          $change =   $price - $refprice ; 
 
-                                                                  
-                                                                    $change =   $price - $refprice ; 
-
-                                                                    echo $price;
-                                                                         
-                                                                        $percent = ($change / $refprice) * 100; 
-                                                                         $percent = number_format($percent,2);
+                                                         $percent = ($change / $refprice) * 100; 
+                                                             $percent = number_format($percent,2);
 
 
-
-
-                                                                         
-
-
-
-                                                    if($percent > 0){
+                                           if($percent > 0){
                                             $percents = "<span style='color:#07fe00'> &#9650; ".$percent."</span>";
                                             $percentsB = "<span style='color:#07fe00'>&#9650;".$percent."</span>";
                                                }

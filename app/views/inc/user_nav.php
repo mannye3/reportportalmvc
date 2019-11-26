@@ -92,6 +92,13 @@
                         </li>
 
                          <li>
+                            <a href="<?php echo URLROOT; ?>/accounts/fin_stat">
+                              <i class="fa fa-newspaper-o"></i><span>Fin Statement</span>
+                            </a>
+                            
+                        </li>
+
+                         <li>
                             <a href="javaScript:void();">
                                 <i class="fa fa-envelope"></i><span>Email</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>

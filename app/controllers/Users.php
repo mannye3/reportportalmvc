@@ -1,10 +1,18 @@
 <?php
   class Users extends Controller {
     public function __construct(){
+     
+
+     
       $this->userModel = $this->model('User');
+
+
     }
 
       public function index(){
+
+       
+
       // Check for POST 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
@@ -263,6 +271,9 @@
     }
 
     public function createUserSession($user){
+       $temp_url =   $_SESSION['url']; 
+       $temp_url;
+
       $_SESSION['user_id'] = $user->id;
       $_SESSION['user_email'] = $user->email;
        $_SESSION['username'] = $user->username;
@@ -277,11 +288,19 @@
 
         
 
+        if ($temp_url =="") {
+          redirect('accounts');
+        }
+
+
+        if ($temp_url ==!"") {
+          temp_redirect($temp_url);
+        }
 
          
 
        
-      redirect('accounts');
+     
     }
 
     public function logout(){

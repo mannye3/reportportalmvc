@@ -3,12 +3,11 @@
             <div class="breadcrumbbar">
                 <div class="row align-items-center">
                     <div class="col-md-8 col-lg-8">
-                        <h4 class="page-title">News</h4>
+                        <h4 class="page-title">Upload Financial Statement</h4>
                         <div class="breadcrumb-list">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                               
-                                <li class="breadcrumb-item active" aria-current="page">Add News</li>
+                                <li class="breadcrumb-item"><a href="<?php echo URLROOT; ?>/accounts">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Upload Financial Statement</li>
                             </ol>
                         </div>
                     </div>
@@ -29,27 +28,9 @@
                             <div class="card-body">
                                <form id="login-form" action="<?php echo URLROOT; ?>/accounts/uploadfinstat" enctype="multipart/form-data" method="post">
 
-                                  <input type="text" name="symbol" value="<?= $_SESSION['user_symbol']?>" class="form-control font-20" id="productTitle"  placeholder="Title">
-
-                                   <!--  <div class="form-group row">
-                                        <label for="productTitle" class="col-sm-12 col-form-label"></label>
-                                        <div class="col-sm-12">
-                                            <input type="text" name="title" class="form-control font-20" id="productTitle" placeholder="Title">
-                                        </div>
-                                    </div>   -->                                   
-                                   <!--  <div class="form-group row">
-                                        <label class="col-sm-12 col-form-label">Description</label>
-                                        <div class="col-sm-12">
-                                            <textarea name="editor1"></textarea>
-                                        <script>
-                                                CKEDITOR.replace( 'editor1' );
-                                        </script>
-                                        </div>
-                                    </div>
-
- -->
-                                <div class="form-group row">
-                                        <label for="productTitle" class="col-sm-12 col-form-label">Upload Financial Statement</label>
+                                  <input type="text" hidden="" name="symbol" value="<?= $_SESSION['user_symbol']?>" class="form-control font-20" id="productTitle"  placeholder="Title">
+                         <div class="form-group row">
+                             <label for="productTitle" class="col-sm-12 col-form-label">Upload Financial Statement</label>
                                         <div class="col-sm-12">
                                              <input type="file" name="file" class="dropify"  data-height="300"> 
                                         </div>
