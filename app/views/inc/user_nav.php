@@ -78,11 +78,17 @@
 
 
 
+                        
+
                          <li>
-                            <a href="<?php echo URLROOT; ?>/accounts/tradeHistory">
-                                <img src="<?php echo URLROOT; ?>/assets/images/svg-icon/tables.svg" class="img-fluid" alt="tables"><span>Trade Report</span>
+                            <a href="javaScript:void();">
+                                <img src="<?php echo URLROOT; ?>/assets/images/svg-icon/tables.svg" class="img-fluid" alt="tables"><span>Trades</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
-                            
+                             <ul class="vertical-submenu">
+                                <li><a href="<?php echo URLROOT; ?>/trades">Live Trades</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts/tradeHistory">Trade Report</a></li>
+                                
+                            </ul>
                         </li>
 
                          <li>

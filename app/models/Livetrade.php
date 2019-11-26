@@ -1,5 +1,5 @@
 <?php
-  class Account3 {
+  class Livetrade {
     private $db;
 
     public function __construct(){

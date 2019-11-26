@@ -5,9 +5,15 @@
            $date = strtotime($date);
             $date *= 1000;      
              $data1[] = "[$date , $usi]";
+
+
   ?>
+
+
           
          <?php endforeach; ?> 
+
+           <?php  echo $date;   ?>
 
 
 
@@ -140,7 +146,7 @@
     },
 
     title: {
-      text: 'AAPL Historical'
+      text: ''
     },
 
     yAxis: [{

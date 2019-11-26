@@ -14,17 +14,21 @@
   // App Version
   define('APPVERSION', '1.0.0');
 
-  // Picture Image Path
+  // NEWS Image Path
   define('NEWS_PIC_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/news_pics/');
 
   // Profile Picture Path
   define('PROFILE_PIC_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/profile_pic/');
 
 
+// FINANCIAL Picture Path
+  define('FINANCIAL_STAT_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/financial_statment/');
 
 
 
-  // DB Params
+
+
+  // DB PARAMS CONNECTION FOR LIVE TRADES
   define('DB_HOST2', 'nasdotcng.com');
   define('DB_USER2', 'notcsadm_excalib');
   define('DB_PASS2', 'DRp@r6iLa0_j');
