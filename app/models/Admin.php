@@ -13,7 +13,7 @@
 
 
       public function updateUserPassword($data){
-      $this->db->query('UPDATE clients_accounts SET password = :password  WHERE id = :id');
+      $this->db->query('UPDATE issuers_accounts SET password = :password  WHERE id = :id');
       // Bind values
       $this->db->bind(':password',  $data['password']);
       $this->db->bind(':id',  $data['id']);
@@ -33,7 +33,7 @@
 
 
      public function updateUser($data){
-      $this->db->query('UPDATE clients_accounts SET username = :username,  email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
+      $this->db->query('UPDATE issuers_accounts SET username = :username,  email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
       // Bind values
       $this->db->bind(':id',  $data['id']);
        $this->db->bind(':username',  $data['username']);
@@ -56,7 +56,7 @@
 
     // Regsiter user
     public function AddUser($data){
-      $this->db->query('INSERT INTO clients_accounts (username, password, symbol, email, phone, company, address, website,  reg_date) VALUES(:username, :password, :symbol, :email, :phone, :company, :address, :website,  :reg_date)');
+      $this->db->query('INSERT INTO issuers_accounts (username, password, symbol, email, phone, company, address, website,  reg_date) VALUES(:username, :password, :symbol, :email, :phone, :company, :address, :website,  :reg_date)');
       // Bind values
       $this->db->bind(':username', $data['username']);
        $this->db->bind(':password', $data['password']);
@@ -78,7 +78,7 @@
 
 
     public function deleteUser($id){
-      $this->db->query('DELETE FROM clients_accounts WHERE id = :id');
+      $this->db->query('DELETE FROM issuers_accounts WHERE id = :id');
       // Bind values
       $this->db->bind(':id', $id);
 
@@ -93,7 +93,7 @@
 
 
     public function getUserById($id){
-      $this->db->query('SELECT * FROM clients_accounts WHERE id = :id');
+      $this->db->query('SELECT * FROM issuers_accounts WHERE id = :id');
       $this->db->bind(':id', $id);
 
       $row = $this->db->single();
@@ -468,7 +468,7 @@
 
 
   public function getUsers(){
-      $this->db->query('SELECT *  FROM clients_accounts ORDER BY id DESC');
+      $this->db->query('SELECT *  FROM issuers_accounts ORDER BY id DESC');
       //$this->db->bind(':ref_id', $ref_id);
 
       

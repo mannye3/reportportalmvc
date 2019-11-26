@@ -2,8 +2,6 @@
   class Accounts extends Controller {
     public function __construct(){
 
-
-      
    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
      $url = "https://";   
     else  
@@ -397,7 +395,91 @@ public function reply($msg_code){
  
 
 
-          public function edit_profile(){
+          // public function edit_profile(){
+          //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+          //     // Sanitize POST array
+          //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          //     // Init data
+          //         $data =[
+          //           'id' => $_SESSION['user_id'],
+          //           'email' => trim($_POST['email']),
+          //           'phone' => trim($_POST['phone']),
+          //           'company' => trim($_POST['company']),
+          //           'website' => trim($_POST['website']),
+          //           'address' => trim($_POST['address']),
+          //           'email_err' => '',
+          //           'phone_err' => '',
+          //         ];
+
+                
+
+          //         // Validate Email
+          //         if(empty($data['email'])){
+          //           $data['email_err'] = 'Pleae enter name';
+          //         } else {
+          
+          //         }
+
+          //         // Validate Phone
+          //         if(empty($data['phone'])){
+          //           $data['phone_err'] = 'Pleae enter phone';
+          //         } else {
+          //         }
+
+
+              
+
+          //         // Make sure errors are empty
+          //         if(empty($data['email_err']) && empty($data['phone_err'])){
+          //           // Validated
+                    
+          //       // Validated
+          //       if($this->accountModel->updateUser($data)){
+
+
+
+          //         $_SESSION['user_email'] = $data['email'];
+          //         $_SESSION['user_phone'] = $data['phone'];
+          //         $_SESSION['user_company'] = $data['company'];
+          //         $_SESSION['user_website'] = $data['website'];
+          //          $_SESSION['user_address'] = $data['address'];
+                  
+          //         flash('post_message', 'Profile Updated');
+          //         redirect('accounts/profile');
+          //       } else {
+          //         die('Something went wrong');
+          //       }
+          //     } else {
+          //       // Load view with errors
+          //       $this->view('accounts/profile', $data);
+          //     }
+
+          //   } else {
+            
+
+          //     $data =[
+          //           'email' => '',
+          //           'phone' => '',
+          //           'company' => '',
+          //           'website' => '',
+          //           'address' => '',
+          //           'email_err' => '',
+          //           'phone_err' => ''
+          //         ];
+        
+          //     $this->view('accounts/profile', $data);
+          //   }
+          // }
+
+
+
+
+
+
+
+           public function edit_profile(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
               // Sanitize POST array
@@ -417,7 +499,7 @@ public function reply($msg_code){
 
                   
 
-                  // Validate Email
+                    // Validate Email
                   if(empty($data['email'])){
                     $data['email_err'] = 'Pleae enter name';
                   } else {
@@ -429,15 +511,18 @@ public function reply($msg_code){
                     $data['phone_err'] = 'Pleae enter phone';
                   } else {
                   }
-
+                 
               
 
-                  // Make sure errors are empty
+                  /// Make sure errors are empty
                   if(empty($data['email_err']) && empty($data['phone_err'])){
                     // Validated
-                    
-                // Validated
+                   
+
+             // Validated
                 if($this->accountModel->updateUser($data)){
+
+
 
                   $_SESSION['user_email'] = $data['email'];
                   $_SESSION['user_phone'] = $data['phone'];
@@ -458,7 +543,7 @@ public function reply($msg_code){
             } else {
             
 
-              $data =[
+               $data =[
                     'email' => '',
                     'phone' => '',
                     'company' => '',
@@ -471,7 +556,6 @@ public function reply($msg_code){
               $this->view('accounts/profile', $data);
             }
           }
-
 
 
            public function edit_password(){

@@ -11,7 +11,7 @@
 
 
       public function updatePassword($data){
-      $this->db->query('UPDATE clients_accounts SET password = :password  WHERE id = :id');
+      $this->db->query('UPDATE issuers_accounts SET password = :password  WHERE id = :id');
       // Bind values
       $this->db->bind(':password',  $data['password']);
       $this->db->bind(':id',  $data['id']);
@@ -28,7 +28,7 @@
 
 
      public function updateUser($data){
-      $this->db->query('UPDATE clients_accounts SET email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
+      $this->db->query('UPDATE issuers_accounts SET email = :email, phone = :phone, company = :company, website = :website, address = :address  WHERE id = :id');
       // Bind values
       $this->db->bind(':id',  $data['id']);
       $this->db->bind(':email', $data['email']);
