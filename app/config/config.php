@@ -3,14 +3,14 @@
   define('DB_HOST', 'localhost');
   define('DB_USER', 'root');
   define('DB_PASS', '');
-  define('DB_NAME', 'reportportal');
+  define('DB_NAME', 'issuersportal');
 
   // App Root
   define('APPROOT', dirname(dirname(__FILE__)));
   // URL Root
-  define('URLROOT', 'http://localhost:8080/reportportalmvc');
+  define('URLROOT', 'http://localhost/issuersportal');
   // Site Name
-  define('SITENAME', 'Prifa Homes');
+  define('SITENAME', '');
   // App Version
   define('APPVERSION', '1.0.0');
 
@@ -22,7 +22,16 @@
 
 
 // FINANCIAL Picture Path
-  define('FINANCIAL_STAT_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/financial_statment/');
+  define('FINANCIAL_STAT_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/');
+  
+  
+  
+  // FINANCIAL Document Path
+  define('ANNUAL_REPORT_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/');
+
+
+   // FINANCIAL Document Path
+  define('REPORT_SHEET_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/public/');
 
 
 

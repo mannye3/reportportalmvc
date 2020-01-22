@@ -62,7 +62,7 @@
                                              <?php $count = 0;  foreach ($data['obj_dec']  as $obj)  : 
 
 
-                                                $security =  $obj->Security;
+                                                  $security =  $obj->Security;
                                                   $totVol = $obj->totVol; 
                                                   $totVal =  $obj->totVal;
                                                   $maxprice = $obj->maxprice;

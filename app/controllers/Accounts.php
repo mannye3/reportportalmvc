@@ -46,6 +46,30 @@
     }
 
 
+     public function issuers_dashboard(){
+      
+      $Close_Deal = $this->accountModel->CloseDeal($_SESSION['user_symbol']);
+
+       $Deals = $this->accountModel->Deals($_SESSION['user_symbol']);
+
+            
+
+      $data = [
+            'Close_Deal' => $Close_Deal,
+             'Deals' => $Deals
+              ];
+
+
+
+
+              
+
+          $this->view('inc/user_header');
+           $this->view('accounts/issuers_dashboard', $data);
+          $this->view('inc/user_footer');
+    }
+
+
      public function profile(){
 
           $this->view('inc/user_header');
@@ -55,13 +79,17 @@
 
 
 
+         
+
+
+
 
     public function compose(){
       
             $msg_code= rand(100000,999999);
 
             $receiver_symbol = 'ADMINCODE';
-            $receiver_email = 'info@fleepng.com';
+            $receiver_email = 'eaboajah@nasdng.com';
 
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
@@ -100,7 +128,7 @@
                   if($this->accountModel->SendMessageInbox($data)){
                    
 
-                    if(sendMail_notification($data)){
+                    if($this->accountModel->sendMail_notification($data)){
                       
                    flash('alert_message', 'Message Sent');
                     redirect('accounts/compose');
@@ -310,6 +338,28 @@ public function reply($msg_code){
 
           $this->view('inc/user_header');
            $this->view('accounts/inbox', $data);
+          $this->view('inc/user_footer');
+    }
+
+
+     public function send_mail(){
+            // $total_sent = $this->accountModel->Totalsent($_SESSION['user_symbol']);
+            // $inbox = $this->accountModel->InboxMsg($_SESSION['user_symbol']);
+            // $total_inbox = $this->accountModel->Totalinbox($_SESSION['user_symbol']);
+
+                  
+
+            //  $data = [
+            //   'inbox' => $inbox,
+            //   'total_sent' => $total_sent,
+            //   'total_inbox' => $total_inbox
+                  
+              
+            
+         
+
+          $this->view('inc/user_header');
+           $this->view('accounts/send_mail');
           $this->view('inc/user_footer');
     }
 
@@ -618,10 +668,6 @@ public function reply($msg_code){
 
 
 
-
-
-    
-
            public function tradeHistory(){
                      $get_report = $this->accountModel->getReport($_SESSION['user_symbol']);
                      // $get_brokerinfo = $this->accountModel->getBroker();
@@ -640,6 +686,73 @@ public function reply($msg_code){
 
                     $this->view('inc/user_header');
                      $this->view('accounts/tradeHistory', $data);
+                    $this->view('inc/user_footer');
+                    }
+
+
+
+
+
+
+
+                  public function daily_trade_report(){
+
+                  $properties_info = $this->account3Model->getProperties($date2);
+
+
+                  $obj_enc = json_encode($properties_info);
+
+                  $obj_dec = json_decode($obj_enc);
+
+                  foreach ($obj_dec as $obj) {
+                  $security =  $obj->Security;
+                  $totVol = $obj->totVol; 
+                  $totVal =  $obj->totVal;
+
+                  $getthings = $this->accountModel->getbasic($security);
+
+                  $boyka = $this->accountModel->getboyka($getthings->col1);
+
+
+
+                  }
+              
+                 
+                   
+                      $data = [
+                    'obj_dec' => $obj_dec,
+                    'boyka' => $boyka 
+                     
+                  ];
+
+             
+                        
+                            $this->view('inc/user_header');
+                             $this->view('accounts/test', $data);
+                            $this->view('inc/user_footer');
+                      }
+
+
+            
+
+             
+    
+
+          
+
+                      public function agm_report(){
+                     $get_report = $this->accountModel->getAgmReport($_SESSION['user_symbol']);
+                    
+                  
+                   
+                    $data = [
+                  'get_report' => $get_report
+                  
+                   
+                    ];
+
+                    $this->view('inc/user_header');
+                     $this->view('accounts/agm_report', $data);
                     $this->view('inc/user_footer');
                     }
 
@@ -704,6 +817,20 @@ public function reply($msg_code){
 
 
 
+
+          public function annual_report(){
+       
+
+                $this->view('inc/user_header');
+                 $this->view('accounts/annual_report', $data);
+                $this->view('inc/user_footer');
+          }
+
+
+
+
+
+
      function uploadfinstat(){
               if(isset($_POST['submit']))
               {
@@ -736,6 +863,45 @@ public function reply($msg_code){
                     redirect('accounts/fin_stat');
                  
                     }
+
+
+
+                     function uploadannualreport(){
+                          if(isset($_POST['submit']))
+                          {
+
+                      $target_dir = ANNUAL_REPORT_ROOT_PATH;
+                      $RandomNum = time();
+                      $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                      $filename = explode('.', $_FILES["file"]["name"]);
+                      $picname = end($filename);
+                      $new_name = rand(1000, 9999) . '.' . $picname;
+                      $ImageName = str_replace(' ','-',strtolower($new_name));
+                      $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
+                      $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+                      $ImageExt = str_replace('.','',$ImageExt);
+                      $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+                      $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+                      $ret[$NewImageName]= $target_dir.$NewImageName;
+                      move_uploaded_file($_FILES["file"]["tmp_name"],$target_dir."/".$NewImageName );
+
+                      $data = array(
+                      'symbol' => trim($_POST['symbol']),
+                      'annual_report' => $NewImageName,
+                      'upload_date' => date('jS \ F Y h:i:s A')
+                      );
+
+                      
+                    $this->accountModel->AddAnnualReport($data);
+                    }
+                    flash('alert_message', 'Annual Report Uploaded');
+                    redirect('accounts/annual_report');
+                 
+                    }
+
+
+
+
 
 
 
@@ -823,7 +989,27 @@ public function reply($msg_code){
           
 
 
-             
+        function send_mail2(){
+    if(isset($_POST['send']))
+        {
+    $to_email=$_POST['to'];
+    $subject=$_POST['subject'];
+    $message=$_POST['message'];
+
+    
+      
+    $to = $to_email;
+        $subject = $subject;
+        $txt = $message;
+        $headers = "From: afasina@nasdotcng.com" . "\r\n" .
+        "CC: eaboajah@nasdng.com";
+    mail($to,$subject,$txt,$headers);
+    }
+
+    flash('alert_message', 'Message Sent');
+                    redirect('accounts/send_mail');
+        // $this->view->render('accounts/send_mail');
+  }
      
     
 

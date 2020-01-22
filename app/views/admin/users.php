@@ -53,6 +53,8 @@
                                         </thead>
                                         <tbody>
                                          <?php  $count = 0; foreach($data['allusers'] as $allusers) :  $count++; ?>
+                                        
+
                                        <tr>
                                             <td><?php echo $count; ?></td>
                                             <td> <?php echo $allusers->username; ?> </td>
@@ -64,8 +66,12 @@
 
                                              <td>
                                                     <div class="button-list">
+                                                        <a href="<?php echo URLROOT; ?>/admins/upload_report_sheet/<?php echo $allusers->id; ?>" class="btn btn-success-rgba"><i class="fa fa-list"></i></a>
+
                                                         <a href="<?php echo URLROOT; ?>/admins/edit_user/<?php echo $allusers->id; ?>" class="btn btn-success-rgba"><i class="feather icon-edit-2"></i></a>
                                                         <a href="<?php echo URLROOT; ?>/admins/delete_user/<?php echo $allusers->id; ?> " onclick="return confirm('Are you sure you want to DELETE USER ?')" class="btn btn-danger-rgba"><i class="feather icon-trash"></i></a>
+
+                                                         
                                                     </div>
                                                 </td>
 
@@ -75,7 +81,8 @@
                                             
                                             
                                         </tr>
-                                        <?php endforeach; ?>
+                                     
+                                    <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>

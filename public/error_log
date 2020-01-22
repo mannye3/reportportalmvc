@@ -1,0 +1,111 @@
+[27-Nov-2019 10:29:23 Africa/Lagos] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'notcsadm_nplcsadm_nsd_new.issuers_accounts' doesn't exist' in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php:64
+Stack trace:
+#0 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(64): PDOStatement->execute()
+#1 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(75): Database->execute()
+#2 /home/notcsadm/public_html/issuersportal/app/models/User.php(88): Database->single()
+#3 /home/notcsadm/public_html/issuersportal/app/controllers/Users.php(41): User->findUserByUsername('super_admin')
+#4 [internal function]: Users->index()
+#5 /home/notcsadm/public_html/issuersportal/app/libraries/Core.php(45): call_user_func_array(Array, Array)
+#6 /home/notcsadm/public_html/issuersportal/public/index.php(5): Core->__construct()
+#7 {main}
+  thrown in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 64
+[27-Nov-2019 10:29:38 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 180
+[27-Nov-2019 10:29:38 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 189
+[27-Nov-2019 10:32:31 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 11:23:49 Africa/Lagos] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'notcsadm_nplcsadm_nsd_new.fin_statement' doesn't exist' in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php:64
+Stack trace:
+#0 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(64): PDOStatement->execute()
+#1 /home/notcsadm/public_html/issuersportal/app/models/Account.php(486): Database->execute()
+#2 /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php(733): Account->AddFinstat(Array)
+#3 [internal function]: Accounts->uploadfinstat()
+#4 /home/notcsadm/public_html/issuersportal/app/libraries/Core.php(45): call_user_func_array(Array, Array)
+#5 /home/notcsadm/public_html/issuersportal/public/index.php(5): Core->__construct()
+#6 {main}
+  thrown in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 64
+[27-Nov-2019 12:35:24 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 12:56:06 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 12:56:37 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 12:58:06 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 12:58:10 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 12:58:22 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 13:44:12 Africa/Lagos] PHP Fatal error:  Cannot use [] for reading in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 7
+[27-Nov-2019 13:48:50 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 13:53:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 13:53:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 13:59:28 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 13:59:28 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 14:06:29 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 14:06:29 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 14:15:44 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 14:15:45 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 139
+[27-Nov-2019 15:26:42 Africa/Lagos] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'notcsadm_nplcsadm_nsd_new.messages' doesn't exist' in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php:64
+Stack trace:
+#0 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(64): PDOStatement->execute()
+#1 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(69): Database->execute()
+#2 /home/notcsadm/public_html/issuersportal/app/models/Account.php(108): Database->resultSet()
+#3 /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php(296): Account->Totalsent('SDCSCSPLC')
+#4 [internal function]: Accounts->inbox()
+#5 /home/notcsadm/public_html/issuersportal/app/libraries/Core.php(45): call_user_func_array(Array, Array)
+#6 /home/notcsadm/public_html/issuersportal/public/index.php(5): Core->__construct()
+#7 {main}
+  thrown in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 64
+[27-Nov-2019 15:26:49 Africa/Lagos] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'notcsadm_nplcsadm_nsd_new.messages' doesn't exist' in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php:64
+Stack trace:
+#0 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(64): PDOStatement->execute()
+#1 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(69): Database->execute()
+#2 /home/notcsadm/public_html/issuersportal/app/models/Account.php(108): Database->resultSet()
+#3 /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php(296): Account->Totalsent('SDCSCSPLC')
+#4 [internal function]: Accounts->inbox()
+#5 /home/notcsadm/public_html/issuersportal/app/libraries/Core.php(45): call_user_func_array(Array, Array)
+#6 /home/notcsadm/public_html/issuersportal/public/index.php(5): Core->__construct()
+#7 {main}
+  thrown in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 64
+[27-Nov-2019 15:50:10 Africa/Lagos] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'notcsadm_nplcsadm_nsd_new.messages' doesn't exist' in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php:64
+Stack trace:
+#0 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(64): PDOStatement->execute()
+#1 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(69): Database->execute()
+#2 /home/notcsadm/public_html/issuersportal/app/models/Account.php(361): Database->resultSet()
+#3 /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php(325): Account->SentMsg('SDCSCSPLC')
+#4 [internal function]: Accounts->sent()
+#5 /home/notcsadm/public_html/issuersportal/app/libraries/Core.php(45): call_user_func_array(Array, Array)
+#6 /home/notcsadm/public_html/issuersportal/public/index.php(5): Core->__construct()
+#7 {main}
+  thrown in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 64
+[28-Nov-2019 12:20:23 Africa/Lagos] PHP Fatal error:  Call to a member function getbasic() on null in /home/notcsadm/public_html/issuersportal/app/views/accounts/trades.php on line 78
+[28-Nov-2019 12:29:53 Africa/Lagos] PHP Warning:  Division by zero in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 100
+[28-Nov-2019 12:30:28 Africa/Lagos] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'notcsadm_nplcsadm_nsd_new.admin' doesn't exist' in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php:64
+Stack trace:
+#0 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(64): PDOStatement->execute()
+#1 /home/notcsadm/public_html/issuersportal/app/libraries/Database.php(75): Database->execute()
+#2 /home/notcsadm/public_html/issuersportal/app/models/Admin_login.php(71): Database->single()
+#3 /home/notcsadm/public_html/issuersportal/app/controllers/Admin_logins.php(35): Admin_login->findUserByusername('super_admin')
+#4 [internal function]: Admin_logins->index()
+#5 /home/notcsadm/public_html/issuersportal/app/libraries/Core.php(45): call_user_func_array(Array, Array)
+#6 /home/notcsadm/public_html/issuersportal/public/index.php(5): Core->__construct()
+#7 {main}
+  thrown in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 64
+[28-Nov-2019 12:40:45 Africa/Lagos] PHP Warning:  Division by zero in /home/notcsadm/public_html/issuersportal/app/views/admin/index.php on line 100
+[28-Nov-2019 12:44:59 Africa/Lagos] PHP Fatal error:  Call to a member function getbasic() on null in /home/notcsadm/public_html/issuersportal/app/views/accounts/trades.php on line 78
+[28-Nov-2019 13:03:49 Africa/Lagos] PHP Fatal error:  Call to a member function getbasic() on null in /home/notcsadm/public_html/issuersportal/app/views/accounts/trades.php on line 78
+[28-Nov-2019 13:17:25 Africa/Lagos] PHP Fatal error:  Call to a member function getbasic() on null in /home/notcsadm/public_html/issuersportal/app/views/accounts/trades.php on line 78
+[28-Nov-2019 13:19:42 Africa/Lagos] PHP Fatal error:  Call to a member function getbasic() on null in /home/notcsadm/public_html/issuersportal/app/views/accounts/trades.php on line 78
+[29-Nov-2019 12:01:50 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 1
+[29-Nov-2019 12:01:50 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 4
+[29-Nov-2019 12:03:21 Africa/Lagos] PHP Fatal error:  Call to undefined function sendMail_notification() in /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php on line 103
+[29-Nov-2019 15:31:42 Africa/Lagos] PHP Fatal error:  Call to undefined function sendMail_notification() in /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php on line 103
+[29-Nov-2019 15:35:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 180
+[29-Nov-2019 15:35:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 189
+[29-Nov-2019 15:35:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 180
+[29-Nov-2019 15:35:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 189
+[29-Nov-2019 17:16:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 180
+[29-Nov-2019 17:16:09 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 189
+[30-Nov-2019 14:55:18 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 1
+[30-Nov-2019 14:55:18 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 4
+[30-Nov-2019 14:56:16 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 1
+[30-Nov-2019 14:56:16 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 4
+[30-Nov-2019 15:00:14 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 1
+[30-Nov-2019 15:00:14 Africa/Lagos] PHP Warning:  Invalid argument supplied for foreach() in /home/notcsadm/public_html/issuersportal/app/views/inc/msg_nav.php on line 4
+[30-Nov-2019 16:57:10 Africa/Lagos] PHP Parse error:  syntax error, unexpected ')' in /home/notcsadm/public_html/issuersportal/app/controllers/Accounts.php on line 109
+[02-Dec-2019 08:23:37 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 180
+[02-Dec-2019 08:23:37 Africa/Lagos] PHP Warning:  join(): Invalid arguments passed in /home/notcsadm/public_html/issuersportal/app/views/accounts/index.php on line 189
+[10-Jan-2020 18:26:48 Africa/Lagos] PHP Fatal error:  Call to a member function prepare() on null in /home/notcsadm/public_html/issuersportal/app/libraries/Database.php on line 38

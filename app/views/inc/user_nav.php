@@ -20,10 +20,10 @@
 
                         <li>
                             <a href="javaScript:void();">
-                               <i class="fa fa-users"></i><span>Users</span><i class="feather icon-chevron-right pull-right"></i>
+                               <i class="fa fa-users"></i><span>Issuers</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
                             <ul class="vertical-submenu">
-                                <li><a href="<?php echo URLROOT; ?>/admins/users">Users</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/admins/users">Issuers</a></li>
                                 <li><a href="<?php echo URLROOT; ?>/admins/add_user">Add New</a></li>
                                 
                             </ul>
@@ -73,6 +73,11 @@
                             <a href="<?php echo URLROOT; ?>/accounts">
                               <img src="<?php echo URLROOT; ?>/assets/images/svg-icon/dashboard.svg" class="img-fluid" alt="dashboard"><span>Dashboard</span>
                             </a>
+                             <ul class="vertical-submenu">
+                                <li><a href="<?php echo URLROOT; ?>/accounts/issuers_dashboard">Issuers Dashboard</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts">NSI Dashboard </a></li>
+                                
+                            </ul>
                             
                         </li>
 
@@ -90,13 +95,23 @@
                                 
                             </ul>
                         </li>
-
+                        
+                        
+                        
+                        
                          <li>
-                            <a href="<?php echo URLROOT; ?>/accounts/fin_stat">
-                              <i class="fa fa-newspaper-o"></i><span>Fin Statement</span>
+                            <a href="javaScript:void();">
+                                <i class="fa fa-envelope"></i><span>Reports</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
-                            
+                             <ul class="vertical-submenu">
+                                 <li><a href="<?php echo URLROOT; ?>/accounts/agm_report">AGM Report </a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts/fin_stat">Financial Statement</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts/annual_report">Annual Report</a></li>
+                                
+                            </ul>
                         </li>
+
+                     
 
                          <li>
                             <a href="javaScript:void();">

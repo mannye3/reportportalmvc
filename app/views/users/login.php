@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                               <div class="forgot-psw"> 
-                                                <a id="forgot-psw" href="user-forgotpsw.html" class="font-14">Forgot Password?</a>
+                                               <!--  <a id="forgot-psw" href="user-forgotpsw.html" class="font-14">Forgot Password?</a> -->
                                               </div>
                                             </div>
                                         </div>                          

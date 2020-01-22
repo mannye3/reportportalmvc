@@ -6,28 +6,41 @@
       }
 
       $this->adminModel = $this->model('Admin');
-      // $this->listingModel = $this->model('listing');
-      $this->utilityModel = $this->model('Utility');
+      $this->accountModel = $this->model('Account');
+      $this->account3Model = $this->model('Account3');
     }
 
-      public function index(){
+ 
+
+
+     public function index(){
+
+      $trade_date = date("Ymd");
+
+      // $trade_date = '20191125';
     
-      $Close_Deal = $this->adminModel->CloseDeal();
+      $live_trade = $this->account3Model->getLiveTrades($trade_date);
+      $AllIssuers = $this->adminModel->GetAllIssuers();
+      $allannualReports = $this->adminModel->GetAllannualReports();
+      $allfinancialStatement = $this->adminModel->GetAllfinancialStatement();
 
-       // $Deals = $this->adminModel->Deals();
 
-            
 
-      $data = [
-            'Close_Deal' => $Close_Deal
-             // 'Deals' => $Deals
-              ];
-              
+      
+          $data = [
+        'live_trade' => $live_trade,
+        'AllIssuers' => $AllIssuers,
+        'allannualReports' => $allannualReports,
+        'allfinancialStatement' => $allfinancialStatement     
+      ];
 
-          $this->view('inc/user_header');
+            $this->view('inc/user_header');
            $this->view('admin/index', $data);
           $this->view('inc/user_footer');
-    }
+          }
+
+
+
 
 
      public function profile(){
@@ -62,11 +75,6 @@
 
           public function edit_user($id){
 
-
-      
-            $num = rand(1000, 9999);
-            $username = 'SD-' . $num; 
-
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
            
@@ -76,27 +84,44 @@
 
 
           
-            $data = [
-             'username' => trim($_POST['username']),
-              'id' => $id,
-              'email' => trim($_POST['email']),
-              'phone' => trim($_POST['phone']),
-              'company' => trim($_POST['company']),
-              'website' => trim($_POST['website']),
-              'address' => trim($_POST['address']),
-              'username_err' => ''
-             
-             
-            ];
+             // Init data
+                  $data =[
+                     'id' => $id,
+                    'symbol' => trim($_POST['symbol']),
+                    'username' => trim($_POST['username']),
+                     'email' => trim($_POST['email']),
+                    'phone' => trim($_POST['phone']),
+                    'company' => trim($_POST['company']),
+                    'website' => trim($_POST['website']),
+                    'address' => trim($_POST['address']),
+                    'email_err' => '',
+                    'phone_err' => '',
+                  ];
 
-            // Validate data
-            if(empty($data['username'])){
-              $data['username_err'] = 'username Field is Empty';
-            }
-            
+                  
+
+                    // Validate Email
+                  if(empty($data['username'])){
+                    $data['username_err'] = 'Pleae enter Username';
+                  } else {
+          
+                  }
+
+                  // Validate Phone
+                  if(empty($data['symbol'])){
+                    $data['symbol_err'] = 'Pleae Symbol';
+                  } else {
+                  }
+                 
+              
+
+                  /// Make sure errors are empty
+                  if(empty($data['username_err']) && empty($data['symbol_err'])){
+                    // Validated
+                   
 
             // Make sure no errors
-            if(empty($data['username_err'])){
+           
               // Validated
               if($this->adminModel->updateUser($data)){
                   flash('alert_message', 'Account Updated');
@@ -280,6 +305,40 @@
 
 
 
+
+               public function annual_reports(){
+      $allannual_reports = $this->adminModel->getannual_reports();
+
+            
+
+      $data = [
+            'allannual_reports' => $allannual_reports
+              ];
+
+          $this->view('inc/user_header');
+           $this->view('admin/annual_reports', $data);
+          $this->view('inc/user_footer');
+    }
+
+
+
+
+public function financial_statements(){
+      $allfinancial_statement = $this->adminModel->getfinancial_statements();
+
+            
+
+      $data = [
+            'allfinancial_statement' => $allfinancial_statement
+              ];
+
+          $this->view('inc/user_header');
+           $this->view('admin/financial_statements', $data);
+          $this->view('inc/user_footer');
+    }
+
+
+
          
 
 
@@ -456,18 +515,32 @@
 
 
     public function add_news(){
-      $allnews = $this->adminModel->getNews();
-
-            
-
-      $data = [
-            'allnews' => $allnews
-              ];
+    
 
           $this->view('inc/user_header');
-           $this->view('admin/add_news', $data);
+           $this->view('admin/add_news');
           $this->view('inc/user_footer');
     }
+
+
+
+
+    public function upload_report_sheet($id){
+    
+      $user_info = $this->adminModel->getUserById($id);
+
+            $data = [
+            'user_info' => $user_info
+
+            ];
+
+          $this->view('inc/user_header');
+           $this->view('admin/upload_report_sheet', $data);
+          $this->view('inc/user_footer');
+    }
+
+
+
 
 
      public function open_news($id){
@@ -607,6 +680,42 @@
                     }
                     flash('alert_message', 'News Uploaded');
                     redirect('admins/news');
+                 
+                    }
+
+
+                     function upload_reportsheet(){
+              if(isset($_POST['submit']))
+              {
+
+                      $target_dir = REPORT_SHEET_ROOT_PATH;
+                      $RandomNum = time();
+                      $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                      $filename = explode('.', $_FILES["file"]["name"]);
+                      $picname = end($filename);
+                      $new_name = rand(1000, 9999) . '.' . $picname;
+                      $ImageName = str_replace(' ','-',strtolower($new_name));
+                      $ImageType = $_FILES['file']['type']; //"file/png", file/jpeg etc.
+                      $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+                      $ImageExt = str_replace('.','',$ImageExt);
+                      $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+                      $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+                      $ret[$NewImageName]= $target_dir.$NewImageName;
+                      move_uploaded_file($_FILES["file"]["tmp_name"],$target_dir."/".$NewImageName );
+
+                      $data = array(
+                      'symbol' => trim($_POST['symbol']),
+                      'title' => trim($_POST['title']),
+                      'year' => trim($_POST['year']),
+                      'report_sheet' => $NewImageName,
+                      'upload_date' => date('jS \ F Y h:i:s A')
+                      );
+
+                      
+                    $this->adminModel->AddSheet($data);
+                    }
+                    flash('alert_message', 'Report Uploaded');
+                    redirect('admins/users');
                  
                     }
 
