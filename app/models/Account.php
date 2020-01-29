@@ -368,23 +368,31 @@ public function getAgmReport($symbol){
 
 
       public function getReportDaily($symbol){ 
-      $this->db->query('SELECT data.`TO ACCOUNT` AS BUYER_ACCOUNT , data.`TO MEMBER` AS TO_MEMBER , data.`FROM MEMBER` AS FROM_MEMBER , data.`VOLUME` AS VOLUME, data.`TRADE DATE` AS TRADE_DATE , data.`PRICE` AS PRICE    , smsNewAccount.SHAREHOLDERSNAME AS BUYER_NAME  ,
-      data.`FROM ACCOUNT`  AS SELLER_ACCOUNT , smsNewAccount2.SHAREHOLDERSNAME AS SELLER_NAME
-      FROM data
-        INNER JOIN smsNewAccount ON data.`TO ACCOUNT` = smsNewAccount.ACCOUNTNUMBER
-           INNER JOIN smsNewAccount2 ON data.`FROM ACCOUNT` = smsNewAccount2.ACCOUNTNUMBER
-         WHERE data.SYMBOL=:symbol ORDER BY id DESC');
+        $this->db->query('SELECT data.`TRADE DATE` AS TRADE_DATE,  data.`FROM MEMBER` AS FROM_MEMBER, data.`TO MEMBER` AS TO_MEMBER , data.PRICE, data.VOLUME , data.`TO ACCOUNT`, smsnewaccount.ACCOUNTNUMBER, smsnewaccount.SHAREHOLDERSNAME AS BUYER_NAME, smsnewaccount2.ACCOUNTNUMBER , smsnewaccount2.SHAREHOLDERSNAME AS SELLER_NAME, data.`FROM ACCOUNT`
+            FROM data
+            INNER JOIN smsnewaccount ON data.`TO ACCOUNT` = smsnewaccount.ACCOUNTNUMBER
+            INNER JOIN smsnewaccount2 ON data.`FROM ACCOUNT` = smsnewaccount2.ACCOUNTNUMBER
+            WHERE data.SYMBOL = :symbol
+
+              UNION
+              SELECT trades.tradedate, trades.buy_firm_code, trades.sell_firm_code , trades.price, trades.quantity, smsnewaccount.ACCOUNTNUMBER, smsnewaccount.SHAREHOLDERSNAME, smsnewaccount2.ACCOUNTNUMBER, smsnewaccount2.SHAREHOLDERSNAME, trades.buy_trading_account, trades.sell_trading_account
+              FROM trades
+              INNER JOIN smsnewaccount ON trades.buy_trading_account =smsnewaccount.ACCOUNTNUMBER
+              INNER JOIN smsnewaccount2 ON trades.sell_trading_account = smsnewaccount2.ACCOUNTNUMBER
+
+
+                WHERE trades.security = :symbol ');
 
       
           
 
-      // Bind Values
-      $this->db->bind(':symbol', $symbol);
+                  // Bind Values
+                  $this->db->bind(':symbol', $symbol);
 
-      $results = $this->db->resultSet();
+                  $results = $this->db->resultSet();
 
-      return $results;
-    }
+                  return $results;
+                }
 
 
       public function SentMsg($symbol){

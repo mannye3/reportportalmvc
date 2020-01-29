@@ -50,16 +50,16 @@
 
                                         </thead>
                                         <tbody>
-                                         <?php  $count = 0; foreach($data['get_report'] as $get_report) :  $count++; ?>
+                                         <?php  $count = 0; foreach($data['get_report_daily'] as $get_report_daily) :  $count++; ?>
                                        <tr>
                                             <td><?php echo $count; ?></td>
-                                            <td><?php echo $get_report->BUYER_NAME; ?> </td>
-                                            <td><?php echo $get_report->TO_MEMBER; ?></td>
-                                            <td><?php echo $get_report->SELLER_NAME; ?></td>  
-                                            <td><?php echo $get_report->FROM_MEMBER; ?></td>
-                                            <td><?php echo $get_report->VOLUME; ?></td>
-                                            <td><?php echo $get_report->PRICE/10000; ?></td>
-                                            <td><?php echo date("m-d-Y", strtotime($get_report->TRADE_DATE));?>
+                                            <td><?php echo $get_report_daily->BUYER_NAME; ?> </td>
+                                            <td><?php echo $get_report_daily->TO_MEMBER; ?></td>
+                                            <td><?php echo $get_report_daily->SELLER_NAME; ?></td>  
+                                            <td><?php echo $get_report_daily->FROM_MEMBER; ?></td>
+                                            <td><?php echo $get_report_daily->VOLUME; ?></td>
+                                            <td><?php echo $get_report_daily->PRICE/10000; ?></td>
+                                            <td><?php echo date("m-d-Y", strtotime($get_report_daily->TRADE_DATE));?>
 
 
 

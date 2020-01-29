@@ -669,7 +669,7 @@ public function reply($msg_code){
 
 
            public function tradeHistory(){
-                     $get_report = $this->accountModel->getReport($_SESSION['user_symbol']);
+                     $get_report_daily = $this->accountModel->getReportDaily($_SESSION['user_symbol']);
                      // $get_brokerinfo = $this->accountModel->getBroker();
                      // $get_accountinfo = $this->accountModel->getAccount();
                      
@@ -678,7 +678,7 @@ public function reply($msg_code){
                   
                    
                     $data = [
-                  'get_report' => $get_report
+                  'get_report_daily' => $get_report_daily
                   // 'get_brokerinfo' => $get_brokerinfo
                    // 'get_accountinfo' => $get_accountinfo
                    
@@ -691,54 +691,27 @@ public function reply($msg_code){
 
 
 
-
-
-
-
-                  public function daily_trade_report(){
-
-                  $properties_info = $this->account3Model->getProperties($date2);
-
-
-                  $obj_enc = json_encode($properties_info);
-
-                  $obj_dec = json_decode($obj_enc);
-
-                  foreach ($obj_dec as $obj) {
-                  $security =  $obj->Security;
-                  $totVol = $obj->totVol; 
-                  $totVal =  $obj->totVal;
-
-                  $getthings = $this->accountModel->getbasic($security);
-
-                  $boyka = $this->accountModel->getboyka($getthings->col1);
-
-
-
-                  }
-              
+                      public function daily_trade_report(){
+                     $get_report_daily = $this->accountModel->getReportDaily($_SESSION['user_symbol']);
+                    
+                      
+ 
+                   
+                    $data = [
+                  'get_report_daily' => $get_report_daily
                  
                    
-                      $data = [
-                    'obj_dec' => $obj_dec,
-                    'boyka' => $boyka 
-                     
-                  ];
+                    ];
 
-             
-                        
-                            $this->view('inc/user_header');
-                             $this->view('accounts/test', $data);
-                            $this->view('inc/user_footer');
-                      }
+                    $this->view('inc/user_header');
+                     $this->view('accounts/daily_trade_report', $data);
+                    $this->view('inc/user_footer');
+                    }
 
 
-            
+                    
 
-             
-    
-
-          
+                 
 
                       public function agm_report(){
                      $get_report = $this->accountModel->getAgmReport($_SESSION['user_symbol']);

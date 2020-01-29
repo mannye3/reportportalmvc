@@ -105,8 +105,8 @@
                             </a>
                              <ul class="vertical-submenu">
                                  <li><a href="<?php echo URLROOT; ?>/accounts/agm_report">AGM Report </a></li>
-                                <li><a href="<?php echo URLROOT; ?>/accounts/fin_stat">Financial Statement</a></li>
-                                <li><a href="<?php echo URLROOT; ?>/accounts/annual_report">Annual Report</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts/fin_stat">Upload Financial Statement</a></li>
+                                <li><a href="<?php echo URLROOT; ?>/accounts/annual_report">Upload Annual Report</a></li>
                                 
                             </ul>
                         </li>
